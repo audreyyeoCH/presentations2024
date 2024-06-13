@@ -1,0 +1,338 @@
+---
+# title: "A Bayesian approach to decision making in early development clinical trials: An R solution"
+# subtitle: "An open source R package"
+# author: "Audrey Yeo"
+# institute: "PSI, 2024"
+format: 
+ revealjs:
+    code-fold: true
+    width: 1280
+    height: 720
+    chalkboard: true
+preload-iframes: true
+editor: 
+  markdown: 
+    wrap: 72
+csl: apa-single-spaced.csl
+---
+
+```{r, echo = FALSE, warning = FALSE}
+# Load relevant packages
+library(testthat)
+library(phase1b)
+library(tidyverse)
+library(flextable)
+library(ggplot2)
+library(float)
+library(utils)
+library(kableExtra)
+library(formattable)
+```
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.pos = 'H')
+```
+
+# A Bayesian approach to decision making in early development clinical trials: An R solution {background-iframe="colored-particles/index.html"} 
+
+**Audrey Yeo**
+
+Statisticians in Pharma Conference <span {style = "colour;red;"}>[(PSI)]</span > 2024, Amsterdam, NL
+\
+***This presentation has ALT text and as much as possible, uses colour-blind friendly palettes***
+
+# Early oncology trials and why `phase1b`? 
+
+# Prior and Posterior of Beta Distribution for response rate {.smaller}
+
+
+    
+-   Conjugate Prior \pi is $f(\pi)$, where $\pi \sim {Beta(\alpha, \beta)}$,
+    same family of distribution of Posterior (see below)
+-   We know the mean response rate (RR) is :
+    $$\pi = \ \frac {\alpha}{\alpha + \beta}$$
+-   Likelihood is $f(x|\pi)$, where $x \sim {Binomial(x, n)}$
+
+-   The updated Posterior $F( \pi | x )$ is again a Beta distribution (same family as
+    prior) : $$ \pi| \ x \sim Beta(\alpha + x, \ \beta + n - x)$$ where $x$ is
+    the number of responders of current trials
+
+
+
+```{r}
+# 2 mins
+# The benefit of a Bayesian approach is the possibility to account for prior data (Thall &amp; Simon,
+# 1994) in that a new drug may have shown some signals of efficacy owing to its proposed
+# mode of action, or similar activity based on prior data.
+# show graph of go, stop, eval zones 
+```
+
+# History and how to install : {.smaller}
+
+-   Roche's early development group, package development led by Daniel
+    Sabanés Bové in 2015.
+
+-   At Roche, we use it regularly since 2015, and since then, package
+    development practices have changed.
+
+-   In 2023, I took over under the supervision of Daniel to refactor, have
+    design discussions, add unit and integration tests to bring it up
+    to state-of-art software engineering practices.
+
+-   100% written in R. Open source shortly...
+
+-   website :
+    [genentech.github.io/phase1b/](genentech.github.io/phase1b/)
+
+```{r, eval = FALSE, echo = TRUE, warning = FALSE}
+library(devtools)
+devtools::install_github("https://github.com/Genentech/phase1b")
+library(phase1b)
+```
+
+
+## Use case: {.smaller}
+
+```{r, warning = FALSE}
+# | fig-alt: This table sets the scene of a problem a study statistician could have. At interim, there are 16/23 responders and they ask, what is the Posterior Probability, what is the Predictive Posterior Probability, is the decision to Go (continue drug development), Stop (terminate drug development) or in between called the "Grey Zone" where team may need additional supporting evidence to make a decision.
+r_interim = 16
+n_interim = 23
+r_final = 23
+n_final = 40
+data.frame( Example = c("Responders", 
+                      "n", 
+                      "Response rate (%)", 
+                      "Posterior probability", 
+                      "Predictive posterior probability",  
+                      "Decision to develop molecule further :\n Go/Stop/Grey Zone"),
+            Interim = c(r_interim, 
+                        n_interim, 
+                        paste(
+                          round(
+                            (r_interim/n_interim)*100, 
+                            digits = 2), 
+                          "%"), 
+                        "ask phase1b", 
+                        "ask phase1b", 
+                        "ask phase1b"),
+            Final = c(r_final, 
+                      n_final, 
+                      paste(
+                        round(
+                          (r_final/n_final)*100, 
+                          digits = 2), 
+                        "%"), 
+                      "ask phase1b", 
+                      "-", 
+                      "ask phase1b") ) -> use_case
+
+use_case %>% kbl(align = "c", caption = "A single arm novel therapeutic with an assumed control response rate is at most 60%") %>% kable_styling()
+```
+\
+\
+* Posterior Probability : $P (\pi > 60 \% | \alpha )$
+* Predictive Posterior Probability : $P (success \ or \  failure \ at \ final)$
+
+
+## Updating the Posterior and making a decision {.smaller}
+
+The updated Posterior will have the parameters $\alpha + x$ and
+$\beta + n - x$.  With the prior of $Beta(0.6, 0.4)$ and the result of our interim results our Posterior has these parameters:  \ $Beta(16.6, 7.4)$.
+
+```{r}
+# | fig.align: center
+# | out-width: "70%" 
+# | fig-alt: This plot shows how the prior can be updated from data and compares with the uniform beta prior. 
+xx <- seq(0, 1, .001)
+
+data = data.frame(rate = rep(xx, 3),
+                  Density = c(dbeta(xx, 1, 1), dbeta(xx, 0.6,0.4), dbeta(xx, 16.6, 7.4)),
+                  Category = c(rep("Uniform", length(xx)), rep("Prior", length(xx)), rep("Updated Posterior", length(xx))))
+
+
+ggplot(data) + geom_line(aes(x = rate, y = Density, colour = Category), size = 1.0) +
+   ggtitle("Historical prior and Updated posterior distribution from 16 responders\n of 23 at interim analysis for a single arm oncology trial") + 
+  scale_x_continuous(labels = scales::percent_format()) +
+  ylab("Density") +
+  xlab("Response Rate") +
+theme(plot.title = element_text(size=15, family = "Helvetica")) +
+  scale_color_manual(values = c("#56B4E9", "#CC79A7", "#009E73")) +
+  scale_y_continuous(limits = c(0, 7))
+
+# could say prior alpha, beta
+
+```
+
+
+## `postprob()` example (Lee & Liu, 2008)
+<!-- -   We observed 16 successes out of 23 patients -->
+<!-- -   We set a threshold of p = 0.60 as a comparator -->
+<!-- -   Assume a  Beta(0.6, 0.4) prior for P_E -->
+<!-- -   Posterior will be a  Beta(16.6, 7.4) distribution -->
+<!-- -   $Pr(RR ≥ p | data)$ = 0.836 -->
+
+```{r}
+r_interim = 16
+n_interim = 23
+r_final = 23
+n_final = 40
+soc_rr = 0.60
+soc_rr_percent = paste(soc_rr*100, "%")
+data.frame( Example = c("Responders", 
+                      "n", 
+                      "Response rate (%)", 
+                      "Standard of Care RR (%)",
+                      "Posterior probability"), 
+            Interim = c(r_interim, 
+                        n_interim, 
+                        paste(
+                          round(
+                            (r_interim/n_interim)*100, 
+                            digits = 2), 
+                          "%"), 
+                        soc_rr_percent,
+                        "postprob( ) call from phase1b" )) -> use_case
+
+use_case %>% kbl(align = "c") %>% kable_styling(font_size = 25)
+```
+
+```{r, echo = TRUE, warning = FALSE}
+postprob(x = 16, n = 23, p = 0.60, par = c(0.6, 0.4))
+```
+
+## `predprob()` example (Lee & Liu, 2008)
+<!-- -   Nmax = 40, x = 16, n = 23, Prior is Beta(0.6, 0.4) -->
+<!-- -   $P(RR > 60\% )$ > $\theta_T$ with $\theta_T$ equal 60 % and 90 -->
+<!--     %. -->
+```{r}
+r_interim = 16
+n_interim = 23
+r_final = 23
+n_final = 40
+soc_rr = 0.60
+soc_rr_percent = paste(soc_rr*100, "%")
+data.frame( Example = c("Responders", 
+                      "n", 
+                      "Response rate (%)", 
+                      "Predictive Posterior probability"), 
+            Interim = c(r_interim, 
+                        n_interim, 
+                        paste(
+                          round(
+                            (r_interim/n_interim)*100, 
+                            digits = 2), 
+                          "%"), 
+                        "predprob( ) call from phase1b")) -> use_case
+use_case %>% kbl(align = "c") %>% kable_styling(font_size = 20)
+```
+
+
+```{r, echo = TRUE, warning = FALSE}
+# | code-line-numbers: "|3-4"
+control = 0.6
+thetaT_low = 0.6
+result <- predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = thetaT_low,
+  parE = c(0.6, 0.4)
+)
+result$result
+thetaT_high = 0.9
+result_high_thetaT <- predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = thetaT_high,
+  parE = c(0.6, 0.4)
+)
+result_high_thetaT$result
+```
+
+## Predictive Posterior Probability 
+
+\n
+
+```{r}
+#| label: fig-histogram
+#| fig-cap: "Predictive Posterior CDF for different Efficacy Rules"
+#| fig-subcap:
+#|   - $P (\theta_T > 0.6 | \ data )$ > 60% #"Efficacious if Pred. Posterior Prob > 90 %" 
+#|   - $P (\theta_T > 0.6 | \ data )$ > 90% #"Efficacious if Pred. Posterior Prob > 90 %" 
+#| layout-ncol: 2 # make graph bigger
+#| column: page-right
+#| fig-alt : "These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40"
+data = rbind(result$table, result_high_thetaT$table)
+data$thetaT = c(rep("60%", 18), rep("90%", 18))
+df_thetaTlow <- data %>% filter(thetaT == "60%") 
+df_thetaThigh <- data %>% filter(thetaT == "90%") 
+
+ggplot(df_thetaTlow) +
+  geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
+  scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
+  xlab("\nFuture successful reponders") +
+  ylab("Probability\n") +
+  ggtitle("With lower threshold : \n32 of 40 responders needed to achieve a Go decision")  +
+  theme(text = element_text(size = 20)) +
+  scale_color_manual(values = c("#D55E00", "#009E73"))
+
+ggplot(df_thetaThigh) +
+  geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
+   scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
+    xlab("\nFuture successful reponders") +
+  ylab("Probability\n") +
+  ggtitle("With higher threshold : \n35 of 40 responders needed to achieve a Go decision") +
+  theme(text = element_text(size = 20)) +
+  scale_color_manual(values = c("#D55E00", "#009E73")) 
+```
+
+## Rules and Operating characteristics. A use case for `ocPostprob()`:
+
+-   Look for Efficacy: Go if $P( RR > 60\% ) > 80%$
+-   Look for Futility: Stop if $P( RR > 60\% ) > 60%$
+-   Prior of treatment arm $Beta(0.6, 0.4)$.
+
+```{r, echo = TRUE, warning = FALSE}
+set.seed(2025)
+res <- ocPostprob(
+  nnE = c(20, 40), truep = 0.60, p0 = 0.60, p1 = 0.60, tL = 0.60, tU = 0.90, parE = c(0.6, 0.4),
+  sim = 50000, wiggle = TRUE, nnF = c(20, 40)
+)
+
+res$oc
+
+```
+
+## Expanded features {.smaller}
+
+#### .... and wiggle room!
+
+```{r}
+Features <- read.csv(file = "phase1b_FeatureTable - Sheet1.csv", header = TRUE, sep  = ",")
+names(Features) <- c(" ", "SOC uncertainty", "single-arm", "two-arm", "simulation", "plotting", "boundaries")
+Features[is.na(Features)] <- ""
+Features[Features == 1] <- "✔️"
+# what are these features, diff between two arm and randomisation say what kind of trials this can support
+Features %>% kbl(align = "c") %>% kable_styling(position = "center", font_size = 18) %>% kable_classic(lightable_options = "hover", html_font = "\"Source Sans Pro\", helvetica, sans-serif") 
+
+
+```
+
+# Concluding remarks {background-iframe="colored-particles/index.html"}
+
+-   Extension to other therapeutic areas that use response rate as
+    endpoint if beta priors are appropriate
+
+-   Contact [me](audreytyeo@gmail.com) to collaborate. Open [issues
+    here](https://github.com/Genentech/phase1b/issues)\
+
+
+# References
+
+-   Thall P F, Simon R (1994), Practical Guidelines for Phase IIB
+    Clinical Trials, Biometrics, 50, 337-349
+
+-   Lee J J, Liu D D (2008), A Predictive probability design for phase
+    II cancer clinical trials, 5(2), 93-106, Clinical Trials
+
+-   Yeo, A T, Sabanés Bové D, Elze M, Pourmohamad T, Zhu J, Lymp J,
+    Teterina A (2024). Phase1b : Calculations for decisions on Phase 1b
+    clinical trials. R package version 1.0.0,
+    <https://genentech.github.io/phase1b>
+
+-   [Code for this presentation](www.audreyyeCH.github.io/About)
