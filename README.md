@@ -12,6 +12,10 @@ devtools::install_github("https://github.com/Genentech/phase1b")
 library(phase1b)
 ```
 
+## useR!2024 
+
+TBC
+
 ## PHUSE 2024, Basel, September 2024
 
 The abstract of the talk above is as follows:
