@@ -397,13 +397,15 @@
 <section id="a-bayesian-approach-to-decision-making-in-early-development-clinical-trials-an-r-solution" class="title-slide slide level1 center" data-background-iframe="colored-particles/index.html">
 <h1>A Bayesian approach to decision making in early development clinical trials: An R solution</h1>
 <p><strong>Audrey Yeo</strong></p>
-<p>Statisticians in Pharma Conference &lt;span {style = “colour;red;”}&gt;[(PSI)] 2024, Amsterdam, NL<br>
+<p>Statisticians in Pharma Conference (PSI) 2024, Amsterdam, NL<br>
 <strong><em>This presentation has ALT text and as much as possible, uses colour-blind friendly palettes</em></strong></p>
 </section>
 
-<section id="early-oncology-trials-and-why-phase1b" class="title-slide slide level1 center">
+<section id="early-oncology-trials-and-why-phase1b" class="title-slide slide level1 smaller center">
 <h1>Early oncology trials and why <code>phase1b</code>?</h1>
-
+<div class="{#layout-nrow=6}">
+<p><img data-src="images/hex1.png" style="width:20.0%"> <img data-src="images/hex5.png" style="width:20.0%"> <img data-src="images/hex6.png" style="width:20.0%"></p>
+</div>
 </section>
 
 <section id="prior-and-posterior-of-beta-distribution-for-response-rate" class="title-slide slide level1 smaller center">
@@ -412,7 +414,7 @@
 <li><p>Conjugate Prior is <span class="math inline">\(f(\pi)\)</span>, where <span class="math inline">\(\pi \sim {Beta(\alpha, \beta)}\)</span>, same family of distribution of Posterior (see below)</p></li>
 <li><p>We know the mean response rate (RR) is : <span class="math display">\[\pi = \ \frac {\alpha}{\alpha + \beta}\]</span></p></li>
 <li><p>Likelihood is <span class="math inline">\(f(x|\pi)\)</span>, where <span class="math inline">\(x \sim {Binomial(x, n)}\)</span></p></li>
-<li><p>The updated Posterior <span class="math inline">\(F( \pi | x )\)</span> is again a Beta distribution (same family as prior) : <span class="math display">\[ \pi| \ x \sim Beta(\alpha + x, \ \beta + n - x)\]</span> where <span class="math inline">\(x\)</span> is the number of responders of current trials</p></li>
+<li><p>The updated Posterior <span class="math inline">\(f( \pi | x )\)</span> is again a <span class="math inline">\(Beta\)</span> distribution (same family as prior) : <span class="math display">\[ \pi| \ x \sim Beta(\alpha + x, \ \beta + n - x)\]</span> where <span class="math inline">\(x\)</span> is the number of responders of current trials</p></li>
 </ul>
 </section>
 
@@ -420,19 +422,15 @@
 <section id="history-and-how-to-install" class="title-slide slide level1 smaller center">
 <h1>History and how to install :</h1>
 <ul>
-<li><p>Roche’s early development group, package development led by Daniel Sabanés Bové in 2015.</p></li>
-<li><p>At Roche, we use it regularly since 2015, and since then, package development practices have changed.</p></li>
-<li><p>In 2023, I took over under the supervision of Daniel to refactor, have design discussions, add unit and integration tests to bring it up to state-of-art software engineering practices.</p></li>
-<li><p>100% written in R. Open source shortly…</p></li>
+<li><p>2015 : Started as a need in Roche’s early development group, package development led by Daniel Sabanés Bové in 2015.</p></li>
+<li><p>2023 : Refactoring, Renaming, adding Unit and Integration tests as current State-of-Art Software Engineering practice.</p></li>
+<li><p>100% written in R and Open Source.</p></li>
 <li><p>website : <a href="genentech.github.io/phase1b/">genentech.github.io/phase1b/</a></p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(devtools)</span>
 <span id="cb1-2"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/Genentech/phase1b"</span>)</span>
 <span id="cb1-3"><a href=""></a><span class="fu">library</span>(phase1b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="use-case" class="slide level2 smaller">
@@ -460,17 +458,17 @@
 <td style="text-align: center;">40</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Response rate (%)</td>
+<td style="text-align: center;">Response rate</td>
 <td style="text-align: center;">69.57 %</td>
 <td style="text-align: center;">57.5 %</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Posterior probability</td>
+<td style="text-align: center;">Posterior probability*</td>
 <td style="text-align: center;">ask phase1b</td>
 <td style="text-align: center;">ask phase1b</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Predictive posterior probability</td>
+<td style="text-align: center;">Predictive posterior probability*</td>
 <td style="text-align: center;">ask phase1b</td>
 <td style="text-align: center;">-</td>
 </tr>
@@ -487,13 +485,18 @@
 </div>
 <p><br>
 <br>
-* Posterior Probability : <span class="math inline">\(P (\pi &gt; 60 \% | \alpha )\)</span> * Predictive Posterior Probability : <span class="math inline">\(P (success \ or \  failure \ at \ final)\)</span></p>
+* Posterior Probability : <span class="math inline">\(P (\pi &gt; 60 \% | \alpha + n, \beta + n - x )\)</span><br>
+* Predictive Posterior Probability : <span class="math inline">\(P (success \ or \  failure \ at \ final)\)</span></p>
 </section>
 <section id="updating-the-posterior-and-making-a-decision" class="slide level2 smaller">
 <h2>Updating the Posterior and making a decision</h2>
-<p>The updated Posterior will have the parameters <span class="math inline">\(\alpha + x\)</span> and <span class="math inline">\(\beta + n - x\)</span>. With the prior of <span class="math inline">\(Beta(0.6, 0.4)\)</span> and the result of our interim results our Posterior has these parameters: &nbsp;<span class="math inline">\(Beta(16.6, 7.4)\)</span>.</p>
+<ul>
+<li>The updated Posterior will have the parameters <span class="math inline">\(\alpha + x\)</span> and <span class="math inline">\(\beta + n - x\)</span>.<br>
+</li>
+<li>With the prior of <span class="math inline">\(Beta(0.6, 0.4)\)</span> and the result of our interim results our Posterior has these parameters: &nbsp;<span class="math inline">\(Beta(16.6, 7.4)\)</span></li>
+</ul>
 
-<img data-src="index2_files/figure-revealjs/unnamed-chunk-5-1.png" data-fig-pos="H" width="960" class="r-stretch"></section>
+<img data-src="index2_files/figure-revealjs/unnamed-chunk-6-1.png" data-fig-pos="H" width="960" class="r-stretch"></section>
 <section id="postprob-example-lee-liu-2008" class="slide level2">
 <h2><code>postprob()</code> example (Lee &amp; Liu, 2008)</h2>
 <!-- -   We observed 16 successes out of 23 patients -->
@@ -520,11 +523,11 @@
 <td style="text-align: center;">23</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Response rate (%)</td>
+<td style="text-align: center;">Response rate</td>
 <td style="text-align: center;">69.57 %</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Standard of Care RR (%)</td>
+<td style="text-align: center;">Standard of Care Response rate</td>
 <td style="text-align: center;">60 %</td>
 </tr>
 <tr class="odd">
@@ -538,10 +541,7 @@
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">p =</span> <span class="fl">0.60</span>, <span class="at">par =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8359808</code></pre>
 </div>
@@ -571,10 +571,14 @@
 <td style="text-align: center;">23</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Response rate (%)</td>
+<td style="text-align: center;">Response rate</td>
 <td style="text-align: center;">69.57 %</td>
 </tr>
 <tr class="even">
+<td style="text-align: center;">Standard of Care Response rate</td>
+<td style="text-align: center;">60 %</td>
+</tr>
+<tr class="odd">
 <td style="text-align: center;">Predictive Posterior probability</td>
 <td style="text-align: center;">predprob( ) call from phase1b</td>
 </tr>
@@ -585,33 +589,38 @@
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># | code-line-numbers: "|3-4"</span></span>
-<span id="cb4-2"><a href=""></a>control <span class="ot">=</span> <span class="fl">0.6</span></span>
-<span id="cb4-3"><a href=""></a>thetaT_low <span class="ot">=</span> <span class="fl">0.6</span></span>
-<span id="cb4-4"><a href=""></a>result <span class="ot">&lt;-</span> <span class="fu">predprob</span>(</span>
-<span id="cb4-5"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> thetaT_low,</span>
-<span id="cb4-6"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
-<span id="cb4-7"><a href=""></a>)</span>
-<span id="cb4-8"><a href=""></a>result<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>control <span class="ot">=</span> <span class="fl">0.6</span></span>
+<span id="cb4-2"><a href=""></a>confidence_sixty <span class="ot">=</span> <span class="fl">0.6</span></span>
+<span id="cb4-3"><a href=""></a>result <span class="ot">&lt;-</span> <span class="fu">predprob</span>(</span>
+<span id="cb4-4"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_sixty,</span>
+<span id="cb4-5"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
+<span id="cb4-6"><a href=""></a>)</span>
+<span id="cb4-7"><a href=""></a>result<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9004913</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>thetaT_high <span class="ot">=</span> <span class="fl">0.9</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>confidence_ninety <span class="ot">=</span> <span class="fl">0.9</span></span>
 <span id="cb6-2"><a href=""></a>result_high_thetaT <span class="ot">&lt;-</span> <span class="fu">predprob</span>(</span>
-<span id="cb6-3"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> thetaT_high,</span>
+<span id="cb6-3"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_ninety,</span>
 <span id="cb6-4"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
 <span id="cb6-5"><a href=""></a>)</span>
 <span id="cb6-6"><a href=""></a>result_high_thetaT<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5655589</code></pre>
 </div>
 </div>
+<!-- ## `predprob()` example (Lee & Liu, 2008), higher threshold -->
+<!-- ```{r} -->
+<!-- use_case %>% kbl(align = "c") %>% kable_styling(font_size = 20) -->
+<!-- ``` -->
+<!-- ```{r, echo = TRUE} -->
+<!-- thetaT_high = 0.9 -->
+<!-- result_high_thetaT <- predprob( -->
+<!--   x = 16, n = 23, Nmax = 40, p = control, thetaT = thetaT_high, -->
+<!--   parE = c(0.6, 0.4) -->
+<!-- ) -->
+<!-- result_high_thetaT$result -->
+<!-- ``` -->
 </section>
 <section id="predictive-posterior-probability" class="slide level2">
 <h2>Predictive Posterior Probability</h2>
@@ -626,7 +635,7 @@
 <img data-src="index2_files/figure-revealjs/fig-histogram-1.png" data-fig-pos="H" data-ref-parent="fig-histogram" alt="These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40" width="960">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-histogram-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) <span class="math inline">\(P (\theta_T &gt; 0.6 | \ data )\)</span> &gt; 60%
+(a) <span class="math inline">\(P (\pi &gt; 0.6 | \ data )\)</span> &gt; 60%
 </figcaption>
 </figure>
 </div>
@@ -638,7 +647,7 @@
 <img data-src="index2_files/figure-revealjs/fig-histogram-2.png" data-fig-pos="H" data-ref-parent="fig-histogram" alt="These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40" width="960">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-histogram-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) <span class="math inline">\(P (\theta_T &gt; 0.6 | \ data )\)</span> &gt; 90%
+(b) <span class="math inline">\(P (\pi &gt; 0.6 |  \ data )\)</span> &gt; 90%
 </figcaption>
 </figure>
 </div>
@@ -651,33 +660,29 @@ Figure&nbsp;1: Predictive Posterior CDF for different Efficacy Rules
 </figure>
 </div>
 </section>
-<section id="rules-and-operating-characteristics.-a-use-case-for-ocpostprob" class="slide level2">
+<section id="rules-and-operating-characteristics.-a-use-case-for-ocpostprob" class="slide level2 smaller">
 <h2>Rules and Operating characteristics. A use case for <code>ocPostprob()</code>:</h2>
 <ul>
-<li>Look for Efficacy: Go if <span class="math inline">\(P( RR &gt; 60\% ) &gt; 80%\)</span></li>
-<li>Look for Futility: Stop if <span class="math inline">\(P( RR &gt; 60\% ) &gt; 60%\)</span></li>
+<li>Look for Efficacy: Go if <span class="math inline">\(P( \pi &gt; 60\% | \ data ) &gt; 90 \%\)</span></li>
+<li>Look for Futility: Stop if <span class="math inline">\(P( \pi &lt; 60\% | \ data ) &gt; 60 \%\)</span></li>
 <li>Prior of treatment arm <span class="math inline">\(Beta(0.6, 0.4)\)</span>.</li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
 <span id="cb8-2"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">ocPostprob</span>(</span>
-<span id="cb8-3"><a href=""></a>  <span class="at">nnE =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>), <span class="at">truep =</span> <span class="fl">0.60</span>, <span class="at">p0 =</span> <span class="fl">0.60</span>, <span class="at">p1 =</span> <span class="fl">0.60</span>, <span class="at">tL =</span> <span class="fl">0.60</span>, <span class="at">tU =</span> <span class="fl">0.90</span>, <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
-<span id="cb8-4"><a href=""></a>  <span class="at">sim =</span> <span class="dv">50000</span>, <span class="at">wiggle =</span> <span class="cn">TRUE</span>, <span class="at">nnF =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>)</span>
+<span id="cb8-3"><a href=""></a>  <span class="at">nnE =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>), <span class="at">truep =</span> <span class="fl">0.60</span>, <span class="at">p0 =</span> <span class="fl">0.60</span>, <span class="at">p1 =</span> <span class="fl">0.60</span>, <span class="at">tL =</span> <span class="fl">0.60</span>, <span class="at">tU =</span> <span class="fl">0.90</span>, <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
+<span id="cb8-4"><a href=""></a>  <span class="at">sim =</span> <span class="dv">500</span>, <span class="at">wiggle =</span> <span class="cn">TRUE</span>, <span class="at">nnF =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>)</span>
 <span id="cb8-5"><a href=""></a>)</span>
-<span id="cb8-6"><a href=""></a></span>
-<span id="cb8-7"><a href=""></a>res<span class="sc">$</span>oc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<span id="cb8-6"><a href=""></a>res<span class="sc">$</span>oc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ExpectedN PrStopEarly PrEarlyEff PrEarlyFut PrEfficacy PrFutility PrGrayZone
-1  29.89542     0.50562    0.09948    0.40614     0.1308    0.53642    0.33278</code></pre>
+1    31.878       0.486      0.088      0.398       0.11       0.51       0.38</code></pre>
 </div>
 </div>
 </section>
 <section id="expanded-features" class="slide level2 smaller">
 <h2>Expanded features</h2>
-<h4 id="and-wiggle-room">…. and wiggle room!</h4>
+<p>…. and wiggle room!</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table lightable-classic lightable-hover" data-quarto-postprocess="true" style="font-size: 18px; margin-left: auto; margin-right: auto; font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
@@ -844,12 +849,15 @@ Figure&nbsp;1: Predictive Posterior CDF for different Efficacy Rules
 </div>
 </div>
 </section></section>
-<section id="concluding-remarks" class="title-slide slide level1 center" data-background-iframe="colored-particles/index.html">
+<section id="concluding-remarks" class="title-slide slide level1 smaller center">
 <h1>Concluding remarks</h1>
+<p><img data-src="images/hex1.png" style="width:20.0%"> <img data-src="images/hex5.png" style="width:20.0%"> <img data-src="images/hex6.png" style="width:20.0%"></p>
 <ul>
+<li><p>Big thank you to Daniel Sabanés Bové for mentorship. Data Science Acceleration colleagues who collaborated and supported.</p></li>
 <li><p>Extension to other therapeutic areas that use response rate as endpoint if beta priors are appropriate</p></li>
 <li><p>Contact <a href="audreytyeo@gmail.com">me</a> to collaborate. Open <a href="https://github.com/Genentech/phase1b/issues">issues here</a><br>
 </p></li>
+<li><p><strong><em>Vote</em></strong> on your favourite HEX sticker on the <strong><em>menti link in my PSI profile</em></strong>!</p></li>
 </ul>
 </section>
 
