@@ -16,11 +16,11 @@ library(phase1b)
 
 The abstract of the talk above is as follows:
 
-Gearing our industry Statisticians up for Software success : A phase1b journey.
+**Gearing our industry Statisticians up for Software success : A phase1b journey.**
 
 Trial statisticians write software and are well placed to contribute to analytical solutions that inform business and clinical decision making. Early conversations about incorporating software engineering competence in a trials statistician’s (Sabanés Bové, 2023) already impressive toolbox have started to emerge with the use of the common language of R. I share my personal experience about the actions and attitudes to achieve a state-of-art solution called phase1b and highlight good software engineering principles and ways of working. The package phase1b (Yeo et al, 2024)  is a flexible toolkit that evaluates efficacy and futility analysis within the Bayesian framework for early Oncology trials. The R package informs decision making on whether the drug of concern warrants further investment. Since the evaluation of the efficacy and futility impacts business and clinical decisions in pharma, it is advantageous that the industry strives to understand and create the conditions for more Software success such as the phase1b.		
 				 	 	 		
-		References
+_References_
 
 Yeo, A T, Sabanés Bové D, Elze M, Pourmohamad T, Zhu J, Lymp J, Teterina A (2024).
 Phase1b : Calculations for decisions on Phase 1b clinical trials. R package
