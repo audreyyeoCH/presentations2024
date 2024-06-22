@@ -58,11 +58,7 @@ df_thetaThigh <- data %>% filter(thetaT == "90%")
 ggplot(df_thetaTlow) +
   geom_point(aes(x = cumul_counts, y = posterior, colour = success), size = 1) +
   scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
-  # xlab("\nFuture successful reponders") +
-  # ylab("Probability\n") +
-  # ggtitle("With lower threshold : \n32 of 40 responders needed to achieve a Go decision")  +
   theme(text = element_text(size = 20)) +
-  # scale_color_manual(values = c("#D55E00", "#009E73")) +
   scale_color_manual(values = c("#DF536B", "#61D04F")) +
   theme_classic() +
   theme(axis.title = element_blank()) +
@@ -94,7 +90,9 @@ Statisticians in Pharma Conference (PSI) 2024, Amsterdam, NL
 
 # Early oncology trials and why `phase1b`?{.smaller}
 
-
+```{r}
+# | fig-alt : "This hexagon is the R sticker for phase1b R package. It has a bright purple background, light orange border and the title is in fuschia. The graph in the middle is a CDF distribution in dots that changes from red dots to green dots to indicate a stop to go decision"
+```
 
 ::: {#layout-nrow=6}
 ![](images/hex1.png){width=20%} ![](images/hex5.png){width=20%} ![](images/hex6.png){width=20%}      
@@ -369,6 +367,7 @@ res$oc
 ## Expanded features {.smaller}
 .... and wiggle room!
 ```{r}
+# | fig-alt: "This table has on the first column other phase1b call functions and on the next columns, have check boxes that show Features like SOC uncertainty, single-arm, two-arm ,simulation , plotting and boundaries" 
 Features <- read.csv(file = "phase1b_FeatureTable - Sheet1.csv", header = TRUE, sep  = ",")
 names(Features) <- c(" ", "SOC uncertainty", "single-arm", "two-arm", "simulation", "plotting", "boundaries")
 Features[is.na(Features)] <- ""
@@ -381,7 +380,9 @@ Features %>% kbl(align = "c") %>% kable_styling(position = "center", font_size =
 
 
 # Concluding remarks{.smaller}
-
+```{r}
+# | fig-alt : "This hexagon is the R sticker for phase1b R package. It has a bright purple background, light orange border and the title is in fuschia. The graph in the middle is a CDF distribution in dots that changes from red dots to green dots to indicate a stop to go decision"
+```
 ![](images/hex1.png){width=20%} ![](images/hex5.png){width=20%} ![](images/hex6.png){width=20%}
 
 -   Big thank you to Daniel Sabanés Bové for mentorship. Data Science Acceleration
