@@ -14,9 +14,9 @@ library(phase1b)
 
 This HEX sticker was voted at the PSI 2024! Thank you all! And nice one : )
 
-:::
+
 ![phase1b HEX sticker](images/hex3.png)
-:::
+
 
 ## useR!2024, Grand Wyndham, Salzburg, Austria, July 2024
 
