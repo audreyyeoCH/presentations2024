@@ -11,7 +11,9 @@ library(devtools)
 devtools::install_github("https://github.com/Genentech/phase1b")
 library(phase1b)
 ```
-![phase1b HEX sticker](images/hex3.png){width = 40%}
+:::{#layout-nrow = 6}
+![phase1b HEX sticker](images/hex3.png)
+:::
 
 ## useR!2024, Grand Wyndham, Salzburg, Austria, July 2024
 
