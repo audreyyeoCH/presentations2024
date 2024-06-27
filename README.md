@@ -11,7 +11,9 @@ library(devtools)
 devtools::install_github("https://github.com/Genentech/phase1b")
 library(phase1b)
 ```
+
 This HEX sticker was voted at the PSI 2024! Thank you all! And nice one : )
+
 :::
 ![phase1b HEX sticker](images/hex3.png)
 :::
