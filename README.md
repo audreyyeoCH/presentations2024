@@ -11,12 +11,13 @@ library(devtools)
 devtools::install_github("https://github.com/Genentech/phase1b")
 library(phase1b)
 ```
+![the phase1b HEX sticker](imgaes/hex3.png)
 
-## useR!2024 
+## useR!2024, Grand Wyndham, Salzburg, Austria, July 2024
 
 TBC
 
-## PHUSE 2024, Basel, September 2024
+## PHUSE 2024, Roche Basel Headquarters, Auditorium B7, September 2024
 
 The abstract of the talk above is as follows:
 
