@@ -12,7 +12,17 @@ devtools::install_github("https://github.com/Genentech/phase1b")
 library(phase1b)
 ```
 
-## PHUSE 2024, Basel, September 2024
+This HEX sticker was voted at the PSI 2024! Thank you all! And nice one : )
+
+
+![phase1b HEX sticker](images/hex3.png)
+
+
+## useR!2024, Grand Wyndham, Salzburg, Austria, July 2024
+
+TBC
+
+## PHUSE 2024, Roche Basel Headquarters, Auditorium B7, September 2024
 
 The abstract of the talk above is as follows:
 
