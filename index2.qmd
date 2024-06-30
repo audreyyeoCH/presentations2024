@@ -30,6 +30,9 @@ library(formattable)
 library(ggfun)
 library(hexSticker)
 library(lattice)
+library(devtools)
+devtools::install_github("https://github.com/Genentech/phase1b")
+library(phase1b)
 ```
 
 ```{r global_options, include=FALSE}
@@ -326,10 +329,10 @@ result_high_thetaT$result
 #| layout-ncol: 2 # make graph bigger
 #| column: page-right
 #| fig-alt : "These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40"
-# data = rbind(result$table, result_high_thetaT$table)
-# data$thetaT = c(rep("60%", 18), rep("90%", 18))
-# df_thetaTlow <- data %>% filter(thetaT == "60%") 
-# df_thetaThigh <- data %>% filter(thetaT == "90%") 
+data = rbind(result$table, result_high_thetaT$table)
+data$thetaT = c(rep("60%", 18), rep("90%", 18))
+df_thetaTlow <- data %>% filter(thetaT == "60%")
+df_thetaThigh <- data %>% filter(thetaT == "90%")
 
 ggplot(df_thetaTlow) +
   geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
