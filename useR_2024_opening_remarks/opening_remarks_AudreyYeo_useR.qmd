@@ -1,0 +1,334 @@
+---
+# title: ""
+# subtitle: "useR!2024"
+format:
+  revealjs:
+       logo: images/UseR-24-Event-LaunchAssets-v2_logo-color.png
+       css: logo.css
+code-fold: true
+chalkboard: true
+footer: "Audrey Yeo"
+---
+
+```{r}
+library(kableExtra)
+# images/UseR-24-Event-LaunchAssets-v2_logo-color.png
+```
+
+# "a(R)t is the engine for change"
+
+```         
+                                                 keynote at useR! 2024 Salzburg, Austria 🎹 
+```
+
+**Audrey Yeo**
+
+# Great minds do not think alike. They challenge each other to think again
+
+```
+- Adam Grant
+```
+
+# All Are Welcome Here ♥️
+
+```{r}
+#| layout-ncol: 6
+#| fig-width: 1
+#| fig-height: 3
+knitr::include_graphics("images/rainbowR-hex.svg")
+knitr::include_graphics("images/BURN.png")
+knitr::include_graphics("images/HexZH_R.png")
+knitr::include_graphics("images/HexLatinR1.png")
+```
+```
+This presentation has ALT text and as much as possible, uses colour-blind friendly palettes
+
+Code for this Quarto-rendered .html will also be shared
+````
+
+# Events *PAST*
+
+```
+- R Ladies Meet up dinner
+- R Ladies Birds of a Feather Lunch
+- Inclusive Pathways to Life Sciences and Tech careers
+```
+
+# Events *NEW*
+
+-   rainbowR and Allies Lunch today at 12h30-13h30 :
+
+```
+"rainbowR is a community that supports, promotes and connects LGBTQ+ people who code in the R language. We run monthly online meetups and also run a buddy scheme. https://rainbowr.netlify.app"
+```
+
+
+
+```{r}
+#| layout-ncol: 4
+#| fig-width: 1
+#| fig-height: 3
+knitr::include_graphics("images/rainbowR-hex.svg")
+```
+
+# Rule 10: Make the conference part of a long-term process for inclusion{.smaller}
+
+::: columns
+::: {.column width="50%"}
+```
+(Joo et al, 2022)
+- Scholarhips
+- Gender Neutral Bathrooms
+- Spotify playlist : Be My Upbeat Ally 🎸 
+- and more!
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| layout-ncol: 3
+#| fig-width: 1
+#| fig-height: 3
+knitr::include_graphics("images/spotify_user.png")
+```
+:::
+:::
+
+
+# Inclusive Speaker Orientation
+```
+- Linux Foundation 
+
+Diversity refers to the vast array of human differences especially those that have been HISTORICALLY disadvantaged
+
+Inclusion refers to systems that ACTIVELY include and support individuals regardless of their identities
+```
+
+# Who am I ?
+
+::: columns
+::: {.column width="40%"}
+```
+    Just another human multi-hyphenate doing my best.
+
+    Clinician-Poet-Statistician-Software Engineer ...
+
+    Healthcare, Finance, Academia, Pharma ... 
+                          
+    Cycling, Swimming, Bouldering, Poetry...
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+#| layout-ncol: 2
+#| fig-width: 0.5
+#| fig-height: 3
+knitr::include_graphics("images/geneva_audrey.jpeg")
+knitr::include_graphics("images/hex3.png")
+```
+:::
+:::
+
+# Why are we here ? 
+
+```
+A good conference experience can make a difference in the 
+                  professional development of the participants and 
+                                    create long-lasting collaborations 
+                                             and opportunities 
+                                                       (Joo et al, 2022)
+```
+
+# Our vision here at useR!2024
+```
+improve accessibility for the wider community such that they can participate and feel safe 
+       regardless of gender, 
+            gender identity, 
+               sexual orientation, 
+                    disability, race, ethnicity, age, religion 
+                        or economic status...
+```
+
+# How do we...
+::: columns
+::: {.column width="100%"}
+```
+Create long-lasting collaborations and opportunities (Joo et al, 2022)
+
+        &&
+
+A safe space at the useR!2024 conference 
+
+        &&
+
+Make the conference part of a long-term process for inclusion ?
+```
+:::
+
+::: {.column width="0%"}
+```
+
+```
+:::
+:::
+
+# How ?
+
+1. Code of conduct - read it.
+```
+Be Kind. Be Respectful. 
+```
+2. The Arts
+```
+“A raintree bent towards a window in one side of the bungalow, eavesdropping on the conversations that had taken place inside over years.”
+
+― Tan Twan Eng, The Garden of Evening Mists
+```
+\
+Be Kind. Be Respectful. Be Curious.
+
+
+# Statistians in History
+```
+Florence Nightingale war eine britische Krankenschwester, Statistikerin, Begründerin der modernen westlichen Krankenpflege ...
+- Wikipedia
+```
+```{r}
+#| layout-ncol: 1
+#| fig-width: 0.5
+#| fig-height: 3
+knitr::include_graphics("images/FN_stats.png")
+```
+
+# On Florance Nightingale:
+<!-- “The very first requirement in a hospital is that it should do the sick no harm.” -->
+```
+"Their principle, if logically carried out, is simply to throw out all ages and all diseases and then there would be no mortality whatever."
+```
+
+# Why we need Diversity in Statistics
+```
+Because we need to keep solving the world's most urgent problems in 
+
+Medicine, Climatology, Sociology ... we need everyone onboard :
+
+                  
+                  Ronald, John, Bruno, Carlo, David and more ...
+```
+
+
+
+# Quote inclusively
+
+             Quote her ...
+
+                  Quote they/them ...
+                                       as well.
+
+
+# Learn something ... "new"
+
+```
+What if I told you that you had Missing information about the world, about the future and about yourself ?
+
+
+   "What Health Care is Learning From the Aviation Industry" (Martha K. Swartz, PhD, RN, CPNP, FAAN)
+
+```
+
+# People are more than 1 thing
+
+```
+"The single story creates stereotypes, and the problem with stereotypes is not that they are untrue, but that they are incomplete. They make one story become the only story."
+
+- Chimamanda Ngozi Adichie, Nigerian writer
+```
+
+# Assume you have different realities from others 
+
+```
+"I did not think of myself as black and I only became black when I came to America."
+
+- Chimamanda Ngozi Adichie, Nigerian writer
+```
+
+# Recommended Books 
+
+```
+(Also in the useR DEI Booklist)
+```
+1. African/Black/Asian	: Resmaa Menakem	My grandmother's hands	2017
+2. Deaf	: Nora Ellen Groce	Everyone here spoke sign language	1985
+3. General	: Judith Heumann	Being Heumann	2020
+4. Deaf/blind	: Haben Girma	Haben: The Deafblind Woman Who Conquered Harvard Law	2019
+
+
+# In summary
+```
+1. Read the Code of Conduct
+
+2. Open yourself up to Missing Information
+
+3. Quote inclusively 
+
+4. Drop by the rainbowR and Allies Lunch
+
+5. We make decisions all the time based on incomplete information. These decisions can change lives. - Be Curious
+
+6. Take the Inclusive Speaker orientation course (Linux Foundation)
+
+````
+
+# After the conference
+
+```
+I hope that beyond the conference, 
+
+          that you continue your work, and make your work 
+          
+                  part of a long-term process for inclusion
+```
+
+# Great minds do not think alike. 
+```
+    
+ 
+- Adam Grant
+```
+
+# Thank you and take your time
+
+```
+"Sometimes taking the time is a shortcut" 
+
+- Haruki Murakami, What I talk about when I talk about running.
+```
+
+# Backup slides{.smaller}
+
+## Ten rules to make conferences more accessible (Joo et al 2022): {.smaller}
+
+1.  Set a vision for DEI
+2.  Create a safe and welcoming environment
+3.  Gather an inclusive and diverse organizing team
+4.  Consciously counteract bias in the conference program
+5.  Design a strong online component
+6.  Making the conference accessible to people with disabilities
+7.  Make room for the linguistic diversity
+8.  Build an inclusive communication strategy
+9.  Allocate adequate financial resources to support inclusion goals
+10. Make the conference part of a long-term process for inclusion
+
+
+# References{.smaller}
+- Code for this presentation [here](https://github.com/audreyyeoCH/presentations2024/tree/main)
+- Joo R, Sànchez-Tapia A, Mortara S, Bellini Saibene Y, Turner H, Hug Peter D, et al. (2022) Ten simple rules to host an inclusive conference. PLoS Comput Biol 18(7): e1010164. [link](https://doi.org/ 10.1371/journal.pcbi.1010164)
+- Inclusive Speaker Orientation
+- The danger of a single story [link](https://www.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story?subtitle=en&trigger=30s)
+- Swartz M, (2015) What Health Care is Learning From the Aviation Industry, J Pediatr Health Care. (2015) 29, 1-2. [link](https://doi.org/10.1016/j.pedhc.2014.09.005)
+-  Wilf-Miron R, Lewenhoff I, Benyamini Z, Aviram A (2023), From aviation to medicine: applying concepts of aviation safety to risk management in ambulatory care, Qual Saf Health Care; 1 2:35–39 [link](https://qualitysafety.bmj.com/content/12/1/35)
+- Bradshaw NA (2020) Florence Nightingale (1820–1910): An Unexpected Master of Data [link](https://doi.org/10.1016/j.patter.2020.100036)
+- Adam Grant [tweet here](https://x.com/AdamMGrant/status/1461337368611463175?lang=en)
+
+

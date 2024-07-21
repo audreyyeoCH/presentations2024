@@ -1,0 +1,479 @@
+---
+# title: "A Statisticians journey in Software Engineering"
+# subtitle: "useR!2024"
+format:
+  revealjs
+code-fold: false
+chalkboard: true
+editor: visual
+footer: "Audrey Yeo"
+---
+
+```{r}
+library(readxl)
+library(kableExtra)
+library(tidyverse)
+library(vistime)
+library(treemap)
+# require(devtools)
+# install_github("lchiffon/wordcloud2")
+library(wordcloud2)
+library(flextable)
+library(devtools)
+devtools::install_github("https://github.com/Genentech/phase1b")
+library(phase1b)
+```
+
+# A Statistician's journey in Software Engineering {background-iframe="moving-waves/index.html"}
+
+***AUDREY YEO, MSc Biostats (Zürich), M Nursing (Sydney)***\
+useR!2024, Salzburg, AUSTRIA
+
+```{r}
+#| layout-ncol: 6
+#| fig-width: 1
+#| fig-height: 3
+knitr::include_graphics("images/hex6.png")
+knitr::include_graphics("images/hex3.png")
+knitr::include_graphics("images/hex9.png")
+knitr::include_graphics("images/hex1.png")
+knitr::include_graphics("images/hex5.png")
+```
+
+```{r}
+# | layout-ncol: 2
+# | fig-alt: "This presentation has ALT text and as much as possible, uses colour-blind friendly palettes"
+print("This presentation has ALT text and as much as possible, uses colour-blind friendly palettes")
+```
+
+## My Journey at F. Hoffmann La-Roche {background-iframe="colored-particles/index.html"}
+
+\
+
+```{r}
+#| layout-ncol: 2
+#| fig-width: 1
+#| fig-height: 3
+knitr::include_graphics("images/roche1.jpg")
+knitr::include_graphics("images/roche2.jpg")
+```
+
+## My Journey at F. Hoffmann La-Roche
+
+-   graduated MSc Biostatistics in 2020
+-   started at RWD at Roche in mid 2021
+-   joined R&D at Roche in mid 2022
+-   first internal statistics presentation end 2022 on decision gating
+    -   skills : R programming, writing functions, version control (GitLab, GitHub), presentation and communication
+-   started `phase1b` in July 2023
+
+# Why Software Engineering ?
+
+**Why find solutions when we can also build them ?**
+
+-   Mathematics is Elegant
+
+-   Building software can be inclusive and collaborative
+
+-   I can create delightful experiences users and bring everyone along : *values of inclusion, building great products, having an impact*
+
+## `phase1b` package history
+
+-   2015 : Started as a need in Roche's early development group, package development led by Daniel Sabanés Bové in 2015.
+
+-   2023 : Refactoring, Renaming, adding Unit and Integration tests as current State-of-Art Software Engineering practice.
+
+-   100% written in R and Open Source.
+
+-   website : [genentech.github.io/phase1b/](genentech.github.io/phase1b/)
+
+```{r, eval = FALSE, echo = TRUE, warning = FALSE}
+library(devtools)
+devtools::install_github("https://github.com/Genentech/phase1b")
+library(phase1b)
+```
+
+## My Pocket Guide : A response to dynamic decision making in early development {.smaller}
+
+```{r}
+#| layout-ncol: 2 
+#| layout-nrow: 2
+#| fig-cap: "Predictive Posterior for different Rules"
+#| fig-subcap:
+#|     - $P (\pi > 0.6 | \ data )$ > 60% #"Efficacious if Pred. Posterior Prob > 90 %" 
+#|     - $P (\pi > 0.6 |  \ data )$ > 90% #"Efficacious if Pred. Posterior Prob > 90 %" 
+#| column: page-right
+#| fig-alt : "These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40"
+control = 0.6
+thetaT_low = 0.6
+result <- predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = thetaT_low,
+  parE = c(0.6, 0.4)
+)
+
+thetaT_high = 0.9
+result_high_thetaT <- predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = thetaT_high,
+  parE = c(0.6, 0.4)
+)
+data = rbind(result$table, result_high_thetaT$table)
+data$thetaT = c(rep("60%", 18), rep("90%", 18))
+df_thetaTlow <- data %>% filter(thetaT == "60%") 
+df_thetaThigh <- data %>% filter(thetaT == "90%") 
+
+ggplot(df_thetaTlow) +
+  geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
+  scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
+  xlab("\nFuture successful reponders") +
+  ylab("Probability\n") +
+  ggtitle("With lower threshold : \n32 of 40 responders needed to achieve a Go decision")  +
+  theme(text = element_text(size = 20)) +
+  scale_color_manual(values = c("#D55E00", "#009E73"))
+
+ggplot(df_thetaThigh) +
+  geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
+   scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
+    xlab("\nFuture successful reponders") +
+  ylab("Probability\n") +
+  ggtitle("With higher threshold : \n35 of 40 responders needed to achieve a Go decision") +
+  theme(text = element_text(size = 20)) +
+  scale_color_manual(values = c("#D55E00", "#009E73")) 
+```
+
+## Skills needed : Covering the basics {.smaller}
+
+-   Onboarding June + July 2023
+    -   R basics: coding and style
+    -   Good function writing in R
+    -   R debugging
+    -   R advanced: package development
+        -   Basics of Package Development in R
+        -   Roxygen2 introduction another resource
+        -   Good Software Engineering Practice for R Packages
+
+***in summary, gaps were*** : Git merging, Pull Requests, Styling, Debugging, Writing Tests
+
+::: notes
+-   DSX Onboarding : mid June - Aug 2023 at 70%
+-   Current duration of rotation \~12 months
+-   First Pull Request (PR) merged on Aug 29th 2023
+-   Daily stand ups for 3 months then 1 month "break". From month 4 we had 3-5/ week stand ups
+-   Tasks
+    -   re-factoring `phase1b` to current State of Art. `phase1b`is already available for use internally and have been used extensively in the early oncology space since 2015
+
+(large task: four functions, test files, and examples to clean) - Current tally : 9 Pull Requests, of which 7 were large 😅 in 7 months - Month 6, we changed tact to smaller PRs which meant that more was achieved in a shorter time span
+
+this presentation is not a bunch of hot takes, it's only my journey
+:::
+
+## New beginnings, knowledge and skills for Statistical Software Engineering!
+
+-   Visualing branches : `Git kraken`, `VS Code Git Graph Extension`
+-   Checking : `pre-commit`, `Git hub checks`, `R CMD`
+-   Documentation : Writing (`roxygen`), building, reviewing documentation
+-   Testing : Taking a reviewer perspective (`testthat` and `checkmate`)
+-   Styling : `styler`, `prettier` ... building your own style
+
+# What is refactoring ?
+
+-   "Polishing an antique cup", making new of "vintage".
+
+```{r, out.height = 350, out.width = 500, fig.align = 'center'}
+#| fig-alt: ""
+#| fig-cap-location: bottom
+#| fig-subcap: 
+#| - "Peranakan bowl from Late 19-20th Century, Kuala Lumpur, British Malaya"
+knitr::include_graphics("images/Peranakan_bowl.jpg", error = FALSE)
+```
+
+<!-- !["Late 19th-early 20th Century bowl from Kuala Lumpur, British Malaya from the Peranakan Museum"](Peranakan_bowl.jpg){fig-align="center"}\](https://www.roots.gov.sg/Collection-Landing/listing/1239988) -->
+
+## Tools for refactoring
+
+-   Variables are `typed` defined from package `roxygen2` and it's type asserted from package `checkmate`
+-   Unit and integration testing takes on the perspective of a reviewer and to ensure the function calls calculates what it says it calculates (they are my favourite). Package `testthat` and `checkmate` are used here
+-   Making `phase1b` a State of Art Software[^1] - reproducible, robust, testable, intuitive and open to collaboration
+
+[^1]: Subject to a change in definition with better tools and practices
+
+```{r, eval = FALSE}
+library(roxygen2)
+library(devtools)
+roxygen2::roxygenise() # converts roxygen comments to .Rd files
+devtools::document()  # R converts .Rd files to human readable documentation
+# then Ctrl + Shift + D, if you’re using RStudio.
+```
+
+## What is debugging ?
+
+*To find a needle in the haystack systematically*
+
+-   Takes the most time and is the most difficult
+-   Needs a lot more courage than creativity
+-   Maintains humility
+
+*embrace small steps as smaller PRs can be sizeABLE.*
+
+```{r, eval = FALSE}
+# | echo = false
+# | eval = false
+debugonce()
+debug()
+undebug()
+options(error = recover)
+options(error = NULL)
+```
+
+::: notes
+-   Provides functions that make it easy to describe what you expect a function to do, including catching errors, warnings, and messages.
+
+-   Easily integrates in your existing workflow, whether it’s informal testing on the command line, building test suites, or using R CMD check.
+
+-   Displays test progress visually, showing a pass, fail, or error for every expectation. If you’re using the terminal or a recent version of RStudio, it’ll even colour the output.
+
+-   resource for testing : <https://r-pkgs.org/testing-basics.html>
+:::
+
+## Polishin' the vintage function - A checklist approach {.smaller}
+
+::: columns
+::: {.column width="50%"}
+![](Example_checklist.png)
+:::
+
+::: {.column width="50%"}
+\
+
+1.  One issue to one branch
+
+2.  One issue to one Pull Request (PR)
+
+3.  One Design Document for entire function
+
+4.  One issue is the smallest task from (3)
+
+5.  Create Test files for helper functions
+
+6.  Create Test files and example files for main function calls
+:::
+:::
+
+## First successes
+
+::: columns
+::: {.column width="60%"}
+\
+
+-   First Pull Request (PR) merged on Aug 29 2023 🥳
+
+-   submitted an abstract by November 2023 at **PSI**
+:::
+
+::: {.column width="40%"}
+```{r}
+knitr::include_graphics("images/abstract.png")
+```
+:::
+:::
+
+## The `phase1b` journey in Pull Requests
+
+```{r, out.height= 500}
+data <- read.csv("phase1b_FeatureTable - Sheet1.csv", sep = ",")
+data <- data[1:20,]
+showcase_PR <- data.frame(`Pull request`= data$Pull.request,
+                          Order= data$order)
+names <- c("Pull Request", "Order of work")
+# dimnames(showcase_PR) = list(1:32, names)
+dimnames(showcase_PR) = list(1:20, names)
+showcase_PR %>%  kbl(align = "c") %>% kable_styling(font_size = 14) %>% kable_classic(lightable_options = "hover", html_font = "\"Source Sans Pro\", helvetica, sans-serif") 
+```
+
+## The `phase1b` journey in Commits
+
+```{r}
+data <- read.csv("phase1b_FeatureTable - Sheet1.csv", sep = ",")
+
+# treemap 2
+treemap(data,
+        index ="order",
+        vSize="commits",
+        type="index",
+        mirror.y = TRUE,
+        title = "Commits decrease with later PRs",
+        algorithm = "pivotSize",
+        fontfamily.title = "helvetica",
+        fontfamily.labels = "helvetica",
+        border.lwds = 0.5
+)
+```
+
+## The `phase1b` journey in Chats
+
+```{r}
+data <- read.csv("phase1b_FeatureTable - Sheet1.csv", sep = ",")
+
+# treemap 2
+treemap(data,
+        index ="order",
+        vSize="chats",
+        type="index",
+        mirror.y = TRUE,
+        title = "Chats decrease with later PRs",
+        algorithm = "pivotSize",
+        fontfamily.title = "helvetica",
+        fontfamily.labels = "helvetica",
+        border.lwds = 0.5
+)
+
+```
+
+## Features of Statistical Software Engineering {.smaller}
+
+::: columns
+::: {.column width="50%"}
+-   Moving parts, collaboration is must
+-   Alignment of Forest vs Trees perspective
+-   Requires focused and deep thinking
+-   Small steps are good starts e.g. small PRs
+-   Creative work comes after foundation
+:::
+
+::: {.column width="50%"}
+-   Systematic deduction is key to debugging
+-   Lots of theory and reading literature about new methodology
+-   Good engineering practices are habits, needs automation which needs practice which needs time
+:::
+:::
+
+## Good practices for new starter{.smaller}
+
+Goal : introduce good practices and improve muscle memory and collaborate
+
+-   Mindset : Being dependent on others is normal. Asking questions are ok because there are also many moving parts. 
+-   Regular stand ups
+-   Taking Small steps : are good starts
+-   Taking Systematic steps : no matter how slow
+    -   e.g. `debug()`, `undebug()`, `options(recover = error)`, `options(recover = NULL)`
+-   older PRs are helpful to learn and reflect
+
+## Good practices for the Engineering Lead {.smaller}
+
+Goal : introduce good practices and improve muscle memory and collaborate
+
+-   Patience
+-   Quick turnover for feedback
+-   Positive feedback but no over positiveness, always based on facts
+-   Use chats in PR can be helpful to precise the feedback
+-   Demonstrate small and systematic deduction during debugging
+-   Acknowledge learning styles can be different
+-   Allow developers to do the work, make mistakes and keep sharing rationale
+
+## Comments on collaboration for `phase1b` work
+
+\
+
+-   Positive bias & Trust are win-win situations
+
+-   Learning through mistakes is key
+
+-   Safe space to be ask any questions, and iterate, even for a seasoned engineer
+
+## Kinds of feedback
+
+\
+
+-   "Great motivation to learn new skills"
+
+-   "... it was always fun and easy to work with Audrey"
+
+## How I want to be a better Software Engineer{.smaller}
+
+-   Develop the skills of slow and systematic deduction (efficiency gains)
+-   Create more conditions for focused, systematic, deep and creative work
+-   Perceive small steps as good starts
+-   Continue having an open mind on what good practices are
+-   Be more patient with the process
+-   Fall on the engineering principles (testing, debugging, iteration, reliability, correctness...)
+
+## Sharing the Success story: Touring `phase1b`
+
+::: columns
+::: {.column width="50%"}
+-   PSI June 2024 conference in Netherlands [link](https://www.psiweb.org/conferences/about-the-conference)
+-   useR!2024 Salzburg [here](https://events.linuxfoundation.org/user/)
+-   PHUSE September 2024 in Basel [link](https://www.phuse-events.org/attend/frontend/reg/thome.csp?pageID=40702&eventID=64&traceRedir=2)
+-   University of Basel November 2024 [link](https://accio.github.io/AMIDD/)
+:::
+
+::: {.column width="40%"}
+```{r}
+knitr::include_graphics("images/PSI_Stand.jpg", error = FALSE)
+
+```
+:::
+:::
+
+## Future outlook
+
+\
+
+-   Go through several more issues to complete and make it more delightful
+
+-   submission to CRAN
+
+-   Collaborate by contacting [me](email%20:%20comptesaudrey@gmail.com)
+
+***More software work for statisticians with values of : Inclusion, Diversity, Impact and Delightful user experience***
+
+## Final Reflections
+
+-   Doing something I wasn't prepared to do paid off
+-   I got more confident about the R Language
+-   Can use this as a reference to build other packages and in other languages [e.g. Julia, see my blog post](https://audreyyeoch.github.io/Julia.html)
+-   Less likely to doubt myself when I learn new things
+
+No matter how much you've improved it's not permanent
+
+```{r}
+#| layout-ncol: 6
+#| fig-width: 1
+#| fig-height: 3
+knitr::include_graphics("images/hex6.png")
+knitr::include_graphics("images/hex3.png")
+knitr::include_graphics("images/hex9.png")
+knitr::include_graphics("images/hex1.png")
+knitr::include_graphics("images/hex5.png")
+```
+
+## Thank you {background-iframe="moving-waves/index.html"}
+
+\
+
+-   Daniel Sabanés Bové
+
+-   ...and other colleagues at Roche
+
+-   R community that do great work and share their knowledge
+
+-   Open Source community
+
+I'd love to know how this presentation relates to you or does not !
+
+## References {.smaller}
+
+-   Thall P F, Simon R (1994), Practical Guidelines for Phase IIB Clinical Trials, Biometrics, 50, 337-349
+
+-   Lee J J, Liu D D (2008), A Predictive probability design for phase II cancer clinical trials, 5(2), 93-106, Clinical Trials
+
+-   Yeo, A T, Sabanés Bové D, Elze M, Pourmohamad T, Zhu J, Lymp J, Teterina A (2024). Phase1b : Calculations for decisions on Phase 1b clinical trials. R package version 1.0.0, <https://genentech.github.io/phase1b>
+
+-   [Code](www.audreyyeCH.github.io/About) for this presentation
+
+-   Why We need to Improve Software Engineering in Biostatistics (October 26 2023 R/Pharma) [link](https://danielinteractive.github.io/rpharma-2023-keynote/#/title-slide)
+
+-   Inclusive Speaker Course by Linux Foundation [link](https://training.linuxfoundation.org/training/inclusive-speaker-orientation/)
+
+-   [license](https://creativecommons.org/licenses/by-sa/4.0/)
+
+#  {background-iframe="multiple-images/index.html"}

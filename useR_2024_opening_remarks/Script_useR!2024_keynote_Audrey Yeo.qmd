@@ -1,0 +1,220 @@
+---
+title: "Script useR!2024 keynote by Audrey Yeo: a(R)t is the engine for change"
+format: html
+editor: visual
+---
+
+\
+
+## Abstract : Keynote at useR! 2024 Salzburg, Austria 🎹 
+
+_"a(R)t is the engine for change"_
+Adam Grant said : Great minds do not think alike. They challenge each other to think again.
+In my opening remarks, I will borrow from Great minds in diverse Literature and how they can guide us to create collaborations and opportunities that span beyond the conference. I will also talk about how we can take similar steps to make the work that we do, a part of a long term-process for inclusion.
+
+## Slide : (Title slide)
+Art is the engine for change.
+
+Good morning. My name is Audrey Yeo and I’ve travelled from Switzerland to be here. I am a Statistician and Statistical Software Engineer. For useR!2024 I am the Diversity Equitiy and Inclusion (DEI) Committee Lead and on behalf of the sponsors, LF and myself, a warm welcome to all of you.
+
+I am excited about the diversity we have in our R community because …Great minds do not think alike, they challenge each other to think again. Adam GRant.
+
+## Slide : All are welcome here
+I want to acknowledge the geographically and linguistically diverse R communities that are in this room, and also joining us virtually.
+
+I want to acknowledge the Neurodiversity in our community as well.
+
+I want to thank the broader DEI community and LF for all the patience and hard work in educating me, on how to we make this conference more inclusive.
+
+Our volunteers from various R ladies chapters including Global, forwardsR, rainbowR et al who have put their minds together to bring this event to all of you.
+
+## Slide : Events NEW
+
+And these events are such as….Birds of a Feather lunch, and Inclusive Pathways to Life Sciences and Tech panel.
+
+## Slide : Events PAST
+
+Thanks to our DEI volunteers, in this conference we have had R Ladies Meet up dinner and R Ladies Birds of a Feather Lunch. Yesterday evening, we held Inclusive Pathways to Life Sciences and TEch careers.
+Slide : Events NEW
+
+And today, rainbowR and Allies will have lunch together today. Rainbow R is a community that supports, promotes and connects LGBTQ+ people who code in the R language.
+
+That’s right. Not just people who make great HEX stickers.
+
+## Slide : Rule 10
+
+Throughout the preparations for this conference we refer to the paper by Joo et all 2022 on how to run a more inclusive conference. Our goal was to make Rule no. 10, Rule no.1
+
+We have given our scholarships, created Gender Neutral Bathrooms, and community has contributed to a spotify playlist of songs from all around the world including indigenous communities. I hope you found something that made you feel welcome
+Slide : Inclusive Speaker Orientation
+
+The Speakers of this conference have also taken part in making everyone feel more included, that is, the inclusive speaker orientation.
+
+I want to read to you the definition of D and I from this course.
+
+Diversity refers to the vast array of human differences especially those that
+have been HISTORICALLY disadvantaged
+
+Inclusion refers to systems that ACTIVELY include and support individuals
+regardless of their identities
+
+
+I will acknowledge the historical precedence for what makes our world so divided in my talk as part of a long term process for inclusion. To the attendees, I recommend that you too take this course which is available on the LF website.
+Slide : Who am I
+You may be asking, who am I ? Well, I am just like you. Navigating in this complex world and doing my best.
+
+I am a Clinician, Poet, Statistician and Software Engineer.
+
+I’ve worked in Healthcare, Finance, Academy and now Pharma.
+
+And maybe just like you, I cycle, Swim, Boulder, write and perform Poetry.
+Slide : Why are we here ?
+
+But why are we ALL here ?
+
+Again I refer to Joo on what a good conference is.
+
+A good conference experience can make a difference in the
+professional development of the participants and
+create long-lasting collaborations
+and opportunities
+(Joo et al, 2022)
+
+## Slide : Our vision at useR!2024
+Our vision here at useR!2024 is improve accessibility for the wider community such that they can participate
+and feel safe
+regardless of gender,
+gender identity,
+sexual orientation,
+disability, race, ethnicity, age, religion
+or economic status...
+
+## Slide : How do we ?
+
+Create long-lasting collaborations and opportunities.
+
+A safe space and
+
+Make the conference part of a long-term process for inclusion ?
+
+I have two suggestions.
+
+## Slide : How do we achieve these 3 goals
+
+Code of conduct. Please read the code of conduct. Be kind. Be respectful.
+
+The second I borrow from the arts. Let me share with you a quote from a Malaysian novelist for the Booker prize book The Garden of Evening Mists..
+
+“A raintree bent towards a window in one side of the bungalow, eavesdropping
+on the conversations that had taken place inside over years.”
+
+The imagery of this phrase likens to
+
+Encouraging as people to listen in with care and consider the accumulated journeys, iteration of thought and experiences, realities and labor that precedes before the present time. We can be curious.
+
+We can Be kind. Be Respectful. Be curious.
+
+Before go more into arts lets go into the foundation of Science. Statistics.
+Slide : Statisticians in History
+
+Great statisticians on google are Calyampudi, Jerzy, David, Carl, William, William, Ronald, John, FLORENCE, Bradley, William, Bruno … I think you get where we are going with this.
+
+I  want to talk about Florence Nightingale. The German Wikipedia in my view has a more inclusive summary of whe FN was. I know bc I studied both a M Nursing and a M Statistics.
+
+FN according to the DE wikipedia, was a British Nurse, Statistician, and founder of modern Western Nursing.
+
+
+If you didn’t know about her, FN was born about 300 years ago to a wealthy and well connected family which is start of her legacy as well. Her father took charge of her and her sisters education, allowing for them to study modern and ancient languages, music, painting, sewing and when FN was 20, at her insistence, her father paid for mathematics lessons. As she was well connected and made long EU trips, she had the opportunity to observe a German head of nursing and was asked to be a superintendent of a nursing home and when the Crimean war broke out, she also went in the efforts to nurse injured soldiers.
+
+FN made headlines for her sharp judgment and call for reform of hospitals. Calling out overcrowdedness and lack of air circulation for causes and persistence of illness just to name a few.
+
+If there was twitter and linkedin at that time, FN might have also been viral on instagram.
+
+There are many quotes from FN on nursing but this is one of statistics. It says: "Their principle, if logically carried out, is simply to throw out all ages
+and all diseases and then there would be no mortality whatever."
+FN encourage critical thinking of data integrity, completeness of data, and highlighted the risk of bias and its inference. These are features of modern statistics.
+
+## Slide : On Florence Nightingale:
+
+Since Florence, we have had a more diverse statisticians coming from University. And we need everybody on board to solve worldly problems the way Florance has. We need Ronald, John, Bruno Carlo, David and… more.
+
+So when you go to your sessions and quote positively of your experience of the useR conference, please …
+
+## Slide : Quote Inclusively
+
+Quote her, Quote they, Quote them as well.
+
+## Slide : Learn something “new”
+
+My wish for you to create long lasting collaborations and opportunities  to learn something new
+
+Medicine and nursing has learned so much from the aviation industry on how to behave in an emergency situation where time is life.
+Aviation taught medicine and nursing How to communicate in a completely unambiguous way so that every effort of the HCW is centered to making sure the patient has the best outcome.
+
+This is a paper written about the innovation when Medicine went to an Aviation conference session. I think you know what I mean. So learn something new, and maybe your long lasting collabortion will change the world for the better.
+
+Please refer to this paper which illuminates this example, also written by a nurse.
+
+## Slide : People are more than 1 thing
+
+With long lasting collaborations and time we see that people are more than 1 thing. When we want everybody on board, we have to keep this in mind.
+I continue to borrow from the Arts This is a quote from a nigerian author, Chimamanda:
+
+“The single story creates stereotypes, and the problem with stereotypes is not
+that they are untrue, but that they are incomplete. They make one story become
+the only story.”
+
+So please, be like Florence Nightingal, be like Chimanda, know that people can be more than 1 thing.
+
+## Slide : Assume you have diﬀerent realities from others
+
+I’d like to bring the previous point home, on how to keep safe spaces for everybody.
+
+I quote Chimamanda again ;: “I did not think of myself as black and I only became black when I came to
+America.”
+
+I can relate this this.
+
+As an Asian woman in growing up in Australia and in Europe, I don’t see what a “big deal” it is to look the way i do, to others. It can feel undignifying, dehumanizing and exhausting, to navigate the body I own in a world that makes me feel that my culture and body is a narrative that excludes mine.
+
+
+Therefore when I read out to you the definition of diversity, and quote about the raintree eavesdropping on the side of a bungalow and realising that there were years before it, I am alluding to the history and precedence that make surface level differences, more deep and deserving of our attention.
+Slide :  Recommended Books
+
+
+Here are some books That our DEI community has put together and we hope it make for part of the conference’s long term pursuit for inclusion. I hope you take part in this force.
+
+
+## Slide :  In summary
+
+1. Read the Code of Conduct
+2. Open yourself up to Missing Information
+3. Quote inclusively
+4. Drop by the rainbowR and Allies Lunch
+5. We make decisions all the time based on incomplete information. These
+decisions can change lives. - Be Curious
+6. Take the Inclusive Speaker orientation course (Linux Foundation)
+
+After the conference
+
+And after the conference, I hope that you get to continue the work you love you do, and make your work part of a long-term process for inclusion because…
+
+## Slide : Because Great minds do not think alike
+
+Great minds do not think alike.
+
+I will conclude with a quote from the Arts. Haruki Murakami in his book What I talk about when I talk about running:
+
+"Sometimes taking the time is a shortcut"
+
+So thank you for your attention and please take your time.
+
+                           -- _fin_ Thank you for reading ♥️ --
+
+Peruse our DEI booklist :
+
+1. African/Black/Asian	: Resmaa Menakem	My grandmother's hands	2017
+2. Deaf	: Nora Ellen Groce	Everyone here spoke sign language	1985
+3. General	: Judith Heumann	Being Heumann	2020
+4. Deaf/blind	: Haben Girma	Haben: The Deafblind Woman Who Conquered Harvard Law	2019
+

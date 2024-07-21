@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="stats_eng_journey_files/libs/clipboard/clipboard.min.js"></script>
+<script src="stats_eng_journey_files/libs/quarto-html/tabby.min.js"></script>
+<script src="stats_eng_journey_files/libs/quarto-html/popper.min.js"></script>
+<script src="stats_eng_journey_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="stats_eng_journey_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="stats_eng_journey_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="stats_eng_journey_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="stats_eng_journey_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.549">
+
+  <meta name="author" content="Audrey Yeo Te-Ying (F. Hoffman-La Roche)">
+  <meta name="dcterms.date" content="2024-05-27">
+  <title>Statistical Software Engineering : A Statistician’s technical journey in R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="stats_eng_journey_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="stats_eng_journey_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="stats_eng_journey_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="stats_eng_journey_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="stats_eng_journey_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="stats_eng_journey_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="stats_eng_journey_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="stats_eng_journey_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="stats_eng_journey_files/libs/plotly-binding-4.10.4/plotly.js"></script>
+  <script src="stats_eng_journey_files/libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="stats_eng_journey_files/libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="stats_eng_journey_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+  <script src="stats_eng_journey_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+  <link href="stats_eng_journey_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+  <script src="stats_eng_journey_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="research-progress.png" data-background-opacity="1" data-background-position="95% 85%" data-background-size="30%" class="quarto-title-block center">
+  <h1 class="title">Statistical Software Engineering : A Statistician’s technical journey in R</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Audrey Yeo Te-Ying (F. Hoffman-La Roche) 
+</div>
+        <p class="quarto-title-affiliation">
+            Basel Biostats Community Forum, 2024
+          </p>
+    </div>
+</div>
+
+  <p class="date">May 27, 2024</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/what-is-refactoring" id="/toc-what-is-refactoring">What is refactoring ?</a></li>
+</ul>
+</nav>
+</section>
+<section id="my-journey-at-f.-hoffman-la-roche" class="slide level2">
+<h2>My Journey at F. Hoffman-La Roche</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-4f7c055bd795fe169a46" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-4f7c055bd795fe169a46">{"x":{"visdat":{"12dbd5f52e83d":["function () ","plotlyVisDat"]},"cur_data":"12dbd5f52e83d","attrs":{"12dbd5f52e83d":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"12dbd5f52e83d.1":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2021-07-01 00:00:00.000000","2022-05-02 00:00:00.000000"],"y":15,"line":{"color":"#8DD3C7","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>CPRD, Flatiron, Picnic Health<\/b><br>from <b>2021-07-01<\/b> to <b>2022-05-02<\/b>","inherit":true},"12dbd5f52e83d.2":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2021-11-30 11:00:00.000000","y":15,"text":"CPRD, Flatiron, Picnic Health","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.3":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2022-05-02 00:00:00.000000","2022-11-02 00:00:00.000000"],"y":13,"line":{"color":"#FFFFB3","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>FAP-4-1BBL<\/b><br>from <b>2022-05-02<\/b> to <b>2022-11-02<\/b>","inherit":true},"12dbd5f52e83d.4":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2022-08-02 00:30:00.000000","y":13,"text":"FAP-4-1BBL","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.5":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2022-05-02 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":12,"line":{"color":"#BEBADA","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>TLR7<\/b><br>from <b>2022-05-02<\/b> to <b>2024-04-30<\/b>","inherit":true},"12dbd5f52e83d.6":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2023-05-01 12:00:00.000000","y":12,"text":"TLR7","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.7":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2022-11-25 00:00:00.000000","2023-05-25 00:00:00.000000"],"y":9,"line":{"color":"#80B1D3","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>MOGAD<\/b><br>from <b>2022-11-25<\/b> to <b>2023-05-25<\/b>","inherit":true},"12dbd5f52e83d.8":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2023-02-23 11:30:00.000000","y":9,"text":"MOGAD","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.9":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2022-11-25 00:00:00.000000","2023-05-25 00:00:00.000000"],"y":8,"line":{"color":"#FDB462","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>NMOSD<\/b><br>from <b>2022-11-25<\/b> to <b>2023-05-25<\/b>","inherit":true},"12dbd5f52e83d.10":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2023-02-23 11:30:00.000000","y":8,"text":"NMOSD","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.11":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2023-03-15 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":6,"line":{"color":"#B3DE69","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>NXT007<\/b><br>from <b>2023-03-15<\/b> to <b>2024-04-30<\/b>","inherit":true},"12dbd5f52e83d.12":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2023-10-07 00:30:00.000000","y":6,"text":"NXT007","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.13":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2023-06-01 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":4,"line":{"color":"#FCCDE5","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>phase1b<\/b><br>from <b>2023-06-01<\/b> to <b>2024-04-30<\/b>","inherit":true},"12dbd5f52e83d.14":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2023-11-14 23:00:00.000000","y":4,"text":"phase1b","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.15":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2022-07-20 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":2,"line":{"color":"#BC80BD","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>Basel Knowledge Sharing<\/b><br>from <b>2022-07-20<\/b> to <b>2024-04-30<\/b>","inherit":true},"12dbd5f52e83d.16":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2023-06-10 00:00:00.000000","y":2,"text":"Basel Knowledge Sharing","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.17":{"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":["2022-10-26 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":1,"line":{"color":"#D9D9D9","width":20},"showlegend":false,"hoverinfo":"text","text":"<b>Basel Biostats Forum<\/b><br>from <b>2022-10-26<\/b> to <b>2024-04-30<\/b>","inherit":true},"12dbd5f52e83d.18":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2023-07-29 00:00:00.000000","y":1,"text":"Basel Biostats Forum","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true},"12dbd5f52e83d.19":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2022-10-01 00:00:00.000000","y":11,"marker":{"color":"#FB8072","size":14,"symbol":"circle","line":{"color":"black","width":1}},"showlegend":false,"hoverinfo":"text","text":"<b>Unicorn_decision: 2022-10-01<\/b>","inherit":true},"12dbd5f52e83d.20":{"mode":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":"2022-10-01 00:00:00.000000","y":11.5,"text":"Unicorn_decision","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"hovermode":"closest","plot_bgcolor":"#FCFCFC","shapes":[{"type":"line","x0":0,"x1":1,"xref":"paper","y0":3,"y1":3,"line":{"color":"grey65","width":0.5}},{"type":"line","x0":0,"x1":1,"xref":"paper","y0":5,"y1":5,"line":{"color":"grey65","width":0.5}},{"type":"line","x0":0,"x1":1,"xref":"paper","y0":7,"y1":7,"line":{"color":"grey65","width":0.5}},{"type":"line","x0":0,"x1":1,"xref":"paper","y0":10,"y1":10,"line":{"color":"grey65","width":0.5}},{"type":"line","x0":0,"x1":1,"xref":"paper","y0":14,"y1":14,"line":{"color":"grey65","width":0.5}}],"xaxis":{"domain":[0,1],"automargin":true,"linewidth":1,"mirror":true,"showgrid":true,"gridcolor":"grey90","title":""},"yaxis":{"domain":[0,1],"automargin":true,"linewidth":1,"mirror":true,"range":[0,16],"showgrid":false,"title":"","tickmode":"array","tickvals":[15,12,8.5,6,4,1.5],"ticktext":["Global Access RWD","Early Phase Oncology","Late Phase Neuroscience","Early Phase Hematology","DSX - Data Science Acceleration","Community Leadership"]},"showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"mode":"lines","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2021-07-01 00:00:00.000000","2022-05-02 00:00:00.000000"],"y":[15,15],"line":{"color":"#8DD3C7","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>CPRD, Flatiron, Picnic Health<\/b><br>from <b>2021-07-01<\/b> to <b>2022-05-02<\/b>","<b>CPRD, Flatiron, Picnic Health<\/b><br>from <b>2021-07-01<\/b> to <b>2022-05-02<\/b>"],"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2021-11-30 11:00:00.000000"],"y":[15],"text":"CPRD, Flatiron, Picnic Health","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2022-05-02 00:00:00.000000","2022-11-02 00:00:00.000000"],"y":[13,13],"line":{"color":"#FFFFB3","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>FAP-4-1BBL<\/b><br>from <b>2022-05-02<\/b> to <b>2022-11-02<\/b>","<b>FAP-4-1BBL<\/b><br>from <b>2022-05-02<\/b> to <b>2022-11-02<\/b>"],"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2022-08-02 00:30:00.000000"],"y":[13],"text":"FAP-4-1BBL","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"line":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2022-05-02 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":[12,12],"line":{"color":"#BEBADA","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>TLR7<\/b><br>from <b>2022-05-02<\/b> to <b>2024-04-30<\/b>","<b>TLR7<\/b><br>from <b>2022-05-02<\/b> to <b>2024-04-30<\/b>"],"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2023-05-01 12:00:00.000000"],"y":[12],"text":"TLR7","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"line":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2022-11-25 00:00:00.000000","2023-05-25 00:00:00.000000"],"y":[9,9],"line":{"color":"#80B1D3","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>MOGAD<\/b><br>from <b>2022-11-25<\/b> to <b>2023-05-25<\/b>","<b>MOGAD<\/b><br>from <b>2022-11-25<\/b> to <b>2023-05-25<\/b>"],"marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2023-02-23 11:30:00.000000"],"y":[9],"text":"MOGAD","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"line":{"color":"rgba(188,189,34,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2022-11-25 00:00:00.000000","2023-05-25 00:00:00.000000"],"y":[8,8],"line":{"color":"#FDB462","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>NMOSD<\/b><br>from <b>2022-11-25<\/b> to <b>2023-05-25<\/b>","<b>NMOSD<\/b><br>from <b>2022-11-25<\/b> to <b>2023-05-25<\/b>"],"marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2023-02-23 11:30:00.000000"],"y":[8],"text":"NMOSD","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2023-03-15 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":[6,6],"line":{"color":"#B3DE69","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>NXT007<\/b><br>from <b>2023-03-15<\/b> to <b>2024-04-30<\/b>","<b>NXT007<\/b><br>from <b>2023-03-15<\/b> to <b>2024-04-30<\/b>"],"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2023-10-07 00:30:00.000000"],"y":[6],"text":"NXT007","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2023-06-01 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":[4,4],"line":{"color":"#FCCDE5","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>phase1b<\/b><br>from <b>2023-06-01<\/b> to <b>2024-04-30<\/b>","<b>phase1b<\/b><br>from <b>2023-06-01<\/b> to <b>2024-04-30<\/b>"],"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2023-11-14 23:00:00.000000"],"y":[4],"text":"phase1b","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"line":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2022-07-20 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":[2,2],"line":{"color":"#BC80BD","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>Basel Knowledge Sharing<\/b><br>from <b>2022-07-20<\/b> to <b>2024-04-30<\/b>","<b>Basel Knowledge Sharing<\/b><br>from <b>2022-07-20<\/b> to <b>2024-04-30<\/b>"],"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2023-06-10 00:00:00.000000"],"y":[2],"text":"Basel Knowledge Sharing","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"line":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines","type":"scatter","x":["2022-10-26 00:00:00.000000","2024-04-30 00:00:00.000000"],"y":[1,1],"line":{"color":"#D9D9D9","width":20},"showlegend":false,"hoverinfo":["text","text"],"text":["<b>Basel Biostats Forum<\/b><br>from <b>2022-10-26<\/b> to <b>2024-04-30<\/b>","<b>Basel Biostats Forum<\/b><br>from <b>2022-10-26<\/b> to <b>2024-04-30<\/b>"],"marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2023-07-29 00:00:00.000000"],"y":[1],"text":"Basel Biostats Forum","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"line":{"color":"rgba(188,189,34,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":["2022-10-01 00:00:00.000000"],"y":[11],"marker":{"color":"#FB8072","size":14,"symbol":"circle","line":{"color":"black","width":1}},"showlegend":false,"hoverinfo":"text","text":"<b>Unicorn_decision: 2022-10-01<\/b>","error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"line":{"color":"rgba(23,190,207,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"text","type":"scatter","x":["2022-10-01 00:00:00.000000"],"y":[11.5],"text":"Unicorn_decision","textfont":{"family":"Arial","size":14,"color":"rgba(0,0,0,1)"},"textposition":"center","showlegend":false,"hoverinfo":"none","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="my-journey-at-dsx-part-1" class="slide level2">
+<h2>My Journey at DSX Part 1</h2>
+<ul>
+<li>Mathematics is Elegant. I enjoy finding computational solutions to real-life problems.</li>
+<li>Software Engineering is attractive to me: It’s creative work</li>
+<li>Values of inclusion and accessibility : I an make accessible products e.g.&nbsp;in documentation, reliability and trustworthy product.</li>
+<li>Neat work : I enjoy creating a neat, and delightful product for user experience.</li>
+</ul>
+</section>
+<section id="my-journey-at-dsx-part-2" class="slide level2">
+<h2>My Journey at DSX Part 2</h2>
+<ul>
+<li>DSX Onboarding : mid June - Aug 2023 at 70%</li>
+<li>Current duration of rotation ~9 months</li>
+<li>First Pull Request (PR) merged on Aug 29th 2023</li>
+<li>Daily stand ups for 3 months then 1 month “break”. From month 4 we had 3-5/ week stand ups</li>
+<li>Task : re-factoring <code>phase1b</code> to current State of Art. <code>phase1b</code>is already available for use internally and have been used extensively in the pRED oncology space since 2015</li>
+</ul>
+<aside class="notes">
+<p>(large task: four functions, test files, and examples to clean) - Current tally : 9 Pull Requests, of which 7 were large 😅 in 7 months - Month 6, we changed tact to smaller PRs which meant that more was achieved in a shorter time span</p>
+<p>this presentation is not a bunch of hot takes, it’s only my journey</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="new-knowledge-and-skills-at-dsx" class="slide level2">
+<h2>New knowledge and skills at DSX!</h2>
+<p>New skills are many and I am still learning them :</p>
+<ul>
+<li>git kraken and branching</li>
+<li>pre-commit checks</li>
+<li>documentation, building documents and reviewing them</li>
+<li>taking a reviewer perspective</li>
+<li>Tools for package developers I incorporate in my practice : <code>roxygen</code>, <code>styler</code>, <code>prettier</code> , <code>testthat</code>, <code>checkmate</code> …</li>
+</ul>
+</section>
+<section id="phase1b-package-history" class="slide level2">
+<h2>Phase1b package history</h2>
+<ul>
+<li>UNICYCLE is a decision framework born out of the methods team in ~2014, to guide decision making for single-arm or small randomised trials. The package <code>phase1b</code> was made to this end.</li>
+<li>UNICYCLE was most recently in Nov 2022 (<a href="https://docs.google.com/presentation/d/1fcOXVF7A8to5uG_yxcsCzk-IyyjMw6Is4HrWti_RV38/edit#slide=id.g14e82d0c9c7_0_0">by me</a>) at the Basel Knowledge Sharing Day, where I wrote my own facility to guide the ESPC<sup>1</sup> and Oncology Forum for my molecule at that time, FAP-4-1BBL.</li>
+<li>I used phase1b package to QC my work plus self-QC</li>
+<li>I had Version Control</li>
+<li>I did not use conventional names</li>
+<li>no code review</li>
+<li>no unit test</li>
+</ul>
+<!-- -   Phase1b featured as far back as 2017 ([by Daniel](https://drive.google.com/file/d/1-dCBy-z6R5ABa4Uz2pLUxJO4Rz0ir4oD/view)) and 2018 (by [Francesca Michielin](https://docs.google.com/presentation/d/1HM_PJZohJbLr7Ij5bqiuK28TCQaH8a5c/edit#slide=id.p1)) -->
+<aside class="notes">
+<pre><code>My perspective
+
+which includes my privilege
+
+how accessible other people are to me because of the languages I speak etc
+
+my understanding of other cultures because I have had the privilege of traveling</code></pre>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Early Stage Portfolio Committee</p></li></ol></aside></section>
+<section>
+<section id="what-is-refactoring" class="title-slide slide level1 center">
+<h1>What is refactoring ?</h1>
+<ul>
+<li>“Polishing an antique cup”</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Code_refactoring">Wikipedia :</a> “Refactoring is intended to improve the design, structure, and/or implementation of the <a href="#/0" title="Software">software</a> (its <a href="#/0" title="Non-functional requirement"><em>non-functional</em></a> attributes), while preserving its <a href="#/0" title="Functional requirement">functionality</a>.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.proantic.com/en/1173695-arita-porcelain-palace-bowl-imari-style-japan-edo-beginning-of-the-18th-century.html"><img data-src="images/polished_cup.jpg" class="quarto-figure quarto-figure-center" alt="18th Century Arita Porcelain Palace Bowl, Imari Style (JPN)"></a></p>
+<figcaption>18th Century Arita Porcelain Palace Bowl, Imari Style (JPN)</figcaption>
+</figure>
+</div>
+</section>
+<section id="tools-for-refactoring" class="slide level2">
+<h2>Tools for refactoring</h2>
+<ul>
+<li>Documentation that defines variables as <code>typed</code> defined, such that we assert more precisely what we can input into function calls. Package <code>roxygen2</code> is used for former. <code>checkmate</code>used for latter</li>
+<li>Testing takes on the perspective of a reviewer and to ensure the function calls calculates what it says it calculates (they are my favourite). Package <code>testthat</code> and <code>checkmate</code> are used</li>
+<li>Making <code>phase1b</code> a State of Art Software<sup>1</sup> - reproducible, robust, testable, intuitive and open to collaboration</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>Subject to a change in definition with better tools and practices</p></li></ol></aside></section>
+<section id="tools-for-refactoring-2" class="slide level2">
+<h2>Tools for refactoring 2</h2>
+<aside class="notes">
+<ul>
+<li><p>Provides functions that make it easy to describe what you expect a function to do, including catching errors, warnings, and messages.</p></li>
+<li><p>Easily integrates in your existing workflow, whether it’s informal testing on the command line, building test suites, or using R CMD check.</p></li>
+<li><p>Displays test progress visually, showing a pass, fail, or error for every expectation. If you’re using the terminal or a recent version of RStudio, it’ll even colour the output.</p></li>
+<li><p>resource for testing : <a href="https://r-pkgs.org/testing-basics.html" class="uri">https://r-pkgs.org/testing-basics.html</a></p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-the-statistical-software-engineering-process" class="slide level2">
+<h2>What is the Statistical Software Engineering Process ?</h2>
+<ul>
+<li><p>Create separate branch to main</p></li>
+<li><p>Create issue then Pull Requests for :</p></li>
+</ul>
+<ol type="1">
+<li>Design Document for entire function</li>
+<li>Work on ONE function</li>
+<li>Create Test files for helper functions</li>
+<li>Create Test files and example files for main function calls</li>
+</ol>
+<p>Embrace small steps as smaller PRs can be sizeABLE.</p>
+</section>
+<section id="my-phase1b-journey-so-far" class="slide level2">
+<h2>My phase1b journey so far</h2>
+</section>
+<section id="title" class="slide level2">
+<h2>title</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Left column</p>
+<p>hello</p>
+</div><div class="column" style="width:60%;">
+<p>Right column</p>
+<p>how are you</p>
+</div>
+</div>
+<aside class="notes">
+<p>never be too clever you forget to be kind</p>
+<p>h_predproblist_nocontrol -&gt; h_predprobdist_single_arm</p>
+<p>small steps leave noting outeverything. makes sense</p>
+<p>messaging in the commits</p>
+<p>PR messaging</p>
+<p>Needle in a haystack -&gt; yeah</p>
+<p>we can be proud</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="features-of-statistical-software-engineering-1-of-2" class="slide level2">
+<h2>Features of Statistical Software Engineering 1 of 2</h2>
+<!-- What characterizes this kind of work: -->
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Moving parts</li>
+<li>Forest vs Trees perspective</li>
+<li>Metaphors are helpful to communicate goals</li>
+<li>Requires focused and deep thinking</li>
+<li>Small steps are good starts</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Systematic deduction is helpful</li>
+<li>Lots of theory and reading literature about new methodology</li>
+<li>Good engineering practices are like habits, needs automation which needs practice which needs time</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>needle in haystack but in a systematic way that allows you to learn …</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="features-of-statistical-software-engineering-2-of-2" class="slide level2">
+<h2><a href="https://www.rclassociation.org/schedule/misty-copeland/"><img data-src="images/Misty_copeland.jpg"></a>Features of Statistical Software Engineering 2 of 2</h2>
+<ul>
+<li>Small PRs can be sizable in work too</li>
+<li>Regular standups can feel pressured, but in the end I am glad they are bunched up together as long as expectations are managed</li>
+<li>Work can be creative, but once foundation is there</li>
+<li>It’s fun!</li>
+</ul>
+<p>Good collaboration and mentorship give space to the nature of this work</p>
+</section>
+<section id="what-i-learned-in-the-1-month-of-no-standups" class="slide level2">
+<h2>What I learned in the 1 month of no standups</h2>
+<ul>
+<li>Standups are helpful</li>
+<li>Develop systematic deduction</li>
+<li>Fall on the engineering principles (testing, debugging, iteration, reliability, correctness…)</li>
+<li>Think creatively of other solutions by myself</li>
+</ul>
+<aside class="notes">
+<p>“take small steps, leave no gaps, everything make sense” : small steps can be frustrating.</p>
+<p>leacve no gaps, learners are expected to fill gaps. They are not bad things but it can be annoying for learners who are not quite sure about themselves.</p>
+<p>rules of programming are rigit.</p>
+<p>learning langauge, some effort and persistance. Some are faster, some are slower.</p>
+<p>everything make sense to the teacher, it’s sometimes up to us to ask about the gaps.</p>
+<p>local and global scope in Julia</p>
+<p>scope ; variables than can be accessed in a aprticular block of code</p>
+<p>comprehension is a complete line of code that runs</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="collaboration-for-phase1b-work" class="slide level2">
+<h2>Collaboration for <code>phase1b</code> work</h2>
+<ul>
+<li>Positive bias &amp; Trust are win-win situations</li>
+<li>Learning through mistakes is key</li>
+<li>Safe space to be ask any questions and iterate</li>
+<li>Collaboration works best when the features of this kind of work is accounted for</li>
+</ul>
+</section>
+<section id="what-has-worked-well-in-standups-and-phase1b-work-1-of-2" class="slide level2">
+<h2>What has worked well in standups and <code>phase1b</code> work 1 of 2</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Daniel is proactive in reaching out and allocating time to do standups, e.g.&nbsp;increasing frequency</li>
+<li>Daniel is responsive to helping and is patient e.g.&nbsp;google hangouts to help unblock steps. Feedback turnover is quick and with example and rationale, then I can remember where exactly</li>
+<li>PR has “conversations” and Daniel actually gives feedback on it</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>I go back to the closed PRs to read the mistakes again, because this is about creating automation in myself</li>
+<li>Being allowed to do the work, make mistakes, talk about theory</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="kinds-of-feedback" class="slide level2">
+<h2>Kinds of feedback</h2>
+</section>
+<section id="section" class="slide level2">
+<h2><img data-src="images/precise_title.png" width="400"></h2>
+<p><img data-src="images/typed_roxygen.png" width="400"></p>
+</section>
+<section id="what-has-worked-well-in-standups-and-phase1b-work-2-of-2" class="slide level2">
+<h2>What has worked well in standups and <code>phase1b</code> work 2 of 2</h2>
+<ul>
+<li>Systematic deduction together, so I can see what kind of habits an expert has</li>
+<li>Making an effort to teach again without resentment</li>
+<li>Encouraging to go for presentations internally and externally as good milestones to develop further</li>
+<li>Positive feedback but No over positiveness, always based on facts</li>
+</ul>
+</section>
+<section id="what-im-changing-after-learning-about-this-kind-of-work" class="slide level2">
+<h2>What I’m changing after learning about this kind of work</h2>
+<ul>
+<li>Create more conditions for focused, systematic, deep and creative work</li>
+<li>Approach work slower because in the end there has been efficiency gains (Learning a new language)</li>
+<li>Perceive small steps as good starts</li>
+<li>Good software engineering is not overnight work, but slow and sustained good practices that requires an open mind</li>
+</ul>
+</section>
+<section id="future-outlook" class="slide level2">
+<h2>Future outlook</h2>
+<ul>
+<li>Smaller PRs are working well</li>
+<li>Standup formats are valuable, 1-2-3 times per week if needed</li>
+<li>Making a cool HEX sticker and Logo for <code>phase1b</code></li>
+<li>Basel Biostats Presentation at 10h May 27th 2024</li>
+<li><a href="https://www.psiweb.org/conferences/about-the-conference">PSI 2024 conference in Netherlands!</a></li>
+<li>Hopefully a presentation at useR!2024 conference in AT</li>
+<li>Working on refactoring other packages and creating my own</li>
+</ul>
+</section>
+<section id="reflections" class="slide level2">
+<h2>Reflections</h2>
+<ul>
+<li>Confidence in R Language</li>
+<li>Learnt and honing my skills in Julia</li>
+<li><a href="https://audreyyeoch.github.io/Julia.html">Julia learning helps me appreciate R in return</a></li>
+<li>Less likely to doubt myslf when I learn new things</li>
+<li>No matter how much you’ve improved it’s not permanent</li>
+</ul>
+</section>
+<section id="acknowledgements" class="slide level2">
+<h2>Acknowledgements</h2>
+<ul>
+<li>Daniel Sabanés Bové</li>
+<li>…and other colleagues at DSX</li>
+</ul>
+</section>
+<section id="what-is-your-experience" class="slide level2">
+<h2>What is your experience ?</h2>
+<p>I’d love to know how this presentation relates to you or does not !</p>
+<aside class="notes">
+<p>It takes a krane to make a krane send me a DM id love to know what you think about my reflection</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<p>[quarto guide] <a href="https://quarto.org/docs/presentations/revealjs/" class="uri">https://quarto.org/docs/presentations/revealjs/</a></p>
+<p><a href="https://audreyyeoch.github.io/StatsSoftware.html">Blog about Julia and Software Engineering</a></p>
+<p><a href="https://danielinteractive.github.io/rpharma-2023-keynote/#/title-slide">Why We need to Improve SE in Biostatistics</a> October 26 2023 R/Pharma</p>
+<p>Footnote license : https://creativecommons.org/licenses/by-sa/4.0/</p>
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+<p><a href="https://audreyyeoch.github.io/">contact</a></p>
+</div>
+</div>
+</section></section>
+
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="stats_eng_journey_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="stats_eng_journey_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: true,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
