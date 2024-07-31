@@ -3,8 +3,8 @@
 # subtitle: "useR!2024"
 format:
   revealjs:
-       logo: images/UseR-24-Event-LaunchAssets-v2_logo-color.png
-       css: logo.css
+       logo: images/useR_logo2.png
+       #css: logo.css
 code-fold: true
 chalkboard: true
 footer: "Audrey Yeo"
@@ -195,9 +195,8 @@ Florence Nightingale war eine britische Krankenschwester, Statistikerin, Begrün
 - Wikipedia
 ```
 ```{r}
-#| layout-ncol: 1
 #| fig-width: 0.5
-#| fig-height: 3
+#| fig-height: 2
 knitr::include_graphics("images/FN_stats.png")
 ```
 
