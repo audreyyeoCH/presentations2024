@@ -1,7 +1,13 @@
 .Rproj.user
 .Rhistory
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Rdata
 .httr-oauth
 .DS_Store
 ../
+=======
+.RData
+.Ruserdata
+.DS_Store
+>>>>>>> 7d1413b (clean)
