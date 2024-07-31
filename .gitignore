@@ -1,13 +1,9 @@
 .Rproj.user
 .Rhistory
-<<<<<<< HEAD
-<<<<<<< HEAD
 .Rdata
 .httr-oauth
 .DS_Store
 ../
-=======
-.RData
-.Ruserdata
-.DS_Store
->>>>>>> 7d1413b (clean)
+reflectionEOY2023.qmd
+reflectionEOY2023.html
+reflectionEOY2023_files
