@@ -1,5 +1,6 @@
 .Rproj.user
 .Rhistory
+<<<<<<< HEAD
 .Rdata
 .httr-oauth
 .DS_Store
@@ -7,3 +8,11 @@
 reflectionEOY2023.qmd
 reflectionEOY2023.html
 reflectionEOY2023_files
+=======
+.RData
+.Ruserdata
+.DS_Store
+reflectionsEOY2023_files
+reflectionsEOY2023.html
+reflectionsEOY2023.qmd
+>>>>>>> 5f13c82 (clean)
