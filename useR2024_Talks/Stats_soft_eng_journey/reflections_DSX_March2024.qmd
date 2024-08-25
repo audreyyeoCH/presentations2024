@@ -346,11 +346,11 @@ treemap(data,
 :::
 :::
 
-## Good practices for new starter{.smaller}
+## Good practices for new starter {.smaller}
 
 Goal : introduce good practices and improve muscle memory and collaborate
 
--   Mindset : Being dependent on others is normal. Asking questions are ok because there are also many moving parts. 
+-   Mindset : Being dependent on others is normal. Asking questions are ok because there are also many moving parts.
 -   Regular stand ups
 -   Taking Small steps : are good starts
 -   Taking Systematic steps : no matter how slow
@@ -387,7 +387,7 @@ Goal : introduce good practices and improve muscle memory and collaborate
 
 -   "... it was always fun and easy to work with Audrey"
 
-## How I want to be a better Software Engineer{.smaller}
+## How I want to be a better Software Engineer {.smaller}
 
 -   Develop the skills of slow and systematic deduction (efficiency gains)
 -   Create more conditions for focused, systematic, deep and creative work
