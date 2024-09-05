@@ -23,27 +23,17 @@ library(phase1b)
 ```
 
 
-# Gearing our industry Statisticians up for Software success : A `phase1b` journey.
+# Gearing our industry Statisticians up for Software success : A `phase1b` journey.{background-iframe="moving-waves/index.html"}
 
 `Audrey Yeo`
 
-# Three answers : 
+#
 
 1. `Opinions do not reflect employer`
 
 2. `This presentation has ALT text and as much as possible, uses colour-blind friendly palettes`
 
 3. `Code for this Quarto-rendered .html will also be shared`
-
-# Perspectives : 
-
-1. Learner
-
-2. Developer
-
-3. Technical Lead
-
-4. People manager 
 
 # About `phase1b`
 
@@ -70,18 +60,19 @@ library(phase1b)
 
 # Why Should Statisticians make Software ?
                              
-                             ...why not ?
+              "Modern statistical inference is unthinkable without the use of a computer"
+               _Likelihood and Bayesian Inference_ Held, Sabanés Bové (2020)
                              
-## Clinical Trials Statisticians understand :{.smaller}
+# Clinical Trials Statisticians understand :{.smaller}
 
-- Clinical development
-- Roadblocks to end points e.g. recruitment rates and failures,
+...the combined Scientific and Business development of a therapy.
+
+  - Roadblocks to end points e.g. recruitment rates and failures,
 business assumptions and strategies
-- Drug pharmacokinetics and pharmacodynamics e.g. latent drug effect
-- Patient population e.g. rare diseases
-- combined Science and Business perspectives
+  - Drug pharmacokinetics and pharmacodynamics e.g. latent drug effect
+  - Patient population e.g. rare diseases
         
-## My Journey at F. Hoffmann La-Roche{.smaller}
+# My Journey at F. Hoffmann La-Roche{.smaller}
 
 -   graduated MSc Biostatistics in 2020
 -   started at RWD at Roche in mid 2021
@@ -100,15 +91,12 @@ business assumptions and strategies
 
 -   I can create delightful experiences users and bring everyone along : *values of inclusion, building great products, having an impact*
 
-## My Pocket Guide : A response to dynamic decision making in early development {.smaller}
+## Why Software Engineering : A response to dynamic decision making in early development {.smaller}
 
 ```{r}
 #| label: fig-histogram
 #| fig-cap: "Predictive Posterior CDF for different Efficacy Rules"
-#| fig-subcap:
-#|   - $P (\pi > 0.6 | \ data )$ > 60% #"Efficacious if Pred. Posterior Prob > 90 %" 
-#|   - $P (\pi > 0.6 |  \ data )$ > 90% #"Efficacious if Pred. Posterior Prob > 90 %" 
-#| layout-ncol: 2 # make graph bigger
+#| layout-ncol: 1 # make graph bigger
 #| column: page-right
 #| fig-alt : "These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40"
 control = 0.6
@@ -133,18 +121,18 @@ ggplot(df_thetaTlow) +
   scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
   xlab("\nFuture successful reponders") +
   ylab("Probability\n") +
-  ggtitle("With lower threshold : \n32 of 40 responders needed to achieve a Go decision")  +
+  ggtitle("With P (RR > 0.6 | data ) > 60% : \n32 of 40 responders needed to achieve a Go decision")  +
   theme(text = element_text(size = 20)) +
   scale_color_manual(values = c("#D55E00", "#009E73"))
-
-ggplot(df_thetaThigh) +
-  geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
-   scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
-    xlab("\nFuture successful reponders") +
-  ylab("Probability\n") +
-  ggtitle("With higher threshold : \n35 of 40 responders needed to achieve a Go decision") +
-  theme(text = element_text(size = 20)) +
-  scale_color_manual(values = c("#D55E00", "#009E73")) 
+# 
+# ggplot(df_thetaThigh) +
+#   geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
+#    scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
+#     xlab("\nFuture successful reponders") +
+#   ylab("Probability\n") +
+#   ggtitle("With higher threshold : \n35 of 40 responders needed to achieve a Go decision") +
+#   theme(text = element_text(size = 20)) +
+#   scale_color_manual(values = c("#D55E00", "#009E73")) 
 ```
 
 ## Skills needed : Covering the basics {.smaller}
@@ -160,7 +148,7 @@ ggplot(df_thetaThigh) +
 
 ***in summary, gaps were*** : Git merging, Pull Requests, Styling, Debugging, Writing Tests
 
-## New beginnings : 
+## New beginnings :{.smaller} 
 Knowledge and skills for Statistical Software Engineering!
 
 -   Visualing branches : `Git kraken`, `VS Code Git Graph Extension`
@@ -169,7 +157,7 @@ Knowledge and skills for Statistical Software Engineering!
 -   Testing : Taking a reviewer perspective (`testthat` and `checkmate`)
 -   Styling : `styler`, `prettier` ... building your own style
 
-# What is refactoring ?
+# What is refactoring ?{.smaller}
 
 -   "Polishing an antique cup", making new of "vintage".
 
@@ -181,17 +169,17 @@ Knowledge and skills for Statistical Software Engineering!
 knitr::include_graphics("images/Peranakan_bowl.jpg", error = FALSE)
 ```
 
-## Tools for refactoring
+## Tools for refactoring{.smaller}
 
 ```{r}
 #| fig-alt: "see sub cap"
 #| fig-cap-location: bottom
-#| fig-subcap: 
-#| - "Roxygen skeleton"
+#| fig-cap: 
+#| - "Roxygen skeleton example for one user-facing function in phase1b"
 knitr::include_graphics("images/typed_asserts.png", error = FALSE)
 ```
 
-## Tools for refactoring
+## Tools for refactoring{.smaller}
 
 -   Variables are `typed` defined from package `roxygen2` and it's type asserted from package `checkmate`
 -   Unit and integration testing takes on the perspective of a reviewer and to ensure the function calls calculates what it says it calculates (they are my favourite). Package `testthat` and `checkmate` are used here
@@ -359,7 +347,7 @@ Goal : introduce good practices and improve muscle memory and collaborate
 -   Acknowledge learning styles can be different
 -   Allow developers to do the work, make mistakes and keep sharing rationale
 
-## Comments on collaboration for `phase1b` work
+## Conditions for success from the `phase1b` work
 
 \
 
@@ -391,7 +379,7 @@ Goal : introduce good practices and improve muscle memory and collaborate
 ::: columns
 ::: {.column width="50%"}
 -   PSI June 2024 conference in Netherlands [link](https://www.psiweb.org/conferences/about-the-conference)
--   useR!2024 Salzburg [here](https://events.linuxfoundation.org/user/)
+-   useR!2024 Salzburg [link](https://events.linuxfoundation.org/user/)
 -   PHUSE September 2024 in Basel [link](https://www.phuse-events.org/attend/frontend/reg/thome.csp?pageID=40702&eventID=64&traceRedir=2)
 -   University of Basel November 2024 [link](https://accio.github.io/AMIDD/)
 :::
@@ -419,7 +407,7 @@ knitr::include_graphics("images/PSI_Stand.jpg", error = FALSE)
 ## Final Reflections
 
 -   Doing something I wasn't prepared to do paid off
--   I got more confident about the R Language
+-   Confidence through Competence : I got more confident about the R Language
 -   Can use this as a reference to build other packages and in other languages [e.g. Julia, see my blog post](https://audreyyeoch.github.io/Julia.html)
 -   Less likely to doubt myself when I learn new things
 
@@ -436,11 +424,11 @@ knitr::include_graphics("images/hex4.png")
 knitr::include_graphics("images/hex5.png")
 ```
 
-## Thank you 
+## Thank you{background-iframe="moving-waves/index.html"} 
 
 \
 
--   Daniel Sabanés Bové
+-   Daniel Sabanés Bové, Isaac Gravestock
 
 -   ...and other colleagues at Roche
 
