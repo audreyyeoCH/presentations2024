@@ -60,8 +60,8 @@ library(phase1b)
 
 # Why Should Statisticians make Software ?
                              
-              "Modern statistical inference is unthinkable without the use of a computer"
-               _Likelihood and Bayesian Inference_ Held, Sabanés Bové (2020)
+        "Modern statistical inference is unthinkable without the use of a computer"
+               Likelihood and Bayesian Inference, Held & Sabanés Bové (2020)
                              
 # Clinical Trials Statisticians understand :{.smaller}
 
@@ -76,10 +76,16 @@ business assumptions and strategies
 
 -   graduated MSc Biostatistics in 2020
 -   started at RWD at Roche in mid 2021
--   joined R&D at Roche in mid 2022
+-   joined R&D at Roche in mid 2022 
+
+        - Project Lead Statistician in early Oncology Trials
+        - Study Statistician for phase 1-2, phase 3 trials
+        
 -   first internal statistics presentation end 2022 on decision gating
     -   skills : R programming, writing functions, version control (GitLab, GitHub), presentation and communication
 -   started `phase1b` in July 2023
+-   `phase1b`'s first external tour at PSI (pic later) and useR! in 2024
+
 
 # Why Software Engineering ?{.smaller}
 
@@ -124,15 +130,6 @@ ggplot(df_thetaTlow) +
   ggtitle("With P (RR > 0.6 | data ) > 60% : \n32 of 40 responders needed to achieve a Go decision")  +
   theme(text = element_text(size = 20)) +
   scale_color_manual(values = c("#D55E00", "#009E73"))
-# 
-# ggplot(df_thetaThigh) +
-#   geom_point(aes(x = cumul_counts, y = posterior, colour = success)) +
-#    scale_x_discrete(limits = c(seq(23, 40, by = 1))) +
-#     xlab("\nFuture successful reponders") +
-#   ylab("Probability\n") +
-#   ggtitle("With higher threshold : \n35 of 40 responders needed to achieve a Go decision") +
-#   theme(text = element_text(size = 20)) +
-#   scale_color_manual(values = c("#D55E00", "#009E73")) 
 ```
 
 ## Skills needed : Covering the basics {.smaller}
@@ -183,9 +180,9 @@ knitr::include_graphics("images/typed_asserts.png", error = FALSE)
 
 -   Variables are `typed` defined from package `roxygen2` and it's type asserted from package `checkmate`
 -   Unit and integration testing takes on the perspective of a reviewer and to ensure the function calls calculates what it says it calculates (they are my favourite). Package `testthat` and `checkmate` are used here
--   Making `phase1b` a State of Art Software[^1] - reproducible, robust, testable, intuitive and open to collaboration
+-   Making `phase1b` a State of Art Software[^2] - reproducible, robust, testable, intuitive and open to collaboration
 
-[^1]: Subject to a change in definition with better tools and practices
+[^2]: Subject to a change in definition with better tools and practices
 
 ```{r, eval = FALSE}
 library(roxygen2)
@@ -233,6 +230,26 @@ options(error = NULL)
 5.  Create Test files for helper functions
 
 6.  Create Test files and example files for main function calls
+:::
+:::
+
+## The Design Document{.smaller}
+::: columns
+::: {.column width="50%"}
+```{r}
+knitr::include_graphics("images/Design_doc_ocPost.png")
+```
+:::
+::: {.column width="50%"}
+User-facing functions start with Design-document (DD)
+
+1. DD helps achieve Clarity on the form and purpose of the user-facing function
+
+2. Use the DD to test regular and edge cases 
+
+3. Makes the rest of the work "easier" when the goals are clear
+
+4. Most of the "skeleton" and "flesh" of the work can already be done in the DD
 :::
 :::
 
@@ -328,7 +345,7 @@ treemap(data,
 
 Goal : introduce good practices and improve muscle memory and collaborate
 
--   Mindset : Being dependent on others is normal. Asking questions are ok because there are also many moving parts.
+-   Mindset : Being dependent on others is normal. Asking questions are key because there are also many moving parts. Group chats are valuable in a safe space to ask questions.
 -   Regular stand ups
 -   Taking Small steps : are good starts
 -   Taking Systematic steps : no matter how slow
@@ -404,7 +421,7 @@ knitr::include_graphics("images/PSI_Stand.jpg", error = FALSE)
 
 ***More software work for statisticians with values of : Inclusion, Diversity, Impact and Delightful user experience***
 
-## Final Reflections
+## Final Reflections{.smaller}
 
 -   Doing something I wasn't prepared to do paid off
 -   Confidence through Competence : I got more confident about the R Language
@@ -428,13 +445,11 @@ knitr::include_graphics("images/hex5.png")
 
 \
 
--   Daniel Sabanés Bové, Isaac Gravestock
+-   Daniel Sabanés Bové
 
--   ...and other colleagues at Roche
+-   ...and other colleagues at Data Science Acceleration at Roche
 
--   R community that do great work and share their knowledge
-
--   Open Source community
+-   Open Source community and R community that do great work and share their knowledge
 
 I'd love to know how this presentation relates to you or does not !
 

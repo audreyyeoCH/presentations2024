@@ -394,10 +394,30 @@
     <div class="slides">
 
 
+<section class="slide level2">
+
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>cpp11   (0.4.7 -&gt; 0.5.0) [CRAN]
+httr2   (1.0.1 -&gt; 1.0.3) [CRAN]
+pkgdown (2.0.9 -&gt; 2.1.0) [CRAN]
+
+The downloaded binary packages are in
+    /var/folders/7s/hgrbfd4152gfx6nyk71l8fpw0000gn/T//RtmprDNDv9/downloaded_packages
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/private/var/folders/7s/hgrbfd4152gfx6nyk71l8fpw0000gn/T/RtmprDNDv9/remotes1ada552a0eb3/Genentech-phase1b-c9c1440/DESCRIPTION’ ... OK
+* preparing ‘phase1b’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building ‘phase1b_1.0.0.tar.gz’</code></pre>
+</div>
+</div>
+</section>
 <section id="a-bayesian-approach-to-decision-making-in-early-development-clinical-trials-an-r-solution" class="title-slide slide level1 center" data-background-iframe="colored-particles/index.html">
 <h1>A Bayesian approach to decision making in early development clinical trials: An R solution</h1>
 <p><strong>Audrey Yeo</strong></p>
-<p>Basel Biostatistics Forum 2024, Basel, CH<br>
+<p>Welwyn Statistics CoP, 2024<br>
 <strong><em>This presentation has ALT text and as much as possible, uses colour-blind friendly palettes</em></strong></p>
 </section>
 
@@ -428,9 +448,9 @@
 <li><p>website : <a href="genentech.github.io/phase1b/">genentech.github.io/phase1b/</a></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(devtools)</span>
-<span id="cb1-2"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/Genentech/phase1b"</span>)</span>
-<span id="cb1-3"><a href=""></a><span class="fu">library</span>(phase1b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">library</span>(devtools)</span>
+<span id="cb2-2"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/Genentech/phase1b"</span>)</span>
+<span id="cb2-3"><a href=""></a><span class="fu">library</span>(phase1b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="use-case" class="slide level2 smaller">
@@ -494,62 +514,40 @@
 <!-- $\beta + n - x$.   -->
 <!-- - With the prior of $Beta(0.6, 0.4)$ and the result of our interim results our Posterior has these parameters:  \ $Beta(16.6, 7.4)$.  -->
 <ul>
-<li>Using the formula for the mean, the new mean is :</li>
+<li><p>Using the formula for the mean, where <span class="math inline">\(\alpha = 0.6, \beta = 0.4\)</span> and at interim x = 16, n = 23 : <span class="math display">\[ \pi = \ \frac {\alpha}{\alpha + \beta} = \ \frac {\alpha_{updated} }{\alpha_{updated} + \beta_{updated}} = \ \frac {16.6 }{16.6 + 7.4} ≈ 69.17 \% \]</span></p>
+<p><span class="math display">\[ mode (\pi) = \ \frac {\alpha_{updated} -1 }{\alpha_{updated} + \beta_{updated} - 2} = \ \frac {16.6 -1  }{16.6 + 7.4 - 2} ≈ 70.90 \% \]</span></p></li>
 </ul>
-<p><span class="math display">\[ \pi = \ \frac {\alpha}{\alpha + \beta} = \ \frac {\alpha_{updated} }{\alpha_{updated} + \beta_{updated}} = \ \frac {16.6 }{16.6 + 7.4} ≈ 69.17 \% \]</span></p>
-<p><span class="math display">\[ mode (\pi) = \ \frac {\alpha_{updated} -1 }{\alpha_{updated} + \beta_{updated} - 2} = \ \frac {16.6 -1  }{16.6 + 7.4 - 2} ≈ 70.90 \% \]</span></p>
 
-<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-7-1.png" data-fig-pos="H" width="960" class="r-stretch"></section>
+<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" data-fig-pos="H" width="960"></section>
 <section id="a-variety-of-priors" class="slide level2 smaller">
 <h2>A variety of Priors</h2>
 <ul>
 <li>To illustrate how density of Prior changes with increased sample size even though mean is the same</li>
 </ul>
 
-<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-8-1.png" data-fig-pos="H" width="960" class="r-stretch"></section>
+<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" data-fig-pos="H" width="960"></section>
 <section id="a-variety-of-posteriors" class="slide level2 smaller">
 <h2>A variety of Posteriors</h2>
 <ul>
 <li>To illustrate how density of Posterior changes with increased sample size even though mean is the same</li>
 </ul>
 
-<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-9-1.png" data-fig-pos="H" width="960" class="r-stretch"></section>
-<section id="does-cdf-improve-with-increased-data-availability-of-priors" class="slide level2">
-<h2>Does CDF improve with increased “data availability” of priors ?</h2>
-<p>Here we have an interim result of 16 and 23 patients. (input for Likelihood)</p>
-<p>We have a threshold of 60% success. Our standard of care is 60%. Our priors have a mean of 50%.</p>
-</section>
-<section id="does-cdf-improve-with-increased-data-availability-of-priors-1" class="slide level2">
-<h2>Does CDF improve with increased “data availability” of priors ?</h2>
-<p>No.</p>
-
-<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-10-1.png" data-fig-pos="H" width="960" class="r-stretch"></section></section>
-<section>
-<section id="beta-prior-mixture" class="title-slide slide level1 center">
-<h1>Beta prior mixture</h1>
-<!-- {\displaystyle {\frac {\alpha -1}{\alpha +\beta -2}}\!}  -->
+<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" data-fig-pos="H" width="960"></section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
 <ul>
-<li><p><code>phase1b</code> facilitates the flexibility of usingvarious priors and its respective weightings:</p>
-<pre><code>           Prior is P_E ~ sum(weights * beta(parE[, 1], parE[, 2]))</code></pre></li>
+<li>A “look” is a stop</li>
+<li>A stop is when a rule is applied</li>
+<li>The rule is specified for Go, Stop or Evaluate (Gray zone)</li>
+<li>If the rule is met, the result is Go, Stop or Evaluate (Gray zone)</li>
+<li>Rules are applied at interim or final</li>
+<li>Go = Success = Efficacious</li>
+<li>Stop = Failure = Futile</li>
+<li>Rule = Criteria, e.g.&nbsp;Go rule is a Go Criteria</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fl">0.5</span><span class="sc">*</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">p =</span> <span class="fl">0.60</span>, <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href=""></a>  <span class="fl">0.5</span><span class="sc">*</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">p =</span> <span class="fl">0.60</span>, <span class="at">parE =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="at">weights =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7187072</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># postprob(x = 16, n = 23, p = 0.60, par = rbind(c(0.6, 0.4), c(2, 4)), weights = c(0.5, 0.5))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><span class="math display">\[  f(\pi | x_{i})  \propto \  \pi^{x_{i}} (1-\pi)^{n-x_{i}}\sum_{j = 1}^{k} \ w_j \frac {1}{B(\alpha_j, \beta_j)} \pi^{\alpha_j-1}(1-\pi)^{\beta_j-1}
-\]</span></p>
 </section>
-<section id="postprob-example-lee-liu-2008" class="slide level2">
+<section id="postprob-example-lee-liu-2008" class="slide level2 smaller">
 <h2><code>postprob()</code> example (Lee &amp; Liu, 2008)</h2>
-<!-- -   We observed 16 successes out of 23 patients -->
-<!-- -   We set a threshold of p = 0.60 as a comparator -->
-<!-- -   Assume a  Beta(0.6, 0.4) prior for P_E -->
-<!-- -   Posterior will be a  Beta(16.6, 7.4) distribution -->
-<!-- -   $Pr(RR ≥ p | data)$ = 0.836 -->
 <div class="cell">
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 25px; margin-left: auto; margin-right: auto;">
@@ -587,17 +585,68 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">p =</span> <span class="fl">0.60</span>, <span class="at">par =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">p =</span> <span class="fl">0.60</span>, <span class="at">par =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8359808</code></pre>
 </div>
 </div>
+</section></section>
+<section>
+<section id="posterior-probability" class="title-slide slide level1 smaller center">
+<h1>Posterior Probability</h1>
+<ul>
+<li>Interim trial is efficacious if posterior probability exceeds 70% or P( RR ≥ 60 % | data ) &gt; 70%</li>
+</ul>
+<div class="cell column-page-right quarto-layout-panel" data-layout-align="center" data-layout-ncol="1">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div id="fig-post" class="quarto-figure quarto-figure-center quarto-float" data-fig-pos="H" width="960" data-fig-align="center" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="BayesianDecisionGating_files/figure-revealjs/fig-post-1.png" id="fig-post" class="quarto-figure quarto-figure-center" data-fig-pos="H" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="predprob-example-lee-liu-2008" class="slide level2">
+<section id="beta-prior-mixture" class="slide level2 smaller">
+<h2>Beta prior mixture</h2>
+<!-- {\displaystyle {\frac {\alpha -1}{\alpha +\beta -2}}\!}  -->
+<ul>
+<li><p><code>phase1b</code> facilitates the flexibility of usingvarious priors and its respective weightings:</p>
+<pre><code>           Prior is P_E ~ sum(weights * beta(parE[, 1], parE[, 2]))</code></pre></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>a <span class="ot">=</span> <span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
+<span id="cb6-2"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
+<span id="cb6-3"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
+<span id="cb6-4"><a href=""></a>             <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), <span class="at">weights =</span> <span class="dv">1</span>)</span>
+<span id="cb6-5"><a href=""></a></span>
+<span id="cb6-6"><a href=""></a>b <span class="ot">=</span> <span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
+<span id="cb6-7"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
+<span id="cb6-8"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
+<span id="cb6-9"><a href=""></a>             <span class="at">parE =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="at">weights =</span> <span class="dv">1</span>)</span>
+<span id="cb6-10"><a href=""></a></span>
+<span id="cb6-11"><a href=""></a><span class="fl">0.5</span><span class="sc">*</span>(a <span class="sc">+</span> b)</span>
+<span id="cb6-12"><a href=""></a></span>
+<span id="cb6-13"><a href=""></a><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
+<span id="cb6-14"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
+<span id="cb6-15"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
+<span id="cb6-16"><a href=""></a>             <span class="at">parE =</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)), <span class="at">weights =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Posterior formulation :</li>
+</ul>
+<p><span class="math display">\[  f(\pi | x)  \propto \  \pi^{x} (1-\pi)^{n-x}\sum_{j = 1}^{k} \ w_j \frac {1}{B(\alpha_j, \beta_j)} \pi^{\alpha_j-1}(1-\pi)^{\beta_j-1}
+\]</span></p>
+</section>
+<section id="predprob-example-lee-liu-2008" class="slide level2 smaller">
 <h2><code>predprob()</code> example (Lee &amp; Liu, 2008)</h2>
-<!-- -   Nmax = 40, x = 16, n = 23, Prior is Beta(0.6, 0.4) -->
-<!-- -   $P(RR > 60\% )$ > $\theta_T$ with $\theta_T$ equal 60 % and 90 -->
-<!--     %. -->
 <div class="cell">
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
@@ -635,22 +684,22 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>control <span class="ot">=</span> <span class="fl">0.6</span></span>
-<span id="cb8-2"><a href=""></a>confidence_sixty <span class="ot">=</span> <span class="fl">0.6</span></span>
-<span id="cb8-3"><a href=""></a>result <span class="ot">&lt;-</span> <span class="fu">predprob</span>(</span>
-<span id="cb8-4"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_sixty,</span>
-<span id="cb8-5"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
-<span id="cb8-6"><a href=""></a>)</span>
-<span id="cb8-7"><a href=""></a>result<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>control <span class="ot">=</span> <span class="fl">0.6</span></span>
+<span id="cb7-2"><a href=""></a>confidence_sixty <span class="ot">=</span> <span class="fl">0.7</span></span>
+<span id="cb7-3"><a href=""></a>result <span class="ot">&lt;-</span> <span class="fu">predprob</span>(</span>
+<span id="cb7-4"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_sixty,</span>
+<span id="cb7-5"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
+<span id="cb7-6"><a href=""></a>)</span>
+<span id="cb7-7"><a href=""></a>result<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9004913</code></pre>
+<pre><code>[1] 0.8211011</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>confidence_ninety <span class="ot">=</span> <span class="fl">0.9</span></span>
-<span id="cb10-2"><a href=""></a>result_high_thetaT <span class="ot">&lt;-</span> <span class="fu">predprob</span>(</span>
-<span id="cb10-3"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_ninety,</span>
-<span id="cb10-4"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
-<span id="cb10-5"><a href=""></a>)</span>
-<span id="cb10-6"><a href=""></a>result_high_thetaT<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>confidence_ninety <span class="ot">=</span> <span class="fl">0.9</span></span>
+<span id="cb9-2"><a href=""></a>result_high_thetaT <span class="ot">&lt;-</span> <span class="fu">predprob</span>(</span>
+<span id="cb9-3"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_ninety,</span>
+<span id="cb9-4"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
+<span id="cb9-5"><a href=""></a>)</span>
+<span id="cb9-6"><a href=""></a>result_high_thetaT<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5655589</code></pre>
 </div>
@@ -669,7 +718,7 @@
 <img data-src="BayesianDecisionGating_files/figure-revealjs/fig-histogram-1.png" data-fig-pos="H" data-ref-parent="fig-histogram" alt="These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40" width="960">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-histogram-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) <span class="math inline">\(P (\pi &gt; 0.6 | \ data )\)</span> &gt; 60%
+(a) <span class="math inline">\(P (\pi &gt; 0.6 | \ data )\)</span> &gt; 70%
 </figcaption>
 </figure>
 </div>
@@ -681,7 +730,7 @@
 <img data-src="BayesianDecisionGating_files/figure-revealjs/fig-histogram-2.png" data-fig-pos="H" data-ref-parent="fig-histogram" alt="These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40" width="960">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-histogram-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) <span class="math inline">\(P (\pi &gt; 0.6 |  \ data )\)</span> &gt; 90%
+(b) <span class="math inline">\(P (\pi &gt; 0.6 | \ data )\)</span> &gt; 90%
 </figcaption>
 </figure>
 </div>
@@ -689,44 +738,44 @@
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Predictive Posterior CDF for different Efficacy Rules
+Figure&nbsp;2: Predictive Posterior CDF for different Efficacy Rules
 </figcaption>
 </figure>
 </div>
 </section></section>
 <section>
-<section id="rules-for-interim-analysis" class="title-slide slide level1 center">
-<h1>Rules for interim analysis</h1>
+<section id="operating-characteristics" class="title-slide slide level1 center">
+<h1>Operating Characteristics</h1>
 
 </section>
-<section id="posterior-probability-and-threshold-for-success-or-failure" class="slide level2">
-<h2>Posterior probability, and threshold for Success (or failure):</h2>
+<section id="operating-characteristics-threshold-for-success-and-failure" class="slide level2">
+<h2>Operating Characteristics : threshold for Success (and failure):</h2>
 <ul>
-<li>Stop criteria for Efficacy :</li>
+<li>Efficacy criteria, e.g.&nbsp;we would stop for Efficacy if :</li>
 </ul>
-<p><code>Pr(truep &gt; p1) &gt; tU</code></p>
+<p><code>Pr( RR &gt; p1) &gt; tU</code></p>
 <ul>
-<li>Stop criteria for Futility :</li>
+<li>Futility criteria, eg. we would stop for Futility if :</li>
 </ul>
-<p><code>Pr(truep &lt; p0) &gt; tL</code></p>
+<p><code>Pr( RR &lt; p0) &gt; tL</code></p>
 </section>
 <section id="rules-and-operating-characteristics.-a-use-case-for-ocpostprob" class="slide level2 smaller">
 <h2>Rules and Operating characteristics. A use case for <code>ocPostprob()</code>:</h2>
 <ul>
 <li>Look for Efficacy: Go if <span class="math inline">\(P( \pi &gt; 60\% | \ data ) &gt; 90 \%\)</span></li>
-<li>Look for Futility: Stop if <span class="math inline">\(P( \pi &lt; 60\% | \ data ) &gt; 60 \%\)</span></li>
+<li>Look for Futility: Stop if <span class="math inline">\(P( \pi &lt; 60\% | \ data ) &gt; 70 \%\)</span></li>
 <li>Prior of treatment arm <span class="math inline">\(Beta(0.6, 0.4)\)</span>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
-<span id="cb12-2"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">ocPostprob</span>(</span>
-<span id="cb12-3"><a href=""></a>  <span class="at">nnE =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>), <span class="at">truep =</span> <span class="fl">0.60</span>, <span class="at">p0 =</span> <span class="fl">0.60</span>, <span class="at">p1 =</span> <span class="fl">0.60</span>, <span class="at">tL =</span> <span class="fl">0.60</span>, <span class="at">tU =</span> <span class="fl">0.90</span>, <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
-<span id="cb12-4"><a href=""></a>  <span class="at">sim =</span> <span class="dv">500</span>, <span class="at">wiggle =</span> <span class="cn">TRUE</span>, <span class="at">nnF =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>)</span>
-<span id="cb12-5"><a href=""></a>)</span>
-<span id="cb12-6"><a href=""></a>res<span class="sc">$</span>oc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb11-2"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">ocPostprob</span>(</span>
+<span id="cb11-3"><a href=""></a>  <span class="at">nnE =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>), <span class="at">truep =</span> <span class="fl">0.60</span>, <span class="at">p0 =</span> <span class="fl">0.60</span>, <span class="at">p1 =</span> <span class="fl">0.69</span>, <span class="at">tL =</span> <span class="fl">0.70</span>, <span class="at">tU =</span> <span class="fl">0.90</span>, <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
+<span id="cb11-4"><a href=""></a>  <span class="at">sim =</span> <span class="dv">500</span>, <span class="at">wiggle =</span> <span class="cn">TRUE</span>, <span class="at">nnF =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>)</span>
+<span id="cb11-5"><a href=""></a>)</span>
+<span id="cb11-6"><a href=""></a>res<span class="sc">$</span>oc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ExpectedN PrStopEarly PrEarlyEff PrEarlyFut PrEfficacy PrFutility PrGrayZone
-1    31.878       0.486      0.088      0.398       0.11       0.51       0.38</code></pre>
+1    35.182       0.294      0.014       0.28      0.018        0.4      0.582</code></pre>
 </div>
 </div>
 </section>
@@ -903,20 +952,21 @@ Figure&nbsp;1: Predictive Posterior CDF for different Efficacy Rules
 <h1>Concluding remarks</h1>
 <p><img data-src="images/hex1.png" style="width:20.0%"> <img data-src="images/hex5.png" style="width:20.0%"> <img data-src="images/hex6.png" style="width:20.0%"></p>
 <ul>
-<li><p>Big thank you to Daniel Sabanés Bové for mentorship. Data Science Acceleration colleagues who collaborated and supported.</p></li>
+<li><p>Big thank you to Daniel Sabanés Bové for mentorship. Data Science Acceleration colleagues Isaac Gravestock, John Kirkpatrick, Craig Gower-Paige et al who collaborated and supported.</p></li>
 <li><p>Extension to other therapeutic areas that use response rate as endpoint if beta priors are appropriate</p></li>
-<li><p>Contact <a href="audreytyeo@gmail.com">me</a> to collaborate. Open <a href="https://github.com/Genentech/phase1b/issues">issues here</a><br>
-</p></li>
-<li><p><strong><em>Vote</em></strong> on your favourite HEX sticker on the <strong><em>menti link in my PSI profile</em></strong>!</p></li>
+<li><p>Open <a href="https://github.com/Genentech/phase1b/issues">issues here.</a>&nbsp;Contact <a href="audreytyeo@gmail.com">me</a> to collaborate.</p></li>
+<li><p>Statistical Engineering Journey, PDD Tech Talk 16th (EU), 19th June (SH/SSF) for more on the <code>phase1b</code> journey</p></li>
 </ul>
 </section>
 
-<section id="references" class="title-slide slide level1 center">
-<h1>References</h1>
+<section id="some-references" class="title-slide slide level1 center">
+<h1>Some references</h1>
 <ul>
 <li><p>Thall P F, Simon R (1994), Practical Guidelines for Phase IIB Clinical Trials, Biometrics, 50, 337-349</p></li>
 <li><p>Lee J J, Liu D D (2008), A Predictive probability design for phase II cancer clinical trials, 5(2), 93-106, Clinical Trials</p></li>
 <li><p>Yeo, A T, Sabanés Bové D, Elze M, Pourmohamad T, Zhu J, Lymp J, Teterina A (2024). Phase1b : Calculations for decisions on Phase 1b clinical trials. R package version 1.0.0, <a href="https://genentech.github.io/phase1b" class="uri">https://genentech.github.io/phase1b</a></p></li>
+<li><p>Inclusive Speaker Orientation <a href="https://training.linuxfoundation.org/training/inclusive-speaker-orientation/">Linux Foundation</a></p></li>
+<li><p>Zeileis, Fisher, Hornik, Ihaka, McWhite, Murrell, Stauffer, Wilke (2020). colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes. Journal of Statistical Software.</p></li>
 <li><p><a href="www.audreyyeCH.github.io/About">Code for this presentation</a></p></li>
 </ul>
 </section>
@@ -926,20 +976,53 @@ Figure&nbsp;1: Predictive Posterior CDF for different Efficacy Rules
 <h1>Backupslides</h1>
 
 </section>
-<section id="predictive-posterior-probability-1" class="slide level2 smaller">
-<h2>Predictive posterior probability :</h2>
-<h3 id="decision-1">Decision 1:</h3>
+<section id="standard-of-care-distribution-when-unknown" class="slide level2">
+<h2>Standard of Care Distribution when unknown</h2>
+<p>Using the approach by Thall and Simon (Biometrics, 1994), this evaluates the posterior probability of achieving superior response rate in the treatment group <code>E</code> compared to standard of care <code>S</code>.</p>
+<ul>
+<li>The desired improvement is denoted as <code>delta</code>. There are two options in using <code>delta</code>. The absolute case when <code>relativeDelta = FALSE</code> and relative as when <code>relativeDelta = TRUE</code>.</li>
+</ul>
+</section></section>
+<section>
+<section id="desired-improvement-delta-two-approaches" class="title-slide slide level1 smaller center">
+<h1>Desired improvement <code>delta</code>, two approaches:</h1>
+<ol type="1">
+<li><p>The absolute case is when we define an absolute delta, greater than <code>P_S</code>, the response rate of the standard of care or control or <code>S</code> group such that the posterior is <code>Pr(P_E &gt; P_S + delta | data)</code>.</p></li>
+<li><p>In the relative case, we suppose that the treatment group’s response rate is assumed to be greater than <code>P_S + (1-P_S) * delta</code> such that the posterior is <code>Pr(P_E &gt; P_S + (1 - P_S) * delta | data)</code>.</p></li>
+</ol>
+<p>User facing functions with this feature include</p>
+<ul>
+<li><code>postprobDist()</code></li>
+<li><code>predprobDist</code></li>
+<li><code>ocPostprobDist()</code></li>
+<li><code>ocPredprobDist()</code></li>
+</ul>
+</section>
+<section id="does-cdf-improve-with-increased-data-availability-of-priors" class="slide level2">
+<h2>Does CDF improve with increased “data availability” of priors ?</h2>
+<p>Here we have an interim result of 16 and 23 patients. (input for Likelihood)</p>
+<p>We have a threshold of 60% success. Our standard of care is 60%. Our priors have a mean of 50%.</p>
+</section>
+<section id="does-cdf-improve-with-increased-data-availability-of-priors-1" class="slide level2">
+<h2>Does CDF improve with increased “data availability” of priors ?</h2>
+<p>No.</p>
+
+<img data-src="BayesianDecisionGating_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center r-stretch" data-fig-pos="H" width="960"></section>
+<section id="predictive-posterior-probability-for-decision-1" class="slide level2 smaller">
+<h2>Predictive posterior probability for Decision 1 :</h2>
 <p>The criteria for Decision 1 for Interim looks are :</p>
 <ul>
-<li><p>interim GO : <code>P(successful trial at final) &gt; phiU</code></p></li>
-<li><p>interim STOP : <code>P(successful trial at final) &lt; phiL</code></p></li>
+<li><p>interim GO : <code>P( success at final) &gt; phiU</code></p></li>
+<li><p>interim STOP : <code>P( success at final) &lt; phiL</code></p></li>
 </ul>
 <p>The criteria for Decision 1 for Final looks are:</p>
 <ul>
 <li><p>Final GO : <code>P( response rate &gt; p0 | data) &gt; tT</code></p></li>
 <li><p>Final STOP : <code>P( response rate &gt; p0 | data ) &lt; tT</code></p></li>
 </ul>
-<h3 id="decision-2">Decision 2:</h3>
+</section>
+<section id="predictive-posterior-probability-for-decision-2" class="slide level2 smaller">
+<h2>Predictive posterior probability for Decision 2:</h2>
 <p>The criteria for Decision 2 for Interim looks are :</p>
 <ul>
 <li><p>Interim GO : <code>P ( success at final) &gt; phiU</code></p></li>
@@ -950,7 +1033,6 @@ Figure&nbsp;1: Predictive Posterior CDF for different Efficacy Rules
 <li><p>Final GO : <code>P( response rate &gt; p0) &gt; tT</code></p></li>
 <li><p>Final STOP : <code>P( response rate  &lt; p1) &gt; tF</code></p></li>
 </ul>
-<p>## When the standard of care “distribution” is not known. Introducing <code>postprobDist()</code>, variations also exist e.g.&nbsp;<code>predprobDist</code>, <code>ocPostprobDist()</code> and of course <code>ocPredprobDist()</code>.</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
