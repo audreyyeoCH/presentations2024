@@ -2,7 +2,7 @@
 # title: "A Bayesian approach to decision making in early development clinical trials: An R solution"
 # subtitle: "An open source R package"
 # author: "Audrey Yeo"
-# institute: "Welwyn Statistics CoP, 2024"
+# institute: ""
 format: 
  revealjs:
     code-fold: false
@@ -69,7 +69,7 @@ df_thetaThigh$cumul_x <- df_thetaThigh$counts + 16
 
 **Audrey Yeo**
 
-Welwyn Statistics CoP, 2024
+UCB, 2024
 \
 ***This presentation has ALT text and as much as possible, uses colour-blind friendly palettes***
 
@@ -118,9 +118,9 @@ Welwyn Statistics CoP, 2024
     [genentech.github.io/phase1b/](genentech.github.io/phase1b/)
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE}
-library(devtools)
-devtools::install_github("https://github.com/Genentech/phase1b")
-library(phase1b)
+# library(devtools)
+# devtools::install_github("https://github.com/Genentech/phase1b")
+# library(phase1b)
 ```
 
 
@@ -514,7 +514,7 @@ Features %>% kbl(align = "c") %>% kable_styling(position = "center", font_size =
 -   Open [issues
     here.](https://github.com/Genentech/phase1b/issues)\ Contact [me](audreytyeo@gmail.com) to collaborate. 
 
-- Statistical Engineering Journey, PDD Tech Talk 16th (EU), 19th June (SH/SSF) for more on the `phase1b` journey
+- Statistical Engineering Journey at PHUSE 18 Sept 2024 for more on the `phase1b` journey
 
 
 # Some references
@@ -531,13 +531,15 @@ Features %>% kbl(align = "c") %>% kable_styling(position = "center", font_size =
     <https://genentech.github.io/phase1b>
     
 -   Inclusive Speaker Orientation [Linux Foundation](https://training.linuxfoundation.org/training/inclusive-speaker-orientation/)
-    
+
+# Some more references 
+
 -   Zeileis, Fisher, Hornik, Ihaka, McWhite, Murrell, Stauffer, Wilke (2020). 
 colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes. Journal of Statistical Software.
 
 -   [Code for this presentation](www.audreyyeCH.github.io/About)
 
-# Backupslides
+# Backup slides
 
 ## Standard of Care Distribution when unknown
 Using the approach by Thall and Simon (Biometrics, 1994), this evaluates the

@@ -398,14 +398,9 @@
 
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>cpp11   (0.4.7 -&gt; 0.5.0) [CRAN]
-httr2   (1.0.1 -&gt; 1.0.3) [CRAN]
-pkgdown (2.0.9 -&gt; 2.1.0) [CRAN]
-
-The downloaded binary packages are in
-    /var/folders/7s/hgrbfd4152gfx6nyk71l8fpw0000gn/T//RtmprDNDv9/downloaded_packages
+<pre><code>
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file ‘/private/var/folders/7s/hgrbfd4152gfx6nyk71l8fpw0000gn/T/RtmprDNDv9/remotes1ada552a0eb3/Genentech-phase1b-c9c1440/DESCRIPTION’ ... OK
+* checking for file ‘/private/var/folders/7s/hgrbfd4152gfx6nyk71l8fpw0000gn/T/RtmpowRCb3/remotes100dd74c8d00e/Genentech-phase1b-ef3fbc6/DESCRIPTION’ ... OK
 * preparing ‘phase1b’:
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
@@ -417,7 +412,7 @@ The downloaded binary packages are in
 <section id="a-bayesian-approach-to-decision-making-in-early-development-clinical-trials-an-r-solution" class="title-slide slide level1 center" data-background-iframe="colored-particles/index.html">
 <h1>A Bayesian approach to decision making in early development clinical trials: An R solution</h1>
 <p><strong>Audrey Yeo</strong></p>
-<p>Welwyn Statistics CoP, 2024<br>
+<p>UCB, 2024<br>
 <strong><em>This presentation has ALT text and as much as possible, uses colour-blind friendly palettes</em></strong></p>
 </section>
 
@@ -448,9 +443,9 @@ The downloaded binary packages are in
 <li><p>website : <a href="genentech.github.io/phase1b/">genentech.github.io/phase1b/</a></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">library</span>(devtools)</span>
-<span id="cb2-2"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/Genentech/phase1b"</span>)</span>
-<span id="cb2-3"><a href=""></a><span class="fu">library</span>(phase1b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># library(devtools)</span></span>
+<span id="cb2-2"><a href=""></a><span class="co"># devtools::install_github("https://github.com/Genentech/phase1b")</span></span>
+<span id="cb2-3"><a href=""></a><span class="co"># library(phase1b)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="use-case" class="slide level2 smaller">
@@ -597,10 +592,10 @@ The downloaded binary packages are in
 <ul>
 <li>Interim trial is efficacious if posterior probability exceeds 70% or P( RR ≥ 60 % | data ) &gt; 70%</li>
 </ul>
-<div class="cell column-page-right quarto-layout-panel" data-layout-align="center" data-layout-ncol="1">
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="1" data-layout-align="center">
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<div id="fig-post" class="quarto-figure quarto-figure-center quarto-float" data-fig-pos="H" width="960" data-fig-align="center" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold">
+<div id="fig-post" class="quarto-figure quarto-figure-center quarto-float" data-fig-align="center" data-fig-pos="H" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold" width="960">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="BayesianDecisionGating_files/figure-revealjs/fig-post-1.png" id="fig-post" class="quarto-figure quarto-figure-center" data-fig-pos="H" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold" width="960">
@@ -955,7 +950,7 @@ Figure&nbsp;2: Predictive Posterior CDF for different Efficacy Rules
 <li><p>Big thank you to Daniel Sabanés Bové for mentorship. Data Science Acceleration colleagues Isaac Gravestock, John Kirkpatrick, Craig Gower-Paige et al who collaborated and supported.</p></li>
 <li><p>Extension to other therapeutic areas that use response rate as endpoint if beta priors are appropriate</p></li>
 <li><p>Open <a href="https://github.com/Genentech/phase1b/issues">issues here.</a>&nbsp;Contact <a href="audreytyeo@gmail.com">me</a> to collaborate.</p></li>
-<li><p>Statistical Engineering Journey, PDD Tech Talk 16th (EU), 19th June (SH/SSF) for more on the <code>phase1b</code> journey</p></li>
+<li><p>Statistical Engineering Journey at PHUSE 18 Sept 2024 for more on the <code>phase1b</code> journey</p></li>
 </ul>
 </section>
 
@@ -966,14 +961,20 @@ Figure&nbsp;2: Predictive Posterior CDF for different Efficacy Rules
 <li><p>Lee J J, Liu D D (2008), A Predictive probability design for phase II cancer clinical trials, 5(2), 93-106, Clinical Trials</p></li>
 <li><p>Yeo, A T, Sabanés Bové D, Elze M, Pourmohamad T, Zhu J, Lymp J, Teterina A (2024). Phase1b : Calculations for decisions on Phase 1b clinical trials. R package version 1.0.0, <a href="https://genentech.github.io/phase1b" class="uri">https://genentech.github.io/phase1b</a></p></li>
 <li><p>Inclusive Speaker Orientation <a href="https://training.linuxfoundation.org/training/inclusive-speaker-orientation/">Linux Foundation</a></p></li>
+</ul>
+</section>
+
+<section id="some-more-references" class="title-slide slide level1 center">
+<h1>Some more references</h1>
+<ul>
 <li><p>Zeileis, Fisher, Hornik, Ihaka, McWhite, Murrell, Stauffer, Wilke (2020). colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes. Journal of Statistical Software.</p></li>
 <li><p><a href="www.audreyyeCH.github.io/About">Code for this presentation</a></p></li>
 </ul>
 </section>
 
 <section>
-<section id="backupslides" class="title-slide slide level1 center">
-<h1>Backupslides</h1>
+<section id="backup-slides" class="title-slide slide level1 center">
+<h1>Backup slides</h1>
 
 </section>
 <section id="standard-of-care-distribution-when-unknown" class="slide level2">

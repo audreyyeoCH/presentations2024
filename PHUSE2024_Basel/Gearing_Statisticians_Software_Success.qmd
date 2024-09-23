@@ -23,7 +23,10 @@ library(phase1b)
 ```
 
 
-# Gearing our industry Statisticians up for Software success : A `phase1b` journey.{background-iframe="moving-waves/index.html"}
+# Gearing our Industry Statisticians up for Software success : A `phase1b` journey. {background-iframe="rubik/index.html"}
+
+
+
 
 `Audrey Yeo`
 
@@ -58,11 +61,12 @@ devtools::install_github("https://github.com/Genentech/phase1b")
 library(phase1b)
 ```
 
-# Why Should Statisticians make Software ?
-                             
-        "Modern statistical inference is unthinkable without the use of a computer"
-               Likelihood and Bayesian Inference, Held & Sabanés Bové (2020)
-                             
+<!-- # Why Should Industry Statisticians make Software ? -->
+
+<!--     "Modern statistical inference is unthinkable without the use of a computer" -->
+
+<!--                Likelihood and Bayesian Inference, Held & Sabanés Bové (2020) -->
+
 # Clinical Trials Statisticians understand :{.smaller}
 
 ...the combined Scientific and Business development of a therapy.
@@ -140,7 +144,7 @@ ggplot(df_thetaTlow) +
     -   R debugging
     -   R advanced: package development
         -   Basics of Package Development in R
-        -   Roxygen2 introduction another resource
+        -   `roxygen2` introduction another resource
         -   Good Software Engineering Practice for R Packages
 
 ***in summary, gaps were*** : Git merging, Pull Requests, Styling, Debugging, Writing Tests
@@ -150,7 +154,7 @@ Knowledge and skills for Statistical Software Engineering!
 
 -   Visualing branches : `Git kraken`, `VS Code Git Graph Extension`
 -   Checking : `pre-commit`, `Git hub checks`, `R CMD`
--   Documentation : Writing (`roxygen`), building, reviewing documentation
+-   Documentation : Writing (`roxygen2`), building, reviewing documentation
 -   Testing : Taking a reviewer perspective (`testthat` and `checkmate`)
 -   Styling : `styler`, `prettier` ... building your own style
 
@@ -219,13 +223,13 @@ options(error = NULL)
 :::
 ::: {.column width="50%"}
 
-1.  One issue to one branch
+1.  One Design Document for entire function
 
-2.  One issue to one Pull Request (PR)
+2.  One issue is the smallest task from (1)
 
-3.  One Design Document for entire function
+3.  One issue to one branch
 
-4.  One issue is the smallest task from (3)
+4.  One issue to one Pull Request (PR)
 
 5.  Create Test files for helper functions
 
@@ -241,15 +245,15 @@ knitr::include_graphics("images/Design_doc_ocPost.png")
 ```
 :::
 ::: {.column width="50%"}
-User-facing functions start with Design-document (DD)
+User-facing functions start with Design-document 
 
-1. DD helps achieve Clarity on the form and purpose of the user-facing function
+1. Helps achieve Clarity on the form and purpose of the user-facing function
 
-2. Use the DD to test regular and edge cases 
+2. Test regular and edge cases 
 
 3. Makes the rest of the work "easier" when the goals are clear
 
-4. Most of the "skeleton" and "flesh" of the work can already be done in the DD
+4. Most of the "skeleton" and "flesh" of the work can already be done in the because of 1-3
 :::
 :::
 
@@ -332,8 +336,13 @@ treemap(data,
 -   Requires focused and deep thinking
 -   Small steps are good starts e.g. small PRs
 -   Creative work comes after foundation
+<!-- The Fundamentals ISE Playbook -->
+<!-- We consider code to be incomplete if it is not accompanied by tests -->
+<!-- We write unit tests (tests without external dependencies) that can run before every PR merge to validate that we don’t have regressions -->
+<!-- We write Integration tests/E2E tests that test the whole system end to end, and run them regularly -->
+<!-- We write our tests early and block any further code merging if tests fail. -->
+<!-- We run load tests/performance tests where appropriate to validate that the system performs under stress -->
 :::
-
 ::: {.column width="50%"}
 -   Systematic deduction is key to debugging
 -   Lots of theory and reading literature about new methodology
@@ -423,12 +432,12 @@ knitr::include_graphics("images/PSI_Stand.jpg", error = FALSE)
 
 ## Final Reflections{.smaller}
 
--   Doing something I wasn't prepared to do paid off
--   Confidence through Competence : I got more confident about the R Language
+-   I started off as a Clinical Trial Statistician (with good technical skills) but doing something I wasn't prepared to do paid off
+-   There were new skills to gain, but it was always Confidence through Competence
 -   Can use this as a reference to build other packages and in other languages [e.g. Julia, see my blog post](https://audreyyeoch.github.io/Julia.html)
--   Less likely to doubt myself when I learn new things
+<!-- -   Less likely to doubt myself when I learn new things, and I believe the recent `phase1b` journey is a testiment to those who find themselves in this situation. -->
 
-No matter how much you've improved it's not permanent
+As in Statistics, no matter how much you've improved it's not permanent
 
 ```{r}
 #| layout-ncol: 6
@@ -453,7 +462,10 @@ knitr::include_graphics("images/hex5.png")
 
 I'd love to know how this presentation relates to you or does not !
 
-## References {.smaller}
+# {background-iframe="phase1b_hero/index.html"}
+
+
+## Some references {.smaller}
 
 -   Thall P F, Simon R (1994), Practical Guidelines for Phase IIB Clinical Trials, Biometrics, 50, 337-349
 
@@ -463,10 +475,21 @@ I'd love to know how this presentation relates to you or does not !
 
 -   [Code](www.audreyyeCH.github.io/About) for this presentation
 
+## Some more references {.smaller}
+
+- Code with engineering. [Microsoft](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/)
+
+- How to do a code review. [Google](https://google.github.io/eng-practices/review/reviewer/)
+
+- Pachecho, C, A Technical Journey into API Design-First: Best Practices and Lessons Learned [link](https://devblogs.microsoft.com/ise/design-api-first-with-typespec/)
+
 -   Why We need to Improve Software Engineering in Biostatistics (October 26 2023 R/Pharma) [link](https://danielinteractive.github.io/rpharma-2023-keynote/#/title-slide)
 
 -   Inclusive Speaker Course by Linux Foundation [link](https://training.linuxfoundation.org/training/inclusive-speaker-orientation/)
 
 -   [license](https://creativecommons.org/licenses/by-sa/4.0/)
 
+
+
 #  {background-iframe="multiple-images/index.html"}
+
