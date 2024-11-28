@@ -53,19 +53,13 @@ knitr::include_graphics("images/hex3.png", error = FALSE, dpi = 100)
 
 -   100% written in R and Open Source.
 
--   website : [genentech.github.io/phase1b/](genentech.github.io/phase1b/)
+-   Website : [genentech.github.io/phase1b/](genentech.github.io/phase1b/)
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE}
 library(devtools)
 devtools::install_github("https://github.com/Genentech/phase1b")
 library(phase1b)
 ```
-
-<!-- # Why Should Industry Statisticians make Software ? -->
-
-<!--     "Modern statistical inference is unthinkable without the use of a computer" -->
-
-<!--                Likelihood and Bayesian Inference, Held & Sabanés Bové (2020) -->
 
 # Clinical Trials Statisticians understand :{.smaller}
 
