@@ -2,9 +2,6 @@
 
 ## The following are talks and abstracts of those I presented 2024
 
-\begin{table}
-\centering\centering\centering\begingroup\fontsize{15}{17}\selectfont
-
 \begin{tabular}[t]{c|c|c|c|c}
 \hline
 Year & Month & Date & Firm & Talk\\
@@ -48,8 +45,6 @@ Year & Month & Date & Firm & Talk\\
 2024 & Dec & 13 & Uni Basel & Applied Mathematics in Drug and Career Discovery\\
 \hline
 \end{tabular}
-\endgroup{}
-\end{table}
 
 ### by the way, This HEX sticker was voted at the PSI 2024! Thank you all! And nice one : )
 
