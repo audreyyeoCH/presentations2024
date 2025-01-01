@@ -1,0 +1,129 @@
+---
+title: "Reflections on Audrey's journey at DSX"
+format: revealjs
+editor: visual
+---
+
+## Background 1 of 2
+
+-   Onboarding start \~ June 2023
+
+-   Current duration of rotation \~7 months
+
+-   standup meeting daily + 1 month "break" + second or third daily
+
+-   9 PRs, of which 7 were large 😅
+
+-   refactoring `phase1b` which is already available internally and "complete"
+
+## Background 2 of 2
+
+New skills are many and I am still learning them :
+
+-   git kraken and branching
+
+-   pre-commit checks
+
+-   documentation, building documents and reviewing them
+
+-   taking a reviewer perspective
+
+-   new packages I used : roxygen, styler, prettier, testthat, checkmate ...
+
+## Features of Statistical Software Engineering 1 of 2
+
+My reflections on what characterizes this kind of work:
+
+-   Lots of moving parts
+
+-   Collaborative : Forest vs Trees perspective applies all the time
+
+-   Requires focussed and deep thinking
+
+-   Small steps are good starts
+
+-   Systematic deduction is helpful
+
+-   Lots of theory and reading literature about new methodology
+
+-   Good engineering practices are like habits, needs automation which needs practice which needs time
+
+## Features of Statistical Software Engineering 1 of 2
+
+My reflections on what characterizes this kind of work:
+
+-   Small PRs can be sizable in work too
+
+-   Regular standups can feel pressured, but in the end I am glad they are bunched up together as long as expectations are managed
+
+-   Work can be creative, but once foundation is there
+
+-   It's fun!
+
+    Good stand ups have acknowledged the nature of the work
+
+## What I learned in the 1 month of no standups
+
+-   Standups are helpful
+
+-   Develop systematic deduction
+
+-   Fall on the engineering principles (testing, debugging, iteration, reliability, correctness...)
+
+-   Think creatively of other solutions by myself
+
+## Collaboration for `phase1b` work
+
+-   Positive bias & Trust
+
+-   Learning through mistakes is key
+
+-   Collaboration works best when the features of this kind of work is accounted for
+
+-   Safe space to be ask any questions and iterate
+
+## What has worked well in standups and `phase1b` work 1 of 2
+
+-   Daniel is proactive in reaching out and allocating time to do standups, e.g. increasing frequency
+
+-   Daniel is responsive to helping and is patient e.g. google hangouts to help unblock steps. Feedback turnover is quick and with example and rationale, then I can remember where exactly
+
+-   PR has "conversations" and Daniel actually gives feedback on it
+
+-   Being allowed to do the work, make mistakes, talk about theory
+
+## What has worked well in standups and `phase1b` work 2 of 2
+
+-   Systematic deduction together, so I can see what kind of habits an expert has
+
+-   Making an effort to teach again without resentment
+
+-   Encouraging to go for presentations internally and externally as good milestones to develop further
+
+-   Positive feedback but No over positiveness
+
+-   there's more...
+
+## What I'm changing after learning about this kind of work
+
+-   Create more conditions for focused, systematic, deep and creative work
+
+-   Approach work slower because in the end there has been efficiency gains
+
+-   Perceive small steps as good starts
+
+-   This is not overnight work, but slow and sustained good practices with an open mind
+
+## Future outlook
+
+-   Smaller PRs ☑️
+
+-   Standup formats are valuable, 1-2-3 times per week if needed
+
+-   Understand my strengths better as this is a new field
+
+-   Making a cool HEX sticker and Logo for `phase1b`
+
+-   Internal Presentation (other than Basel Biostats ?) and External ☑️
+
+-   Working on refactoring other packages
