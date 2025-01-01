@@ -1,55 +1,29 @@
 # presentations2024 
 
 ## The following are talks and abstracts of those I presented 2024
+|Year|Month                        |Date  |Firm                                         |Talk                                                                                                                                                  |
+|----|-----------------------------|------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+|2024|Jan                          |25    |Roche                                        |Julia Basel Course (Data Science, Machine Learning, Quarto)                                                                                           |
+|2024|June                         |13    |Roche                                        |Julia Basel Course (Data Science, Machine Learning, Quarto)                                                                                           |
+|2024|March                        |5     |Roche                                        |QTRLY- DSS "HOPE" POD ALL Hands: Dose Escalation                                                                                               |
+|2024|March                        |18    |Roche                                        |Our dose escalation trial Journey in OCEAN                                                                                              |
+|2024|March                        |21    |Roche                                        |Our dose escalation trial Journey in OCEAN                                                                                              |
+|2024|June                         |18    |PSI                                          |A Bayesian Framework for decision making in early development                                                                                         |
+|2024|June                         |9     |useR! Salzburg                               |A Statistician's journey in Statistical Software Engineering                                                                                          |
+|2024|July                         |10    |useR! Salzburg                               |Keynote : A(R)t is the Engine for Change                                                                                                              |
+|2024|July                         |10    |useR! Salzburg                               |A Bayesian Framework for decision making in early development                                                                                         |
+|2024|Sept                         |9     |Roche                                        |Basel Biostats Forum : [expanded] A Bayesian Framework for decision making in early development                                                       |
+|2024|Sept                         |16    |Roche                                        |Statistical Software Engineering : A Statistician‚Äôs technical journey in R                                                                          |
+|2024|Sept                         |18    |PHUSE                                        |Gearing Statisticians up for Software Successs                                                                                                        |
+|2024|Sept                         |19    |UCB                                          |[expanded] A Bayesian Framework for decision making in early development A Bayesian Framework for decision making in early development                |
+|2024|Sept                         |19    |Genentech SSF                                |Statistical Software Engineering : A Statistician‚Äôs technical journey in R                                                                          |
+|2024|Oct                          |29    |R/Pharma                                     |Gearing Statisticians up for Software Successs                                                                                                        |
+|2024|Oct                          |30    |R/Pharma                                     |[expanded] A Bayesian Framework for decision making in early development                                                                              |
+|2024|Nov                          |12    |Effective Statistician                       |[expanded] A Bayesian Framework for decision making in early development                                                                              |
+|2024|Dec                          |12    |BMS                                          |[expanded] A Bayesian Framework for decision making in early development                                                                              |
+|2024|Dec                          |13    |Uni Basel                                    |Applied Mathematics in Drug and Career Discovery                                                                                                      |
+|2025|March                        |24    |DAGStat                                      |Practical Bayesian Statistics : A gentle refresher on probability theory, Bayesian Framework and Intuition for effective application in Biostatistics.|
 
-|\begin{table}                                                                                                                                                    |FIELD2           |FIELD3    |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|----------|
-|\centering\centering\centering\begingroup\fontsize{15}{17}\selectfont                                                                                            |                 |          |
-|\begin{tabular}[t]{c&#124;c&#124;c&#124;c&#124;c}                                                                                                                                    |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|Year & Month & Date & Firm & Talk\\                                                                                                                              |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Jan & 25 & Roche & Julia Basel Course (Data Science                                                                                                       | Machine Learning| Quarto)\\|
-|\hline                                                                                                                                                           |                 |          |
-|2024 & June & 13 & Roche & Julia Basel Course (Data Science                                                                                                      | Machine Learning| Quarto)\\|
-|\hline                                                                                                                                                           |                 |          |
-|2024 & March & 5 & Roche & QTRLY- DSS "HOPE" POD ALL Hands: NXT007 Dose Escalation\\                                                                             |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & March & 18 & Roche & Our NXT007 Journey in OCEAN (Phase I/II in Hemophilia A)\\                                                                           |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & March & 21 & Roche & Our NXT007 Journey in OCEAN (Phase I/II in Hemophilia A)\\                                                                           |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & June & 18 & PSI & A Bayesian Framework for decision making in early development\\                                                                         |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & June & 9 & useR! Salzburg & A Statistician's journey in Statistical Software Engineering\\                                                                |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & July & 10 & useR! Salzburg & Keynote : A(R)t is the Engine for Change\\                                                                                   |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & July & 10 & useR! Salzburg & A Bayesian Framework for decision making in early development\\                                                              |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Sept & 9 & Roche & Basel Biostats Forum : [expanded] A Bayesian Framework for decision making in early development\\                                      |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Sept & 16 & Roche & Statistical Software Engineering : A Statistician’s technical journey in R\\                                                          |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Sept & 18 & PHUSE & Gearing Statisticians up for Software Successs\\                                                                                      |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Sept & 19 & UCB & [expanded] A Bayesian Framework for decision making in early development A Bayesian Framework for decision making in early development\\|                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Sept & 19 & Genentech SSF & Statistical Software Engineering : A Statistician’s technical journey in R\\                                                  |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Oct & 29 & R/Pharma & Gearing Statisticians up for Software Successs\\                                                                                    |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Oct & 30 & R/Pharma & [expanded] A Bayesian Framework for decision making in early development\\                                                          |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Nov & 12 & Effective Statistician & [expanded] A Bayesian Framework for decision making in early development\\                                            |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Dec & 12 & BMS & [expanded] A Bayesian Framework for decision making in early development\\                                                               |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|2024 & Dec & 13 & Uni Basel & Applied Mathematics in Drug and Career Discovery\\                                                                                 |                 |          |
-|\hline                                                                                                                                                           |                 |          |
-|\end{tabular}                                                                                                                                                    |                 |          |
-|\endgroup{}                                                                                                                                                      |                 |          |
-|\end{table}                                                                                                                                                      |                 |          |
 
 
 
