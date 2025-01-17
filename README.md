@@ -23,6 +23,8 @@
 |2024|Dec                          |12    |BMS                                          |[expanded] A Bayesian Framework for decision making in early development                                                                              |
 |2024|Dec                          |13    |Uni Basel                                    |Applied Mathematics in Drug and Career Discovery                                                                                                      |
 |2025|March                        |24    |DAGStat                                      |Practical Bayesian Statistics : A gentle refresher on probability theory, Bayesian Framework and Intuition for effective application in Biostatistics.|
+|2025|March                        |24    |DAGStat                                      |Good Software Engineering Practices in R.|
+
 
 
 
