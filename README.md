@@ -1,6 +1,6 @@
 # presentations2024 
 
-## The following are talks and abstracts of those I presented in 2024 
+## The following are talks and abstracts of those I presented in 2024 and will present in 2025 (new!).
 |Year|Month                        |Date  |Firm                                         |Talk                                                                                                                                                  |
 |----|-----------------------------|------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 |2024|Jan                          |25    |Roche                                        |Julia Basel Course (Data Science, Machine Learning, Quarto)                                                                                           |
