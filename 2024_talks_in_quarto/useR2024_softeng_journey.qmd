@@ -236,7 +236,7 @@ options(error = NULL)
 
 ## Polishin' the vintage function - A checklist approach {.smaller}
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ![](Example_checklist.png)
 :::
@@ -256,11 +256,11 @@ options(error = NULL)
 
 6.  Create Test files and example files for main function calls
 :::
-:::
+:::::
 
 ## First successes
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 \
 
@@ -274,7 +274,7 @@ options(error = NULL)
 knitr::include_graphics("images/abstract.png")
 ```
 :::
-:::
+:::::
 
 ## The `phase1b` journey in Pull Requests
 
@@ -330,7 +330,7 @@ treemap(data,
 
 ## Features of Statistical Software Engineering {.smaller}
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Moving parts, collaboration is must
 -   Alignment of Forest vs Trees perspective
@@ -344,7 +344,7 @@ treemap(data,
 -   Lots of theory and reading literature about new methodology
 -   Good engineering practices are habits, needs automation which needs practice which needs time
 :::
-:::
+:::::
 
 ## Good practices for new starter {.smaller}
 
@@ -398,7 +398,7 @@ Goal : introduce good practices and improve muscle memory and collaborate
 
 ## Sharing the Success story: Touring `phase1b`
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   PSI June 2024 conference in Netherlands [link](https://www.psiweb.org/conferences/about-the-conference)
 -   useR!2024 Salzburg [here](https://events.linuxfoundation.org/user/)
@@ -412,7 +412,7 @@ knitr::include_graphics("images/PSI_Stand.jpg", error = FALSE)
 
 ```
 :::
-:::
+:::::
 
 ## Future outlook
 
@@ -475,4 +475,3 @@ I'd love to know how this presentation relates to you or does not !
 -   Inclusive Speaker Course by Linux Foundation [link](https://training.linuxfoundation.org/training/inclusive-speaker-orientation/)
 
 -   [license](https://creativecommons.org/licenses/by-sa/4.0/)
-
