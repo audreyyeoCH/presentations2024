@@ -952,4 +952,25 @@ colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes. Journa
                         
                         
                   - Haruki Murakami - 
+# Sharing the Success story: Touring `phase1b`{.smaller}
 
+::: columns
+::: {.column width="70%"}
+
+- Various Pharma (UCB, Bristol Myer Squibb)
+\
+- [DAGStat 2025](https://dagstat2025.de/#) : Bayesian Framework and Intuition for effective application in Clinical Biostatistics
+
+- [ISCB 2025](https://iscb2025.info/) : 46th Annual Conference of the International Society for Clinical Biostatistics (ISCB)
+
+- [RoES 2025](https://www.roes2025.at/) : Empowering Statistical Methods:
+Connecting Theory and Application
+
+:::
+
+::: {.column width="30%"}
+```{r}
+knitr::include_graphics("images/hex3.png", error = FALSE)
+```
+:::
+:::
