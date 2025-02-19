@@ -100,21 +100,25 @@ Bristol Myers Squibbs 2025
 ::: columns
 ::: {.column width="22%"}       
 ```{r}
+#| fig-alt: "Left view of Sydney Uni main campus Quadrangle and Anderson Building, slightly sunny day"
 knitr::include_graphics("images/sydneyuni.jpeg", error = FALSE)
 ```
 :::
 ::: {.column width="20%"}
 ```{r}
+#| fig-alt: "South top flow view of RCH corridoor with Giant stature of 20 metres, aquarium not in sight"
 knitr::include_graphics("images/rch.jpg", error = FALSE)
 ```
 :::
 ::: {.column width="20%"}
 ```{r}
+#| fig-alt: "Building 2 view from ground showing a triangular shape"
 knitr::include_graphics("images/roche1.jpg", error = FALSE)
 ```
 :::
 ::: {.column width="13%"}
 ```{r}
+#| fig-alt: "The official HEX sticker for phase1b R package"
 knitr::include_graphics("images/hex3.png", error = FALSE)
 ```
 :::
@@ -125,6 +129,7 @@ knitr::include_graphics("images/hex3.png", error = FALSE)
 <!-- ::: -->
 ::: {.column width="15%"}
 ```{r}
+#| fig-alt: "Current openstatsware logo"
 knitr::include_graphics("images/openstatsware-hex.svg", error = FALSE)
 ```
 :::
@@ -148,7 +153,7 @@ knitr::include_graphics("images/openstatsware-hex.svg", error = FALSE)
 
 -   joined Market Access at Roche mid 2021
 
-        - RWD Enabling platform (Statistical Computing Environment, RWD assets, SQL, Redshift)
+        - RWD Enabling platform (Statistical Computing Environment, RWD assets, SQL)
 :::
 
 ::: {.column width="40%"}
@@ -157,6 +162,7 @@ knitr::include_graphics("images/openstatsware-hex.svg", error = FALSE)
 #| layout-ncol: 1
 #| fig-width: 1
 #| fig-height: 1
+#| fig-alt: "a nice indoor day at innsbruck kletterzentrum in November"
 knitr::include_graphics("images/ibk1_indoor.jpeg", error = FALSE)
 
 ```
@@ -172,8 +178,8 @@ knitr::include_graphics("images/ibk1_indoor.jpeg", error = FALSE)
         - Biostats Lead in Early Oncology Trials
         - Study Statistician for phase I-II, phase III trials
         - Led Roche/Genentech Dose Escalation on new SCE
-        - Led the development of R package **phase1b**
-        - Instructor for **Julia** Course Basel (Data Science, Quarto, ML modules)
+        - Led the development of R package phase1b
+        - Instructor for Julia Course Basel (Data Science, Quarto, ML modules)
         - Co-organiser and Presenter many Methodology seminars
         
 -   `phase1b`'s world debut in 2024 :
@@ -190,52 +196,23 @@ knitr::include_graphics("images/ibk1_indoor.jpeg", error = FALSE)
 #| layout-ncol: 1
 #| fig-width: 1
 #| fig-height: 1
+#| fig-alt: "me standing infront of the speaker stage at psi 2021"
 knitr::include_graphics("images/PSI_Stand.jpg", error = FALSE)
 
 ```     
 :::
 :::
 
-# Outlook 2025 {.smaller}
-::: columns
-::: {.column width="30%"}  
-```{r}
-#| layout-ncol: 1
-#| fig-width: 1
-#| fig-height: 1
-knitr::include_graphics("images/ibk_outdoor.jpeg", error = FALSE)
-```
-:::
-::: {.column width="0%"}  
-  
-:::
-::: {.column width="50%"}  
-\
-
-- [ ] DAGStat Conference presentation on Bayesian Statistics
-
-- [ ] ISCB pre-course on Good Software Engineering practices 
-
-- [x] R/Pharma Summit Board
-
-- [x] RoES conference submission
-
-- [ ] CRAN submission for `phase1b`
-
-- [ ] Improve Bouldering Grade to V6+
-:::
-:::
-
 ## **Analysts** are Strategic partners in the Pharma business :{.smaller}
 
-... for therapeutics, we understand the combined Scientific and Business development of our assets such as (Subject Matter Expertise) :
+... for therapeutics, we understand the combined Scientific and Business development of our assets such as :
 
--   Roadblocks, business assumptions and strategies
--   Scientific profiles of our assets e.g. half-life, storage properties
+-   Roadblocks, business assumptions and strategies on development
+-   Scientific profiles of our assets e.g. half-life
 -   Target audience, regular and edge cases for use
 -   Regulatory frameworks
   
-Developing `phase1b` has **strengthened** my understanding of this **Strategic Partnership**
+Developing `phase1b` has **strengthened** my understanding of this **Strategic Partnership** with target audience
 
 # About `phase1b` {.smaller}
 :::: {.columns}
@@ -258,7 +235,8 @@ library(phase1b)
 :::
 ::: {.column width="40%"}
 ```{r, fig.align='center'}
-# | fig-alt : "This hexagon is the R sticker for phase1b R package. It has a bright purple background, light orange border and the title is in fuschia. The graph in the middle is a CDF distribution in dots that changes from red dots to green dots to indicate a stop to go decision"
+#| fig-alt: "This hexagon is the R sticker for phase1b R package. It has a bright purple background, light orange border and the title is in fuschia. The graph in the middle is a CDF distribution in dots that changes from red dots to green dots to indicate a stop to go decision"
+#| 
 knitr::include_graphics(path = "images/hex3.png")
 ```
 :::
@@ -278,7 +256,7 @@ knitr::include_graphics(path = "images/hex3.png")
 ## Use case: {.smaller}
 
 ```{r, warning = FALSE}
-# | fig-alt: This table sets the scene of a problem a study statistician could have. At interim, there are 16/23 responders and they ask, what is the Posterior Probability, what is the Predictive Posterior Probability, is the decision to Go (continue drug development), Stop (terminate drug development) or in between called the "Grey Zone" where team may need additional supporting evidence to make a decision.
+#| fig-alt: This table sets the scene of a problem a study statistician could have. At interim, there are 16/23 responders and they ask, what is the Posterior Probability, what is the Predictive Posterior Probability, is the decision to Go (continue drug development), Stop (terminate drug development) or in between called the "Grey Zone" where team may need additional supporting evidence to make a decision.
 alpha = 
 r_interim = 16
 n_interim = 23
@@ -311,7 +289,11 @@ data.frame( Example = c("Responders",
                       "-", 
                       "ask phase1b") ) -> use_case
 
-use_case %>% kbl(align = "c", caption = "A single arm novel therapeutic with an assumed control response rate is at most 60%") %>% kable_styling()
+use_case %>% 
+  kbl(align = "c", 
+      caption = 
+        "A single arm novel therapeutic with an assumed control response rate is at most 60%") %>% 
+  kable_styling()
 ```
 
 # Prior and Posterior of Beta Distribution for $\pi${.smaller}
@@ -364,7 +346,8 @@ Using the formula for the mean, mode and median, where :
 # | fig-pos : "H"
 # | out-width: "300%" 
 # | out-height : "300%"
-# | fig-alt: This plot shows how the prior can be updated from data and compares with the uniform beta prior. 
+#| fig-alt: "This plot shows how the prior can be updated from data and compares with the uniform beta prior"
+
 alpha = 0.6
 beta = 0.4
 interim_x = 16
@@ -376,9 +359,9 @@ new_mode = (alpha_updated - 1) / (alpha_updated + beta_updated - 2)
 new_median = (alpha_updated - (1/3)) / (alpha_updated + beta_updated - (2/3))
 xx <- seq(0, 1, .001)
 
-uniform = dbeta(xx, 1, 1) #https://stackoverflow.com/questions/21991688/r-beta-function-relative-y-scale
-prior_param = dbeta(xx, 0.6,0.4)
-updated_param = dbeta(xx, 16.6, 7.4)
+uniform = dbeta(xx, 1, 1) # source https://stackoverflow.com/questions/21991688/r-beta-function-relative-y-scale
+prior_param = dbeta(xx, alpha, beta)
+updated_param = dbeta(xx, alpha_updated, beta_updated)
 
 data = data.frame(rate = rep(xx, 3),
                   Density = c(uniform, prior_param, updated_param),
@@ -402,7 +385,7 @@ geom_vline(xintercept = new_mean, linetype = "dashed", size = 0.5, colour = "#00
 # | fig-pos : "H"
 # | out-width: "300%" 
 # | out-height : "300%"
-# | fig-alt: This plot shows how the Mixture priors can be updated from data and compares with the uniform beta prior. 
+#| fig-alt: This plot shows how the Mixture priors can be updated from data and compares with the uniform beta prior. 
 a1 = 3
 b1 = 12
 weight1 = 0.6
@@ -452,16 +435,12 @@ theme(plot.title = element_text(size=15, family = "Helvetica")) +
   scale_y_continuous(limits = c(0, 5))
 ```
 
-
-
-
-
 ## A variety of Priors{.smaller}
 
 - To illustrate how density of Prior changes with increased sample size even though mean is the same
 ```{r ,fig.align='center', eval = TRUE}
 # | out-width: "70%" 
-# | fig-alt: This plot shows how the priors of mean 50% can have improving precision with increased sample size. 
+#| fig-alt: "This plot shows how the priors of mean 50% can have improving precision with increased sample size"
 xx <- seq(0, 1, .001)
 
 data = data.frame(
@@ -494,7 +473,7 @@ theme(plot.title = element_text(size=15, family = "Helvetica")) +
 
 ```{r, fig.align='center'}
 # | out-width: "70%" 
-# | fig-alt: This plot shows how the priors of mean 50% can have improving precision with increased sample size. 
+#| fig-alt: "This plot shows how the priors of mean 50% can have improving precision with increased sample size" 
 x = 16
 n = 23
 final_n = 40
@@ -535,10 +514,6 @@ theme(plot.title = element_text(size=15, family = "Helvetica")) +
   scale_color_manual(values = c("#56B4E9", "#CC79A7", "#009E73", "blue")) 
 ```
 
-
-
-
-
 ```{r}
 # 2 mins
 # The benefit of a Bayesian approach is the possibility to account for prior data (Thall &amp; Simon,
@@ -555,21 +530,19 @@ theme(plot.title = element_text(size=15, family = "Helvetica")) +
 # - Go = Success = Efficacious
 # - Stop = Failure = Futile
 # - Rule = Criteria, e.g. Go rule is a Go Criteria
-
 ```
-
-
 
 ## `postprob()` example (Lee & Liu, 2008){.smaller}
 
 ```{r}
+#| fig-alt: "repeating the same running example table for this experiment"
 r_interim = 16
 n_interim = 23
 r_final = 23
 n_final = 40
 soc_rr = 0.60
 soc_rr_percent = paste(soc_rr*100, "%")
-data.frame( Example = c("Responders", 
+data.frame(Example = c("Responders", 
                       "n", 
                       "Response rate", 
                       "Standard of Care Response rate",
@@ -616,8 +589,8 @@ plotthis$success = c(rep("FALSE", 15), rep("TRUE", 9)) #P(RR ≥ TPP | x, a, b) 
 ggplot(plotthis) +
   geom_point(aes(x = x,
                  y = posterior,
-                 col = success,
-                 size = 5)) +
+                 col = success),
+             size = 5) +
   ggtitle(paste("Posterior probability that Response Rate ≥ 60% given number of responders with ",n, "patients.")) +
   ylab("Posterior Probability") +
   xlab("Number of responders") +
@@ -703,13 +676,13 @@ result_high_thetaT <- phase1b::predprob(
 result_high_thetaT$result
 ```
 
-## Predictive Posterior Probability 
+<!-- ## Predictive Posterior Probability  -->
 
-### Two contexts this could be useful in :
-1. We're at interim, we want to know what is our Predictive Posterior Probability is .... 
-  - Did we hit the mark for a Success / Failure ?
-2. We're designing an experiment (A/B Testing), and ask : What does a good result look like ?
-  - Design a Success / Failure criteria such that it is relevant to our business (e.g. risk appetite)
+<!-- ### Two contexts this could be useful in : -->
+<!-- 1. We're at interim, we want to know what is our Predictive Posterior Probability is ....  -->
+<!--   - Did we hit the mark for a Success / Failure ? -->
+<!-- 2. We're designing an experiment (A/B Testing), and ask : What does a good result look like ? -->
+<!--   - Design a Success / Failure criteria such that it is relevant to our business (e.g. risk appetite) -->
 
 <!-- ## Context : -->
 
@@ -737,7 +710,7 @@ result_high_thetaT$result
 #| fig-alt : "These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40"
 
 ggplot(df_thetaTlow) +
-  geom_point(aes(x = counts, y = posterior, colour = success, size = 8)) +
+  geom_point(aes(x = counts, y = posterior, colour = success), size = 8) +
   scale_x_discrete(limits = c(seq(0, 33, by = 1))) +
   xlab("\nFuture successful reponders") +
   ylab("Probability\n") +
@@ -747,7 +720,7 @@ ggplot(df_thetaTlow) +
   geom_vline(aes(xintercept = 9), linetype="dashed", size = 1, colour = "purple")
 
 ggplot(df_thetaThigh) +
-  geom_point(aes(x = counts, y = posterior, colour = success, size = 8)) +
+  geom_point(aes(x = counts, y = posterior, colour = success), size = 8) +
    scale_x_discrete(limits = c(seq(0, 33, by = 1))) +
     xlab("\nFuture successful reponders") +
   ylab("Probability\n") +
@@ -839,23 +812,21 @@ res$oc %>%
 ```{r, echo = FALSE, warning = FALSE}
 oc_tab
 ```
-```{r, echo = FALSE, warning = FALSE}
-#| fig-width: 10
-#| fig.height: 5
-#| fig.align: "center"
-sim_line
-```
+\
+\
+
 - At n = 34, we have some **useful results (we did not have to evaluate 40!)**
+
 - 1/3 of results are known at interim, most of these results are in the **Gray Zone**
-- ~ 1/2 of results are also at the Gray Zone
-- It may be *entirely ok to stop at 34 patients*
+
+- ~ 1/2 of results are also at the Gray Zone at final
 
 
 ## Expanded features {.smaller}
 .... and wiggle room!
 
 ```{r}
-# | fig-alt: "This table has on the first column other phase1b call functions and on the next columns, have check boxes that show Features like SOC uncertainty, single-arm, two-arm ,simulation , plotting and boundaries" 
+#| fig-alt: "This table has on the first column other phase1b call functions and on the next columns, have check boxes that show Features like SOC uncertainty, single-arm, two-arm ,simulation , plotting and boundaries" 
 Features <- read.csv(file = "phase1b_FeatureTable - Sheet1.csv", header = TRUE, sep  = ",")
 names(Features) <- c(" ", "SOC uncertainty", "single-arm", "two-arm", "simulation", "plotting", "boundaries")
 Features[is.na(Features)] <- ""
@@ -892,6 +863,38 @@ Bristol Myers Squibbs
 - [Visit my website](audreyyeoCH.github.io)
 - [LinkedIn](www.linkedin.com/in/audrey-yeo-8000)
 - [My GitHub repo]( github.com/audreyyeoCH)
+
+# Outlook 2025 {.smaller}
+::: columns
+::: {.column width="30%"}
+```{r}
+#| layout-ncol: 1
+#| fig-width: 1
+#| fig-height: 1
+#| fig-alt: "a nice outdoor day at innsbruck kletterzentrum in November"
+knitr::include_graphics("images/ibk_outdoor.jpeg", error = FALSE)
+```
+:::
+::: {.column width="0%"}
+
+:::
+::: {.column width="50%"}
+\
+
+- [ ] DAGStat Conference presentation on Bayesian Statistics
+
+- [ ] ISCB pre-course on Good Software Engineering practices
+
+- [x] R/Pharma Summit Board
+
+- [x] RoES conference submission
+
+- [ ] CRAN submission for `phase1b`
+
+- [ ] Improve Bouldering Grade to V6+
+:::
+:::
+
 
 # Effect on varying weight on different priors Example 2
 ```{r , fig.align='center', echo = FALSE, eval = TRUE}

@@ -4,6 +4,10 @@ on:
 
 name: Render and Publish
 
+project:
+  type: website
+  output-dir: docs
+  
 permissions: 
     contents: write
     pages: write
@@ -33,3 +37,4 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          
