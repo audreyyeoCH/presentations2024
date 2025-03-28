@@ -1,1 +1,70 @@
 /* css styles */
+
+/* Import Pacifico font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap')
+
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+}
+
+/* Define a CSS class for Pacifico font */
+.pacifico-font {
+  font-family: 'Pacifico', cursive; /* cursive is a fallback */
+}
+
+/* Example of another class using pacifico with bold and larger font size */
+.pacifico-bold-large {
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+  font-size: 2em; /* 2 times the default font size */
+}
+
+/* Example of using pacifico with a specific color */
+.pacifico-blue {
+  font-family: 'Pacifico', cursive;
+  color: blue;
+}
+
+
+
+/* Import Fira Code from Google Fonts (or another source) */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap'); /* Regular and Bold weights */
+
+/* Define a CSS class for Fira Code */
+.fira-code {
+  font-family: 'Fira Code', monospace; /* monospace is a fallback */
+}
+
+/* Example with bold Fira Code */
+.fira-code-bold {
+  font-family: 'Fira Code', monospace;
+  font-weight: 700; /* or bold */
+}
+
+/* Example with smaller Fira Code for inline code snippets*/
+.fira-code-inline {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85em; /* Slightly smaller than default */
+}
+
+/* Example with larger Fira Code and a background color */
+.fira-code-highlighted {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.2em;
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 5px; /* Add some padding for visual separation */
+  border-radius: 3px; /* Rounded corners */
+}
+
+/* Example for code blocks */
+
+pre code.fira-code-block{
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+  background-color: #282c34; /* Dark background for code blocks */
+  color: #abb2bf; /* Light text color */
+  padding: 10px;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  display: block; /* Make sure it's a block element */
+}

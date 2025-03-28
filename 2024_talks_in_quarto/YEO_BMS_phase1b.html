@@ -398,18 +398,9 @@
 
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>ps       (1.8.1 -&gt; 1.9.0) [CRAN]
-jsonlite (1.8.9 -&gt; 1.9.0) [CRAN]
-curl     (6.2.0 -&gt; 6.2.1) [CRAN]
-xfun     (0.50  -&gt; 0.51 ) [CRAN]
-tinytex  (0.54  -&gt; 0.55 ) [CRAN]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
 <pre><code>
-The downloaded binary packages are in
-    /var/folders/36/1t9xtfl51px173qfsbg8tlcc0000gn/T//RtmpyAzzuW/downloaded_packages
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file ‘/private/var/folders/36/1t9xtfl51px173qfsbg8tlcc0000gn/T/RtmpyAzzuW/remotes9ebb7fe8f60/Genentech-phase1b-d1c9bbf/DESCRIPTION’ ... OK
+* checking for file ‘/private/var/folders/36/1t9xtfl51px173qfsbg8tlcc0000gn/T/Rtmp5RlAMY/remotes1daa32531477/Genentech-phase1b-4ac47e1/DESCRIPTION’ ... OK
 * preparing ‘phase1b’:
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
@@ -529,7 +520,7 @@ Bristol Myers Squibbs 2025</p>
 <div class="cell quarto-layout-panel" data-layout-ncol="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><img data-src="images/ibk1_indoor.jpeg" data-fig-pos="H" alt="a nice indoor day at innsbruck kletterzentrum in November"></p>
+<p><img data-src="images/ibk1_indoor.jpeg" data-fig-pos="H" alt="a nice indoor day at innsbruck kletterzentrum in November" width="800"></p>
 </div>
 </div>
 </div>
@@ -563,7 +554,7 @@ Bristol Myers Squibbs 2025</p>
 <div class="cell quarto-layout-panel" data-layout-ncol="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><img data-src="images/PSI_Stand.jpg" data-fig-pos="H" alt="me standing infront of the speaker stage at psi 2021"></p>
+<p><img data-src="images/PSI_Stand.jpg" data-fig-pos="H" alt="me standing infront of the speaker stage at psi 2021" width="1512"></p>
 </div>
 </div>
 </div>
@@ -592,9 +583,9 @@ Bristol Myers Squibbs 2025</p>
 <li><p>website : <a href="genentech.github.io/phase1b/">genentech.github.io/phase1b/</a></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">library</span>(devtools)</span>
-<span id="cb7-2"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/Genentech/phase1b"</span>)</span>
-<span id="cb7-3"><a href=""></a><span class="fu">library</span>(phase1b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">library</span>(devtools)</span>
+<span id="cb6-2"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/Genentech/phase1b"</span>)</span>
+<span id="cb6-3"><a href=""></a><span class="fu">library</span>(phase1b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="cell" data-layout-align="center">
@@ -775,7 +766,7 @@ Bristol Myers Squibbs 2025</p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">p =</span> <span class="fl">0.60</span>, <span class="at">par =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">p =</span> <span class="fl">0.60</span>, <span class="at">par =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8359808</code></pre>
 </div>
@@ -793,7 +784,7 @@ Bristol Myers Squibbs 2025</p>
 <div class="cell column-page-right quarto-layout-panel" data-layout-ncol="1" data-layout-align="center">
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<div id="fig-post" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center" width="960" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold" data-fig-pos="H">
+<div id="fig-post" class="quarto-float quarto-figure quarto-figure-center" data-fig-pos="H" width="960" data-fig-align="center" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="YEO_BMS_phase1b_files/figure-revealjs/fig-post-1.png" id="fig-post" class="quarto-figure quarto-figure-center" data-fig-pos="H" alt="This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold" width="960">
@@ -815,22 +806,22 @@ Figure&nbsp;1
 <pre><code>           Prior is P_E ~ sum(weights * beta(parE[, 1], parE[, 2]))</code></pre></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>a <span class="ot">=</span> phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
-<span id="cb11-2"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
-<span id="cb11-3"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
-<span id="cb11-4"><a href=""></a>             <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), <span class="at">weights =</span> <span class="dv">1</span>)</span>
-<span id="cb11-5"><a href=""></a></span>
-<span id="cb11-6"><a href=""></a>b <span class="ot">=</span> phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
-<span id="cb11-7"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
-<span id="cb11-8"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
-<span id="cb11-9"><a href=""></a>             <span class="at">parE =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="at">weights =</span> <span class="dv">1</span>)</span>
-<span id="cb11-10"><a href=""></a></span>
-<span id="cb11-11"><a href=""></a><span class="fl">0.5</span><span class="sc">*</span>(a <span class="sc">+</span> b)</span>
-<span id="cb11-12"><a href=""></a></span>
-<span id="cb11-13"><a href=""></a>phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
-<span id="cb11-14"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
-<span id="cb11-15"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
-<span id="cb11-16"><a href=""></a>             <span class="at">parE =</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)), <span class="at">weights =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>a <span class="ot">=</span> phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
+<span id="cb10-2"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
+<span id="cb10-3"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
+<span id="cb10-4"><a href=""></a>             <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), <span class="at">weights =</span> <span class="dv">1</span>)</span>
+<span id="cb10-5"><a href=""></a></span>
+<span id="cb10-6"><a href=""></a>b <span class="ot">=</span> phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
+<span id="cb10-7"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
+<span id="cb10-8"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
+<span id="cb10-9"><a href=""></a>             <span class="at">parE =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="at">weights =</span> <span class="dv">1</span>)</span>
+<span id="cb10-10"><a href=""></a></span>
+<span id="cb10-11"><a href=""></a><span class="fl">0.5</span><span class="sc">*</span>(a <span class="sc">+</span> b)</span>
+<span id="cb10-12"><a href=""></a></span>
+<span id="cb10-13"><a href=""></a>phase1b<span class="sc">::</span><span class="fu">postprob</span>(<span class="at">x =</span> <span class="dv">16</span>,</span>
+<span id="cb10-14"><a href=""></a>             <span class="at">n =</span> <span class="dv">23</span>,</span>
+<span id="cb10-15"><a href=""></a>             <span class="at">p =</span> <span class="fl">0.60</span>,</span>
+<span id="cb10-16"><a href=""></a>             <span class="at">parE =</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)), <span class="at">weights =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Posterior formulation :</li>
@@ -877,22 +868,22 @@ Figure&nbsp;1
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>control <span class="ot">=</span> <span class="fl">0.6</span></span>
-<span id="cb12-2"><a href=""></a>confidence_seventy <span class="ot">=</span> <span class="fl">0.7</span></span>
-<span id="cb12-3"><a href=""></a>result <span class="ot">&lt;-</span> phase1b<span class="sc">::</span><span class="fu">predprob</span>(</span>
-<span id="cb12-4"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_seventy,</span>
-<span id="cb12-5"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
-<span id="cb12-6"><a href=""></a>)</span>
-<span id="cb12-7"><a href=""></a>result<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>control <span class="ot">=</span> <span class="fl">0.6</span></span>
+<span id="cb11-2"><a href=""></a>confidence_seventy <span class="ot">=</span> <span class="fl">0.7</span></span>
+<span id="cb11-3"><a href=""></a>result <span class="ot">&lt;-</span> phase1b<span class="sc">::</span><span class="fu">predprob</span>(</span>
+<span id="cb11-4"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_seventy,</span>
+<span id="cb11-5"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
+<span id="cb11-6"><a href=""></a>)</span>
+<span id="cb11-7"><a href=""></a>result<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8211011</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>confidence_ninety <span class="ot">=</span> <span class="fl">0.9</span></span>
-<span id="cb14-2"><a href=""></a>result_high_thetaT <span class="ot">&lt;-</span> phase1b<span class="sc">::</span><span class="fu">predprob</span>(</span>
-<span id="cb14-3"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_ninety,</span>
-<span id="cb14-4"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
-<span id="cb14-5"><a href=""></a>)</span>
-<span id="cb14-6"><a href=""></a>result_high_thetaT<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>confidence_ninety <span class="ot">=</span> <span class="fl">0.9</span></span>
+<span id="cb13-2"><a href=""></a>result_high_thetaT <span class="ot">&lt;-</span> phase1b<span class="sc">::</span><span class="fu">predprob</span>(</span>
+<span id="cb13-3"><a href=""></a>  <span class="at">x =</span> <span class="dv">16</span>, <span class="at">n =</span> <span class="dv">23</span>, <span class="at">Nmax =</span> <span class="dv">40</span>, <span class="at">p =</span> control, <span class="at">thetaT =</span> confidence_ninety,</span>
+<span id="cb13-4"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
+<span id="cb13-5"><a href=""></a>)</span>
+<span id="cb13-6"><a href=""></a>result_high_thetaT<span class="sc">$</span>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5655589</code></pre>
 </div>
@@ -964,19 +955,19 @@ Figure&nbsp;2: Predictive Posterior CDF for different Efficacy Rules
 <li>Prior of treatment arm <span class="math inline">\(Beta(0.6, 0.4)\)</span>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
-<span id="cb17-2"><a href=""></a>res <span class="ot">&lt;-</span> phase1b<span class="sc">::</span><span class="fu">ocPostprob</span>(</span>
-<span id="cb17-3"><a href=""></a>  <span class="at">nnE =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>), </span>
-<span id="cb17-4"><a href=""></a>  <span class="at">truep =</span> <span class="fl">0.60</span>, </span>
-<span id="cb17-5"><a href=""></a>  <span class="at">p0 =</span> <span class="fl">0.60</span>, </span>
-<span id="cb17-6"><a href=""></a>  <span class="at">p1 =</span> <span class="fl">0.60</span>, </span>
-<span id="cb17-7"><a href=""></a>  <span class="at">tL =</span> <span class="fl">0.70</span>, </span>
-<span id="cb17-8"><a href=""></a>  <span class="at">tU =</span> <span class="fl">0.90</span>, </span>
-<span id="cb17-9"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
-<span id="cb17-10"><a href=""></a>  <span class="at">sim =</span> <span class="dv">500</span>, </span>
-<span id="cb17-11"><a href=""></a>  <span class="at">wiggle =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb17-12"><a href=""></a>  <span class="at">nnF =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>)</span>
-<span id="cb17-13"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb16-2"><a href=""></a>res <span class="ot">&lt;-</span> phase1b<span class="sc">::</span><span class="fu">ocPostprob</span>(</span>
+<span id="cb16-3"><a href=""></a>  <span class="at">nnE =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>), </span>
+<span id="cb16-4"><a href=""></a>  <span class="at">truep =</span> <span class="fl">0.60</span>, </span>
+<span id="cb16-5"><a href=""></a>  <span class="at">p0 =</span> <span class="fl">0.60</span>, </span>
+<span id="cb16-6"><a href=""></a>  <span class="at">p1 =</span> <span class="fl">0.60</span>, </span>
+<span id="cb16-7"><a href=""></a>  <span class="at">tL =</span> <span class="fl">0.70</span>, </span>
+<span id="cb16-8"><a href=""></a>  <span class="at">tU =</span> <span class="fl">0.90</span>, </span>
+<span id="cb16-9"><a href=""></a>  <span class="at">parE =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
+<span id="cb16-10"><a href=""></a>  <span class="at">sim =</span> <span class="dv">500</span>, </span>
+<span id="cb16-11"><a href=""></a>  <span class="at">wiggle =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb16-12"><a href=""></a>  <span class="at">nnF =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">40</span>)</span>
+<span id="cb16-13"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="results" class="slide level2 smaller">
@@ -1223,7 +1214,7 @@ Bristol Myers Squibbs</p>
 <div class="cell quarto-layout-panel" data-layout-ncol="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<p><img data-src="images/ibk_outdoor.jpeg" data-fig-pos="H" alt="a nice outdoor day at innsbruck kletterzentrum in November"></p>
+<p><img data-src="images/ibk_outdoor.jpeg" data-fig-pos="H" alt="a nice outdoor day at innsbruck kletterzentrum in November" width="360"></p>
 </div>
 </div>
 </div>
