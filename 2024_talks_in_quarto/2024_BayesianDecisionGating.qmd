@@ -1,6 +1,6 @@
 ---
 # title: "A Bayesian approach to decision making in early development clinical trials: An R solution"
-# subtitle: "An open source R package"
+# subtitle: "finc-research.com"
 # author: "Audrey Yeo"
 # institute: ""
 format: 
@@ -230,7 +230,8 @@ b1 = 0.4
 
 dbetaMix1 = dbetaMix(x = xx, par = rbind(c(a1, b1), c(1, 1)), weights = c(0.6, 0.4))
 dbetaMix2 = dbetaMix(x = xx, par = rbind(c(1, 3), c(1, 1)), weights = c(0.6, 0.4))
-dbetaMix3 = dbetaMix(x = xx, par = rbind(c(a1 + 16, b1 + interim_n - interim_x)))
+# dbetaMix3 = dbeta(x = xx, shape1 = a1 + 16, shape2 = interim_n - interim_x)/dbeta(xx, alpha, beta)
+dbetaMix3 = dbeta(x = xx, shape1 = a1 + 16, shape2 = interim_n - interim_x)/dbeta(xx, alpha, beta)
 
 Mix2 = paste("Prior of a =", a1, ", b =", b1)
 Mix3 = paste("Updates Posterior with a =", a1 + 16, ", b =", b1 + interim_n - interim_x)
@@ -536,7 +537,7 @@ res$oc
 .... and wiggle room!
 ```{r}
 # | fig-alt: "This table has on the first column other phase1b call functions and on the next columns, have check boxes that show Features like SOC uncertainty, single-arm, two-arm ,simulation , plotting and boundaries" 
-Features <- read.csv(file = "../phase1b_FeatureTable - Sheet1.csv", header = TRUE, sep  = ",")
+Features <- read.csv(file = "../2024_talks_in_quarto/phase1b_FeatureTable - Sheet1.csv", header = TRUE, sep  = ",")
 names(Features) <- c(" ", "SOC uncertainty", "single-arm", "two-arm", "simulation", "plotting", "boundaries")
 Features[is.na(Features)] <- ""
 Features[Features == 1] <- "✔️"

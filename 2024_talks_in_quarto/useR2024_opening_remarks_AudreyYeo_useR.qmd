@@ -32,7 +32,7 @@ library(kableExtra)
 # All Are Welcome Here ♥️
 
 ```{r}
-#| layout-ncol: 6
+#| layout-ncol: 4
 #| fig-width: 1
 #| fig-height: 3
 knitr::include_graphics("images/rainbowR-hex.svg")

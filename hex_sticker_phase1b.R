@@ -67,4 +67,4 @@ sticker(q, package="finc", p_size = 7, s_x = 1, s_y= 0.85, s_width = 1, s_height
         h_color = "#F6DC43",
         h_fill = "#3D2C8D", p_color = "#F6DC43",
         # spotlight = TRUE, l_x = 1, l_y = 0.75,
-        filename="2024_talks_in_quarto/images/finc.svg")
+        filename="media/finctest.svg")

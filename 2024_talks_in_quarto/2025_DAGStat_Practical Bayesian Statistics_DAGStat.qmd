@@ -21,7 +21,9 @@ footer: "7th Joint Statistical Meeting of the Deutsche Arbeitsgemeinschaft Stati
 options(kableExtra.html.bsTable = TRUE)
 ```
 
-```{r, echo = FALSE, warning = FALSE}
+```{r}
+#| echo: FALSE
+#| warning: FALSE
 # Load relevant packages
 library(tidyverse)
 library(flextable)
@@ -64,7 +66,7 @@ df_thetaThigh$cumul_x <- df_thetaThigh$counts + 16
 
 :::::: columns
 ::: {.column width="30%"}
-```{r, fig.width=20, fig.height=10}
+```{r}
 #| fig-align: center
 #| fig-width: 20
 #| fig-height: 10
@@ -128,17 +130,24 @@ Berlin, Germany
 \
 
 ::: center
-![](images/sydneyuni.jpeg){width=34%}{fig-alt="Sunny day view of Quardrangle building of Sydney Uni"}
-![](images/rch.jpg){width=30%} ![](images/roche1.jpg){width=30%}{fig-alt="Inside view of royal children's hospital from south side with the bug statue"}
+![](images/sydneyuni.jpeg){width=34%}
+<!-- {fig-alt="Sunny day view of Quardrangle building of Sydney Uni"} -->
+![](images/rch.jpg){width=30%} ![](images/roche1.jpg){width=30%}
+<!-- {fig-alt="Inside view of royal children's hospital from south side with the bug statue"} -->
 :::
 
 # Intro myself
 
 
 ::: center
-![](images/hex3.png){width=20%}{fig-alt="This hexagon is the R sticker for phase1b R package. It has a bright purple background, light orange border and the title is in fuschia. The graph in the middle is a CDF distribution in dots that changes from red dots to green dots to indicate a stop to go decision"}
-![](images/openstatsware-hex.svg){width=22%}{fig-alt="This hexagon is the openstats logo"}
-![](images/finc3.png){width=19%}{fig-alt="This hexagon is the finc-research company located in Basel, Switzerland. See more on finc.research.com"}
+![](images/hex3.png){width=20%}
+
+<!-- {fig-alt="This hexagon is the R sticker for phase1b R package. It has a bright purple background, light orange border and the title is in fuschia. The graph in the middle is a CDF distribution in dots that changes from red dots to green dots to indicate a stop to go decision"} -->
+
+![](images/openstatsware-hex.svg){width=22%}
+<!-- {fig-alt="This hexagon is the openstats logo"} -->
+![](images/finc3.png){width=19%}
+<!-- {fig-alt="This hexagon is the finc-research company located in Basel, Switzerland. See more on finc.research.com"} -->
 :::
 
 
@@ -449,7 +458,7 @@ $\pi$ or Response Rate can be modeled by the Beta Distribution
 -   website :
     [genentech.github.io/phase1b/](genentech.github.io/phase1b/)
 
-```{r, eval = FALSE, echo = TRUE, warning = FALSE}
+```{r}
 #| eval: FALSE
 #| echo: TRUE
 #| warning: FALSE
@@ -556,6 +565,10 @@ use_case %>%
 :::{.column width="45%"}
 :::
 ```{r, echo = TRUE, fig.align='center', fig.width=10, eval = FALSE}
+#| echo: TRUE
+#| eval: FALSE
+#| fig-align: 'center'
+#| fig.width: 10
 example_alpha = 1
 example_beta = 2
 phase1b::plotBeta(alpha = example_alpha + x, beta = example_beta + n - x)
@@ -638,7 +651,7 @@ geom_vline(xintercept = new_mean, linetype = "dashed", size = 0.5, colour = "#00
 
 # Effect on varying weight on different priors Example{.smaller}
 
-```{r , fig.align='center'}
+```{r}
 #| fig-align: 'center'
 #| fig-alt: This plot shows how the Mixture priors can be updated from data and compares with the uniform beta prior. 
 a1 = 3
@@ -815,7 +828,7 @@ phase1b::postprob(x = 16, n = 23, p = 0.60, par = c(0.6, 0.4))
 #| label: fig-post
 #| layout-ncol: 1 # make graph bigger
 #| column: page-right
-#| fig-alt : "This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold"
+#| fig-alt: "This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold"
 TPP = 0.6
 n =23
 plotthis = data.frame(x = c(0:n),
@@ -904,7 +917,7 @@ data.frame( Example = c("Responders",
 use_case %>% kbl(align = "c") %>% kable_styling(font_size = 20)
 ```
 
-```{r, echo = TRUE, warning = FALSE}
+```{r}
 #| fig-align: center
 #| echo: TRUE
 #| warning: FALSE
@@ -1115,7 +1128,7 @@ oc_tab
 
 .... and wiggle room!
 
-```{r, fig.height=0.4}
+```{r}
 #| fig-alt: "This hexagon is the finc-research company located in Basel, Switzerland. See more on finc.research.com" 
 #| fig-height: 0.4
 Features <- read.csv(file = "phase1b_FeatureTable - Sheet1.csv", header = TRUE, sep  = ",")

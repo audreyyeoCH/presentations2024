@@ -1,0 +1,1186 @@
+---
+# title:
+# author: 
+format: 
+ revealjs:
+    code-fold: true
+    width: 1280
+    height: 720
+    chalkboard: true
+preload-iframes: true
+editor: 
+  markdown: 
+    wrap: 72
+csl: apa-single-spaced.csl
+footer: "7th Joint Statistical Meeting of the Deutsche Arbeitsgemeinschaft Statistik"
+# Artwork codepen by Julien Barreira, inspired by Berlin Animation from Fabricio Rosa Marques
+#"7th Joint Statistical Meeting of the Deutsche Arbeitsgemeinschaft Statistik"
+---
+
+```{r}
+options(kableExtra.html.bsTable = TRUE)
+```
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+# Load relevant packages
+library(tidyverse)
+library(flextable)
+library(ggplot2)
+library(kableExtra)
+library(devtools)
+devtools::install_github("https://github.com/Genentech/phase1b", force = TRUE)
+library(phase1b)
+library(cowplot)
+```
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+control = 0.6
+thetaT_low = 0.6
+result <- predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = thetaT_low,
+  parE = c(0.6, 0.4)
+)
+
+thetaT_high = 0.9
+result_high_thetaT <- predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = thetaT_high,
+  parE = c(0.6, 0.4)
+)
+data = rbind(result$table, result_high_thetaT$table)
+
+data$thetaT = c(rep("60%", 18), rep("90%", 18))
+df_thetaTlow <- data %>% filter(thetaT == "60%") 
+df_thetaTlow$cumul_x <- df_thetaTlow$counts + 16
+
+df_thetaThigh <- data %>% filter(thetaT == "90%") 
+df_thetaThigh$cumul_x <- df_thetaThigh$counts + 16
+```
+
+# Practical Bayesian Statistics  {background-iframe="yellow-train-berlin/dist/index.html"} 
+
+\
+
+:::::: columns
+::: {.column width="30%"}
+```{r}
+#| fig-align: center
+#| fig-width: 20
+#| fig-height: 10
+#| eval: TRUE
+#| fig-alt: "This hexagon is the finc-research company located in Basel, Switzerland. See more on finc.research.com"
+knitr::include_graphics(path = "images/finc3.png")
+```
+:::
+::: {.column width="40%"}
+:::
+::: {.column width="30%"}
+
+**Audrey Yeo**
+\
+Thursday, March 27 
+\
+*08:00*
+\
+**DAGStat 2025**
+\
+Berlin, Germany
+:::
+::::::
+
+#  Practical Bayesian Statistics?  {background-iframe="less-lego/dist/index.html"} 
+
+**A gentle refresher on probability theory, Bayesian Framework and Intuition for effective application in Biostatistics**
+
+- Build a simple Bayesian Model
+  - Test out different Priors
+  - Infer from different Posteriors
+- Discussing ideas for your own work
+
+## *Agenda*  {background-iframe="less-lego/dist/index.html"}
+
+:::: columns
+::: {.column width="50%"}
+**What's covered**
+
+- Proper Priors
+- Discrete endpoints
+- Credible Interval
+- Posterior Probability
+- Predictive Posterior Probability
+- if time permits, discussion on example applications
+:::
+::: {.column width="50%"}
+**What's not covered**
+
+- Improper Priors
+- Continuous endpoints
+- Complex simulation
+- Comparison with hypothesis testing using Bayes Factors
+:::
+::::
+
+## Intro myself{.smaller}
+
+\
+\
+
+
+![](images/sydneyuni.jpeg){width=34%} ![](images/rch.jpg){width=30%} ![](images/roche1.jpg){width=30%}
+
+
+
+# Intro myself
+
+
+::: center
+![](images/hex3.png){width=20%} ![](images/openstatsware-hex.svg){width=22%} ![](images/finc3.png){width=19%}
+:::
+
+# Career{.smaller}
+
+::::: columns
+::: {.column width="50%"}
+
+-   joined R & D at **Roche** in mid 2022 :
+
+    - Biostats Lead in Early Oncology Trials
+    - Study Statistician for phase I-II, phase III trials
+    - Led Roche/Genentech Dose Escalation on new SCE
+    - Led the development of R package phase1b
+    - Instructor for Julia Course Basel (Data Science, Quarto, ML modules)
+    - Co-organiser and Presenter many Methodology seminars
+:::
+::: {.column width="50%"}
+-   `phase1b`'s world debut in 2024 :
+
+    - PSI 2024
+    - useR!2024 
+    - R/Pharma 2024
+    - Effective Statistician conference 
+    - BMS, UBC, Roche/ Genentech
+:::
+:::::
+# A starting example {background-iframe="my_pastel_background/dist/index.html"}
+
+$$P( awake\ | \ coffee ) $$
+ 
+$$P( awake \ | \ coffee + enthusiasm )$$
+ 
+$$P( awake \ | \ coffee + enthusiasm + breakfast )$$
+
+## Everything is a distribution 
+
+Upon visual inspection, increase sample sizes leads to 
+
+- Better precision 
+    - Estimates and Credible Interval are more precise
+    
+***These are benefits of the Bayesian paradigm***
+
+```{r}
+#| fig.align: 'center'
+#| eval: TRUE
+#| fig-alt: "This plot shows how the priors of mean 50% can have improving precision with increased sample size"
+xx <- seq(0, 1, .001)
+
+data = data.frame(
+  rate = rep(xx, 4),
+  Density = c(dbeta(xx, 10, 10), 
+              dbeta(xx, 20, 20), 
+              dbeta(xx, 30, 30), 
+              dbeta(xx, 40, 40) ),
+  Category = c(rep("sample size = 20", length(xx)), 
+               rep("sample size = 40", length(xx)), 
+               rep("sample size = 60", length(xx)),
+               rep("sample size = 80", length(xx)) 
+  )
+)
+
+ggplot(data) + geom_line(aes(x = rate, y = Density, colour = Category), size = 1.0) +
+   ggtitle("The difference increasing sample size makes in a Beta Distribution") + 
+  scale_x_continuous(n.breaks = 10, labels = scales::percent_format()) +
+  ylab("Density") +
+  xlab("Response Rate") +
+  geom_vline(xintercept = 0.5, linetype = "dotted", colour = "blue") +
+theme(plot.title = element_text(size=15, family = "Helvetica")) +
+  scale_color_manual(values = c("#56B4E9", "#CC79A7", "#009E73", "blue")) +
+  scale_y_continuous(limits = c(0, 8)) +
+  theme_bw() +
+  ggplot2::labs(colour = "Prior types")
+```
+
+## Using priors to improve precision {.smaller}
+
+-   Priors that incorporate higher $\alpha$ and $\beta$ parameters influence the posterior, given data stays the same (16 / 23 responders in likelihood)
+
+```{r}
+#| fig.align: 'center'
+#| eval: TRUE
+#| fig-alt: "This plot shows how the priors of mean 50% can have improving precision with increased sample size" 
+x = 16
+n = 23
+final_n = 40
+length = length(0:final_n)
+
+data11 = data.frame(
+  rate = rep(0:final_n, 4),
+  Density = c(dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(10 + x, 10 + n - x)),
+                            weights = 1), 
+              dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(20 + x, 20 + n - x)), 
+                            weights = 1),
+              dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(30 + x, 30 + n - x)),
+                            weights = 1), 
+              dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(40 + x, 40 + n -x)),
+                            weights = 1)),
+  Category = c(rep("sample size = 20", length), 
+               rep("sample size = 40", length), 
+               rep("sample size = 60", length),
+               rep("sample size = 80", length) 
+  ) 
+    
+)
+
+
+ggplot(data11) + 
+  geom_line(aes(x = rate, y = Density, colour = Category, fill = Category), size = 1.0) +
+   ggtitle("Updated Posteriors with Priors of increasing sample sizes") + 
+  scale_x_continuous(breaks = seq(0, 40, by = 4)) +
+ylab("Density") +
+  xlab("Response Rate") +
+  labs(colour = "Prior types") +
+  geom_vline(xintercept = 0.5*final_n, linetype = "dotted", colour = "blue") +
+  theme(plot.title = element_text(size=15, family = "Helvetica")) +
+  scale_color_manual(values = c("#56B4E9", "#CC79A7", "#009E73", "blue")) +
+  theme_bw()
+```
+
+## Quiz
+
+1. Increased sample size in prior information can improve precision of credible intervals
+
+- [ ] TRUE
+- [ ] FALSE
+
+## Different Perspective : neither are wrong{.smaller}
+```{r}
+#| fig.align: 'center'
+#| eval: TRUE
+#| warning: FALSE
+#| fig-alt: This table sets the scene of a problem a study statistician could have. At interim, there are 16/23 responders and they ask, what is the Posterior Probability, what is the Predictive Posterior Probability, is the decision to Go (continue drug development), Stop (terminate drug development) or in between called the "Grey Zone" where team may need additional supporting evidence to make a decision. 
+tt <- data.frame( Example = c("$\\theta$", 
+                        "Model or Distribution", 
+                        "Method", 
+                        "Inference", 
+                        "What is the probability of a fair coin toss ?"),
+            Frequentist = c("Known and fixed according to some distribution", 
+                            "Build a model, e.g. Likelihood using data", 
+                            "OLS, Maximum Likelihood", 
+                              "via hypothesis testing",
+                            "Since we toss this n times, it would converge to 0.5"),
+            Bayesian = c("A random variable we can infer from some distribution", 
+                         "P($\\theta$ | data, prior )", 
+                         "prior multiplied by likelihood", 
+                         "P($\\theta$ > $\\theta_{c}$ | data, prior )",
+                         "it's 0 or 1") ) 
+
+kableExtra::kable(tt,  escape = TRUE)
+```
+
+## A Bayesian model looks like the Bayes Thereom or Bayes Rule {.smaller}
+
+:::: columns
+::: {.column width="50%"}
+**For Event A and B** :
+
+$$ 0 < P(A) < 1$$
+
+$$ P(B) > 0$$
+$$ {P( B | A)} =  { {P(A|B)P(B)} \over {P(A) } } $$
+**Law of Total probability**
+
+$$P(A) = \sum_{i=1}^{n} P(A \cap B_i)$$
+:::
+::: {.column width="45%"}
+
+**Using the definition of conditional probability, 
+we can rewrite this as:**
+
+$$P(A) = \sum_{i=1}^{n} P(A | B_i) P(B_i)$$
+$$ P(A) = \sum_{i=1}^{n} P(A \cap B_i) =  \sum_{i=1}^{n} P(A | B_i) P(B_i)$$
+
+$$P(A) = P(A | B_1) P(B_1) + P(A | B_2) P(B_2) + P(A | B_3) P(B_3)$$
+:::
+::::
+
+## Motivating example for Biostatistics
+
+$$ Sensitivity = P(T^{+} \ | \ D^{+} \ ) = True \ Positive \ rate $$
+$$ Specificity = P(T^{-} \ | \ D^{-} \ ) = True \ Negative \ rate $$
+$$ 1 - Sensitivity = P( T^{-} \ | \ D^{+} \ ) = False \ Negative \ rate $$
+$$ 1- Specificity = P(T^{+} \ | \ D^{-} \ ) = False \ Positive \ rate $$
+
+## Normalising constant : 1 less worry in your life
+
+::: small
+$$ P(A|B) = { {P(B | A) P (A)} \over { P(B)} } $$
+$$ P(A|B) = {P(B | A) \over P(B) } +  {P (A) \over P(B) } $$
+$$ P(A|B)*P(B) = {{P(B | A)}} *  { P (A)} $$
+
+**Demonstration only : Law of Total Probability**
+
+$$ P(B) = 1 = P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + P(B|A_3)P(A_3) $$
+$$ P(A|B)*1 = P(B | A)  + P (A) $$
+
+$$ Posterior \ \propto \ Likelihood  \ Prior$$
+:::
+
+# Let's look at a Biostatistics example 
+
+## Biostatistics solution I
+
+```{r}
+knitr::include_graphics(path = "images/Path_status_conditional_prob.png")
+```
+
+## Biostatistics solution  II
+
+```{r}
+knitr::include_graphics(path = "images/Test_status_conditional_prob.png")
+```
+
+## Common use of Bayesian Statistics {.smaller}
+
+:::: columns
+
+::: {.column width="40%"}
+1. [SARS-CoV2 Diagnostic tests](https://centerforhealthsecurity.org/sites/default/files/2022-12/201207-sensitivity-specificty-factsheet.pdf) 
+
+2. [Modeling transmission mechanism to infer treatment efficacy of different drugs and combination therapy against Trichuris trichiura](https://doi.org/10.1093/aje/kwab093) by **Grolimund et al (2024)**
+
+As an example, we elaborate on 2.
+
+Modeling Egg Counts:
+
+$$Y_{i_{jgds}}^{(0)} \sim NB(\mu_{i_{jgd}}^{(0)}, k^{(0)})$$
+
+At baseline, egg counts are assumed to follow a negative binomial distribution.
+::: {.column width="15%"}
+:::
+:::
+::: {.column width="45%"}
+
+Mean $\mu$ egg count was modeled by the gamma distribution. 
+
+$$ \mu \sim \ Gamma ( \mu_{jg}^{0}, \sigma_{jg}^{0}, \sigma_{jg}^{0} ) $$
+
+The parameters used for the gamma distribution were:
+
+* For $\mu_{jg}^{(0)}$ (mean egg count): a gamma distribution with a mean of 50 and a variance of 1250
+
+* For $\sigma_{jg}^{(0)}$ (standard deviation of egg count): an exponential distribution with a mean of 0.5 and a variance of 0.25. 
+
+* For $\sigma_{jg}^{(0)}$ a gamma distribution with mean 1 and variance 1
+
+:::
+::::
+
+##  The Conjugate Prior
+
+*Merriam-Webster Dictionary* on "conjugate" : `coupled, connected, or related.` 
+
+
+$$ {P( B | A)} =  { {P(A|B)P(B)} \over {P(A) } } $$
+
+
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/beta_binom_schema.png")
+```
+
+# Choices
+
+```{r}
+#| fig-cap: "Summary table from Likelihood and Bayesian Inference from Held & Sabanés Bové (2020)"
+knitr::include_graphics(path = "images/conj_prior_SB_Held.png")
+```
+
+## Quiz 2 
+
+$\pi$ or Response Rate can be modeled by the Beta Distribution
+
+- [ ] TRUE
+
+- [ ] FALSE
+
+## About `phase1b` 
+
+::::: columns
+::: {.column width="60%"}
+-   2015 : Started as a need in Roche's early development group, package
+    development led by Daniel Sabanés Bové in 2015.
+
+-   2023 : Refactoring, Renaming, adding Unit and Integration tests as
+    current State-of-Art Software Engineering practice.
+
+-   100% written in R and Open Source.
+
+-   website :
+    [genentech.github.io/phase1b/](genentech.github.io/phase1b/)
+
+```{r}
+#| eval: FALSE
+#| echo: TRUE
+#| warning: FALSE
+library(devtools)
+devtools::install_github("https://github.com/Genentech/phase1b")
+library(phase1b)
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| fig-align: 'center'
+#| fig-alt: "This hexagon is the R sticker for phase1b R package. It has a bright purple background, light orange border and the title is in fuschia. The graph in the middle is a CDF distribution in dots that changes from red dots to green dots to indicate a stop to go decision"
+#| 
+knitr::include_graphics(path = "images/hex3.png")
+```
+:::
+:::::
+
+## Use case: {.smaller}
+
+```{r}
+#| warning: FALSE
+#| fig-alt: This table sets the scene of a problem a study statistician could have. At interim, there are 16/23 responders and they ask, what is the Posterior Probability, what is the Predictive Posterior Probability, is the decision to Go (continue drug development), Stop (terminate drug development) or in between called the "Grey Zone" where team may need additional supporting evidence to make a decision.
+alpha = 
+r_interim = 16
+n_interim = 23
+r_final = 23
+n_final = 40
+data.frame( Example = c("Responders", 
+                      "n", 
+                      "Response rate", 
+                      "Posterior probability*", 
+                      "Predictive posterior probability*",  
+                      "Decision to develop molecule further :\n Go/Stop/Grey Zone"),
+            Interim = c(r_interim, 
+                        n_interim, 
+                        paste(
+                          round(
+                            (r_interim/n_interim)*100, 
+                            digits = 2), 
+                          "%"), 
+                        "ask phase1b", 
+                        "ask phase1b", 
+                        "ask phase1b"),
+            Final = c(r_final, 
+                      n_final, 
+                      paste(
+                        round(
+                          (r_final/n_final)*100, 
+                          digits = 2), 
+                        "%"), 
+                      "ask phase1b", 
+                      "-", 
+                      "ask phase1b") ) -> use_case
+
+use_case %>% 
+  kbl(align = "c", 
+      caption = 
+        "A single arm novel therapeutic with an assumed control response rate is at most 60%") %>% 
+  kable_styling()
+```
+# Prior and Posterior of Beta Distribution for $\pi$ {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+-   Conjugate Prior \pi is $f(\pi)$, where
+    $\pi \sim {Beta(\alpha, \beta)}$, same family of distribution of
+    Posterior
+-   We know the mean response rate (RR) is :
+    $$\pi = \ \frac {\alpha}{\alpha + \beta}$$
+-   Likelihood is $f(x|\pi)$, where $x \sim {Binomial(x, n)}$
+:::
+
+::: {.column width="50%"}
+-   The updated Posterior $f( \pi | x )$ is again a $Beta$ distribution
+    (same family as prior) :
+    $$ \pi| \ x \sim Beta(\alpha + x, \ \beta + n - x)$$ where $x$ is
+    the number of responders of current trial
+-   Posterior Probability :\
+    $P (\pi > 60 \% | \alpha + x, \beta + n - x )$
+-   Predictive Posterior Probability :\
+    $P (success \ or \  failure \ at \ final)$
+:::
+:::::
+
+
+## try it yourself :{.smaller}
+
+:::: columns
+::: {.column width="45%"}
+
+**Parameters: **
+
+- Historical trial showed result of 1 of 3 responders
+- we then set alpha = 1, beta = 2
+- expected mean for prior distribution = 1 / 1 + 2
+- Current experiment has 16 / 23 responders
+- expected mean for **posterior** distribution = 1 + 16 / 17 + 2 + 23 - 16
+  - this mean is 17 / 17 + 9 ≈ 65 %
+:::
+:::{.column width="0%"}
+:::
+:::{.column width="45%"}
+:::
+```{r, echo = TRUE, fig.align='center', fig.width=10, eval = FALSE}
+#| echo: TRUE
+#| eval: FALSE
+#| fig-align: 'center'
+#| fig.width: 10
+example_alpha = 1
+example_beta = 2
+phase1b::plotBeta(alpha = example_alpha + x, beta = example_beta + n - x)
+```
+::::
+
+## Quiz 3 {.smaller}
+
+The expected value of mean in the Beta Distribution is/are : 
+
+- [ ] $$ \mu = {{\alpha} \over {\alpha + \beta }}$$
+
+- [ ] $$ \mu = {{\alpha + x} \over {\alpha + \beta }}$$
+
+- [ ] $$ \mu = {{\alpha_{updated}} \over {\alpha_{updated} + \beta_{updated} }}$$
+
+
+## Posterior formulation :
+
+$$  f(\pi | x)  \propto \  \pi^{x} (1-\pi)^{n-x} * \frac {1}{B(\alpha, \beta)} \pi^{\alpha-1}(1-\pi)^{\beta-1} $$
+
+-   (weighted sum version)
+
+$$  f(\pi | x)  \propto \  \pi^{x} (1-\pi)^{n-x} * \sum_{j = 1}^{k} \ w_j \frac {1}{B(\alpha_j, \beta_j)} \pi^{\alpha_j-1}(1-\pi)^{\beta_j-1} $$
+
+## Updating the Posterior{.smaller}
+
+Using the formula for the mean, mode and median, where :
+
+-   $\alpha = 0.6, \beta = 0.4$ and
+
+-   interim x = 16, interim n = 23 :\
+    $$ \pi = \ \frac {\alpha}{\alpha + \beta} = \ \frac {\alpha_{updated} }{\alpha_{updated} + \beta_{updated}} = \ \frac {16.6 }{16.6 + 7.4} ≈ 69.17 \% $$
+
+    $$ mode (\pi) = \ \frac {\alpha_{updated} -1 }{\alpha_{updated} + \beta_{updated} - 2} = \ \frac {16.6 -1  }{16.6 + 7.4 - 2} ≈ 70.90 \% $$
+    $$ median ( \pi) ≈ \ \frac {\alpha_{updated}}{ \alpha_{updated} + \beta_{updated} - \frac{2}{3} } ≈ 69.71 \% $$
+
+## Graphical representation of the updated Posterior {.smaller}
+
+-   Prior parameters are $\alpha$ = 0.6, $\beta$ = 0.4
+-   Updated Posterior parameters are $\alpha$ = 16.6 and $\beta$ = 7.4
+
+```{r}
+#| fig-align: 'center'
+#| fig-alt: "This plot shows how the prior can be updated from data and compares with the uniform beta prior"
+
+alpha = 0.6
+beta = 0.4
+interim_x = 16
+interim_n = 23
+alpha_updated = alpha + interim_x
+beta_updated = beta + interim_n - interim_x
+new_mean = alpha_updated / (alpha_updated + beta_updated )
+new_mode = (alpha_updated - 1) / (alpha_updated + beta_updated - 2)
+new_median = (alpha_updated - (1/3)) / (alpha_updated + beta_updated - (2/3))
+xx <- seq(0, 1, .001)
+
+uniform = dbeta(xx, 1, 1) # source https://stackoverflow.com/questions/21991688/r-beta-function-relative-y-scale
+prior_param = dbeta(xx, alpha, beta)
+updated_param = dbeta(xx, alpha_updated, beta_updated) /dbeta(xx, alpha, beta)
+
+data = data.frame(rate = rep(xx, 3),
+                  Density = c(uniform, prior_param, updated_param),
+                  Category = c(rep("Uniform Prior a = b = 1", length(xx)), 
+                               rep("Prior a = 0.4, b = 0.6", length(xx)), 
+                               rep("Updated Posterior a = 16.6, b = 7.4", length(xx))))
+
+
+ggplot(data) + geom_line(aes(x = rate, y = Density, colour = Category), size = 1.0) +
+   ggtitle("Historical prior and Updated posterior distribution from 16 responders\n of 23 at interim analysis for a single arm oncology trial") + 
+  scale_x_continuous(n.breaks = 10, labels = scales::percent_format()) +
+  ylab("Density") +
+  xlab("Response Rate") +
+theme(plot.title = element_text(size=15, family = "Helvetica")) +
+  scale_color_manual(values = c("#56B4E9", "#CC79A7", "#009E73")) +
+  scale_y_continuous(limits = c(0, 7)) +
+  geom_vline(xintercept = new_median, linetype = "dashed", size = 0.5, colour = "#009E73") +
+geom_vline(xintercept = new_mean, linetype = "dashed", size = 0.5, colour = "#009")
+```
+
+# Effect on varying weight on different priors Example{.smaller}
+
+```{r}
+#| fig-align: 'center'
+#| fig-alt: This plot shows how the Mixture priors can be updated from data and compares with the uniform beta prior. 
+a1 = 3
+b1 = 12
+weight1 = 0.6
+weight2 = 0.4
+alpha = a1
+beta = b1
+interim_x = 16
+interim_n = 23
+alpha_updated = alpha + interim_x
+beta_updated = beta + interim_n - interim_x
+new_mean = alpha_updated / (alpha_updated + beta_updated )
+new_mode = (alpha_updated - 1) / (alpha_updated + beta_updated - 2)
+xx <- seq(0, 1, .001)
+
+dbetaMix1 = phase1b::dbetaMix(x = xx, 
+                     par = rbind(c(1, 1)), 
+                     weights = 1)
+dbetaMix2 = phase1b::dbetaMix(x = xx, 
+                     par = rbind(c(a1, b1)), 
+                     weights = 1)
+dbetaMix3 = phase1b::dbetaMix(x = xx, 
+                     par = rbind(c(1, 1), c(a1, b1)), 
+                     weights = c(weight1, weight2))
+dbetaMix4 = phase1b::dbetaMix(x = xx, 
+                     par = rbind(c(1, 1), c(a1, b1)), 
+                     weights = c(weight2, weight1))
+Mix1 = paste("Prior of a =", 1, ", b =", 1)
+Mix2 = paste("Prior of a =", a1, "and b =", b1)
+Mix3 = paste("Beta Mixture Prior:\n", weight1*100, "% weighting on uniform and\n", weight2*100, "% weighting on \nalpha =", a1, ", beta =", b1)
+Mix4 = paste("Beta Mixture Prior:\n", weight2*100, "% weighting on uniform and\n", weight1*100, "% weighting on \nalpha =", a1, ", beta =", b1)
+new_mean = a1/ sum(a1+ b1)
+
+data = data.frame(rate = rep(xx, 4),
+                  Density = c(dbetaMix1, dbetaMix2, dbetaMix3, dbetaMix4),
+                  Category = c(rep(Mix1, length(xx)), 
+                               rep(Mix2, length(xx)), 
+                               rep(Mix3, length(xx)),
+                               rep(Mix4, length(xx))))
+
+ggplot(data) + geom_line(aes(x = rate, y = Density, colour = Category), size = 1.0) +
+   ggtitle("Effect of diverse weighting contribution to Beta Mix Prior") + 
+  scale_x_continuous(n.breaks = 10, labels = scales::percent_format()) +
+  ylab("Density") +
+  xlab("Response Rate") +
+theme(plot.title = element_text(size=15, family = "Helvetica")) +
+  scale_color_manual(values = c("#009E73", "#000", "#CC79A7", "#56B4E9")) +
+  scale_y_continuous(limits = c(0, 5))
+```
+
+## A variety of Priors {.smaller}
+
+-   To illustrate how density of Prior changes with increased sample
+    size even though mean is the same
+
+```{r}
+#| fig-align: 'center'
+#| eval: TRUE
+#| fig-alt: "This plot shows how the priors of mean 50% can have improving precision with increased sample size"
+xx <- seq(0, 1, .001)
+
+data = data.frame(
+  rate = rep(xx, 4),
+  Density = c(dbeta(xx, 10, 10), 
+              dbeta(xx, 20, 20), 
+              dbeta(xx, 30, 30), 
+              dbeta(xx, 40, 40) ),
+  Category = c(rep("alpha = beta = 10", length(xx)), 
+               rep("alpha = beta = 20", length(xx)), 
+               rep("alpha = beta = 30", length(xx)),
+               rep("alpha = beta = 40", length(xx)) 
+  )
+)
+
+ggplot(data) + geom_line(aes(x = rate, y = Density, colour = Category), size = 1.0) +
+   ggtitle("Priors of mean 50% can have improving precision with increased sample size") + 
+  scale_x_continuous(n.breaks = 10, labels = scales::percent_format()) +
+  ylab("Density") +
+  xlab("Response Rate") +
+  geom_vline(xintercept = 0.5, linetype = "dotted", colour = "blue") +
+theme(plot.title = element_text(size=15, family = "Helvetica")) +
+  scale_color_manual(values = c("#56B4E9", "#CC79A7", "#009E73", "blue")) +
+  scale_y_continuous(limits = c(0, 8)) 
+```
+
+## A variety of Posteriors {.smaller}
+
+-   To illustrate how density of Posterior changes with increased sample
+    size even though mean is the same
+
+```{r}
+#| fig-align: 'center'
+#| fig-alt: "This plot shows how the priors of mean 50% can have improving precision with increased sample size" 
+x = 16
+n = 23
+final_n = 40
+length = length(0:final_n)
+
+data11 = data.frame(
+  rate = rep(0:final_n, 4),
+  Density = c(dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(10 + x, 10 + n - x)),
+                            weights = 1), 
+              dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(20 + x, 20 + n - x)), 
+                            weights = 1),
+              dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(30 + x, 30 + n - x)),
+                            weights = 1), 
+              dbetabinomMix(x = 0:final_n, 
+                            m = final_n, 
+                            par = rbind(c(40 + x, 40 + n -x)),
+                            weights = 1)),
+  Category = c(rep("alpha = beta = 10", length), 
+               rep("alpha = beta = 20", length), 
+               rep("alpha = beta = 30", length),
+               rep("alpha = beta = 40", length) 
+  )
+)
+
+ggplot(data11) + geom_line(aes(x = rate, y = Density, colour = Category), size = 1.0) +
+   ggtitle("Updated Posteriors of Priors of mean 50% with increasing sample size and \ndata is 16 of 23 responders") + 
+  ylab("Density") +
+  xlab("Response Rate") +
+  scale_x_continuous(breaks = seq(0, 40, by = 4)) +
+  geom_vline(xintercept = 0.5*final_n, linetype = "dotted", colour = "blue") +
+theme(plot.title = element_text(size=15, family = "Helvetica")) +
+  scale_color_manual(values = c("#56B4E9", "#CC79A7", "#009E73", "blue")) 
+```
+
+## `postprob()` example (Lee & Liu, 2008) {.smaller}
+
+```{r}
+#| fig-alt: "repeating the same running example table for this experiment"
+r_interim = 16
+n_interim = 23
+r_final = 23
+n_final = 40
+soc_rr = 0.60
+soc_rr_percent = paste(soc_rr*100, "%")
+data.frame(Example = c("Responders", 
+                      "n", 
+                      "Response rate", 
+                      "Standard of Care Response rate",
+                      "Posterior probability"), 
+            Interim = c(r_interim, 
+                        n_interim, 
+                        paste(
+                          round(
+                            (r_interim/n_interim)*100, 
+                            digits = 2), 
+                          "%"), 
+                        soc_rr_percent,
+                        "postprob( ) call from phase1b" )) -> use_case
+
+use_case %>% kbl(align = "c") %>% kable_styling(font_size = 25)
+```
+
+```{r, echo = TRUE, warning = FALSE}
+phase1b::postprob(x = 16, n = 23, p = 0.60, par = c(0.6, 0.4))
+```
+
+# Posterior Probability {.smaller}
+
+-   Interim trial is efficacious if posterior probability exceeds 70% or
+    P( RR ≥ 60 % \| data ) \> 70%
+
+```{r}
+#| fig-align: 'center'
+#| label: fig-post
+#| layout-ncol: 1 # make graph bigger
+#| column: page-right
+#| fig-alt: "This graphs side by side show that by increasing number of responders out of 23 reaches our TPP threshold"
+TPP = 0.6
+n =23
+plotthis = data.frame(x = c(0:n),
+                      posterior = c(phase1b::postprob(x = 0:n,  #P(RR ≥ TPP | x, a, b)
+                                             n = n,
+                                             p = TPP,
+                                             par =
+                                                 c(0.6, 0.4))))
+plotthis$success = c(rep("FALSE", 15), rep("TRUE", 9)) #P(RR ≥ TPP | x, a, b) > 70%
+
+
+
+ggplot(plotthis) +
+  geom_point(aes(x = x,
+                 y = posterior,
+                 col = success),
+             size = 5) +
+  ggtitle(paste("Posterior probability that Response Rate ≥ 60% given number of responders with ",n, "patients.")) +
+  ylab("Posterior Probability") +
+  xlab("Number of responders") +
+  scale_x_continuous(breaks = seq(0, n, by = 2)) +
+  theme(text = element_text(size = 20)) +
+  scale_color_manual(values = c("#D55E00", "#009E73")) + 
+  theme_gray(base_size = 13) +
+  geom_vline(aes(xintercept = 15), colour = "purple", linetype = "dashed")
+```
+
+## Beta prior mixture {.smaller}
+
+-   `phase1b` facilitates the flexibility of using various priors and
+    its respective weightings:
+
+    ```         
+               Prior is P_E ~ sum(weights * beta(parE[, 1], parE[, 2]))
+    ```
+
+```{r}
+#| fig-align: 'center'
+#| echo: TRUE
+#| results: asis
+a = phase1b::postprob(x = 16,
+             n = 23,
+             p = 0.60,
+             parE = c(0.6, 0.4), weights = 1)
+
+b = phase1b::postprob(x = 16,
+             n = 23,
+             p = 0.60,
+             parE = c(2, 4), weights = 1)
+
+0.5*(a + b)
+
+phase1b::postprob(x = 16,
+             n = 23,
+             p = 0.60,
+             parE = rbind(c(0.6, 0.4), c(2, 4)), weights = c(0.5, 0.5))
+```
+
+-   Posterior formulation :
+
+$$  f(\pi | x)  \propto \  \pi^{x} (1-\pi)^{n-x}\sum_{j = 1}^{k} \ w_j \frac {1}{B(\alpha_j, \beta_j)} \pi^{\alpha_j-1}(1-\pi)^{\beta_j-1} $$
+
+## `predprob()` example (Lee & Liu, 2008) {.smaller}
+
+```{r}
+r_interim = 16
+n_interim = 23
+r_final = 23
+n_final = 40
+soc_rr = 0.60
+soc_rr_percent = paste(soc_rr*100, "%")
+data.frame( Example = c("Responders", 
+                      "n", 
+                      "Response rate", 
+                      "Standard of Care Response rate",
+                      "Predictive Posterior probability"), 
+            Interim = c(r_interim, 
+                        n_interim, 
+                        paste(
+                          round(
+                            (r_interim/n_interim)*100, 
+                            digits = 2), 
+                          "%"), 
+                        soc_rr_percent,
+                        "predprob( ) call from phase1b")) -> use_case
+use_case %>% kbl(align = "c") %>% kable_styling(font_size = 20)
+```
+
+```{r}
+#| fig-align: center
+#| echo: TRUE
+#| warning: FALSE
+control = 0.6
+confidence_seventy = 0.7
+result <- phase1b::predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = confidence_seventy,
+  parE = c(0.6, 0.4)
+)
+result$result
+confidence_ninety = 0.9
+result_high_thetaT <- phase1b::predprob(
+  x = 16, n = 23, Nmax = 40, p = control, thetaT = confidence_ninety,
+  parE = c(0.6, 0.4)
+)
+result_high_thetaT$result
+```
+
+## Predictive Posterior Probability (Lee & Liu, 2017){.smaller}
+
+$$ \sum_{i = 0}^{m} P( Y = i \ | \ x ) . I\ (Prob ( P > p_{0} \ | x, Y = i) > \theta_{T}) $$
+
+
+$$ = \sum_{i = 0}^{m} \{ P( Y = i \ | \ x ).  I\ ( B_{i} > \theta_{T} \}  
+= \sum_{i = 0}^{m} P( Y = i \ | \ x ) . I_{i} $$
+
+## Predictive Posterior Probability (PPP) {.smaller}
+
+$$ PPP = \sum_{i = 0}^{m} \{ P( Y = i \ | \ x ).  I\ ( B_{i} > \theta_{T} \}
+ =  P(RR \ at final \ > 60 \%) > 70 \% $$
+
+:::: columns
+::: {.column width="30%"}
+```{r}
+#| echo: TRUE
+# The original Lee and Liu (Table 1) example:
+# Nmax = 40, x = 16, n = 23, beta(0.6,0.4) prior distribution,
+# thetaT = 0.7. The control response rate is 60%:
+results <- phase1b::predprob(
+  x = 16, # current number of responders
+  n = 23, # sample size at interim
+  Nmax = 40, # max sample size
+  p = 0.6, # control response rate 
+  thetaT = 0.7, # confidence 
+  parE = c(0.6, 0.4) # prior alpha and beta
+)
+```
+:::
+:::{.column width="70%"}
+```{r}
+#| echo: TRUE
+print(results)
+results$table$density[results$table$success == TRUE] %>% sum()
+```
+
+:::
+
+::::
+
+
+## Predictive Posterior Probability
+
+\n
+\n
+
+Predictive Posterior Probability is the Posterior probability of
+additional responders. \n
+
+```         
+        (Note : 40 - 23 = 17 remaining patients. Potentially 16 + 17 responders at final = 33)
+```
+
+```{r}
+#| label: fig-histogram
+#| fig-cap: "Predictive Posterior CDF for different Efficacy Rules"
+#| fig-subcap:
+#|   - $P (\pi > 0.6 | \ data )$ > 70% #"Efficacious if Pred. Posterior Prob > 60 %" 
+#|   - $P (\pi > 0.6 | \ data )$ > 90% #"Efficacious if Pred. Posterior Prob > 90 %" 
+#| layout-ncol: 2 # make graph bigger
+#| column: page-right
+#| fig-alt : "These two graphs side by side show that by increasing the threshold for an Efficacy or Go decision, the number of responders out of 40 is higher with the higher threshold, ie 35 patients instead of 32 patients of 40"
+
+ggplot(df_thetaTlow) +
+  geom_point(aes(x = counts, y = posterior, colour = success), size = 8) +
+  scale_x_discrete(limits = c(seq(0, 33, by = 1))) +
+  xlab("\nFuture successful reponders") +
+  ylab("Probability\n") +
+  ggtitle("With lower threshold : \n25 of 40 responders needed to achieve a Go decision")  +
+  theme(text = element_text(size = 20)) +
+  scale_color_manual(values = c("#D55E00", "#009E73")) +
+  geom_vline(aes(xintercept = 9), linetype="dashed", size = 1, colour = "purple")
+
+ggplot(df_thetaThigh) +
+  geom_point(aes(x = counts, y = posterior, colour = success), size = 8) +
+   scale_x_discrete(limits = c(seq(0, 33, by = 1))) +
+    xlab("\nFuture successful reponders") +
+  ylab("Probability\n") +
+  ggtitle("With higher threshold : \n28 of 40 responders needed to achieve a Go decision") +
+  theme(text = element_text(size = 20)) +
+  scale_color_manual(values = c("#D55E00", "#009E73")) +
+  geom_vline(aes(xintercept = 12), linetype="dashed", size = 1, colour = "purple")
+```
+
+## Operating Characteristics : Monte Carlo Simulations and threshold for Success (and Failure) {.smaller}
+
+-   Efficacy criteria, e.g. we would stop for Efficacy (Success) if :
+    `Pr( RR > p1) > tU`
+-   Futility criteria, eg. we would stop for Futility (Failure) if :
+    `Pr( RR < p0) > tL`
+
+```{r}
+#| echo: FALSE
+#| fig-width: 10
+#| fig.height: 5
+#| fig.align: "center"
+
+simline_data <- data.frame(
+  time = c(0, 23, 40),
+  event = c("Start", "Apply Go/Stop Rule \n at Interim (23)", "Apply Go/Stop Rule \n at Final (40)")
+)
+# Create the simulation line plot
+ggplot(simline_data, aes(x = time, y = 0)) + 
+  geom_line(color = "navy", linewidth = 1.5) +  # Customize line appearance
+  geom_point(color = "orange", size = 5) +       # Add points for the events
+  geom_text(aes(label = event, y = 0.2),  # Add labels above the points
+            vjust = 0, hjust = 0.5,     # Adjust label position
+            color = "lavender", size = 4) +
+  scale_x_continuous(breaks = simline_data$time,  # Set x-axis breaks
+                     labels = simline_data$event, # Set x-axis labels
+                     limits = c(-1, 45)) +       # Set axis limits for better visualization
+  scale_y_continuous(limits = c(-0.05, 0.05)) +
+  theme_classic() +  
+  theme(axis.text.x = element_text(size = 15)) +
+  theme(axis.line.y = element_blank()) +
+  theme(axis.ticks.y = element_blank()) +
+  theme(axis.title.y = element_blank()) +
+  theme(axis.text.y = element_blank()) +
+  theme(axis.title.x = element_blank()) +
+  theme(axis.text.x = element_blank()) +
+   theme(axis.line.x = element_blank()) +
+  theme(axis.ticks.x = element_blank()) +
+  geom_text(aes(x = 23, y = 0.02, label = "Apply Go / Stop rule \n at Interim (23)"), size = 6) +
+   geom_text(aes(x = 40, y = 0.02, label = "Apply Go / Stop rule \n at Final (40)"), 
+             size = 6)  +
+   geom_text(aes(x = 0, y = 0.02, label = "Start (0)"), 
+             size = 6) -> sim_line
+
+sim_line
+
+```
+
+## Rules and Operating characteristics. A use case for `ocPostprob()`: {.smaller}
+
+-   ***Stop for Efficacy: Go if*** $P( \pi > 60\% | \ data ) > 90 \%$
+-   ***Stop for Futility: Stop if*** $P( \pi < 60\% | \ data ) > 70 \%$
+-   Prior of treatment arm $Beta(0.6, 0.4)$.
+
+```{r}
+#| echo: TRUE
+#| warning: FALSE
+set.seed(2025)
+res <- phase1b::ocPostprob(
+  nnE = c(23, 40), 
+  truep = 0.60, 
+  p0 = 0.60, 
+  p1 = 0.60, 
+  tL = 0.70, 
+  tU = 0.90, 
+  parE = c(0.6, 0.4),
+  sim = 500, 
+  wiggle = TRUE, 
+  nnF = c(23, 40)
+)
+```
+
+```{r}
+#| echo: FALSE
+# representing the results in a nice, interpretable table 
+res$oc %>% 
+  mutate(across(starts_with("Pr"), ~ .*100)) %>% 
+  mutate(across(starts_with("Pr"), ~ paste(., "%"))) %>%
+  mutate(across(starts_with("Expected"), ~ round(., digits = 0))) %>% 
+  kableExtra::kable() %>% 
+  kable_classic(lightable_options = "hover", html_font = "\"Source Sans Pro\", helvetica, sans-serif") -> oc_tab
+
+```
+
+## Results {.smaller}
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+oc_tab
+```
+
+\
+\
+
+-   At n = 34, we have some **useful results (we did not have to
+    evaluate 40!)**
+
+-   1/3 of results are known at interim, most of these results are in
+    the **Gray Zone**
+
+-   \~ 1/2 of results are also at the Gray Zone at final
+
+## Expanded features {.smaller}
+
+.... and wiggle room!
+
+```{r}
+#| fig-alt: "This hexagon is the finc-research company located in Basel, Switzerland. See more on finc.research.com" 
+#| fig-height: 0.4
+Features <- read.csv(file = "phase1b_FeatureTable - Sheet1.csv", header = TRUE, sep  = ",")
+names(Features) <- c(" ", "SOC uncertainty", "single-arm", "two-arm", "simulation", "plotting", "boundaries")
+Features[is.na(Features)] <- ""
+Features[Features == 1] <- "✔️"
+# what are these features, diff between two arm and randomisation say what kind of trials this can support
+Features %>% kbl(align = "c") %>% kable_styling(position = "center", font_size = 13) %>% kableExtra::kable_classic(lightable_options = "hover", html_font = "\"Source Sans Pro\", helvetica, sans-serif") 
+```
+
+# Some references {.smaller}
+
+-   Held L & Sabanés Bové D (2020) Likelihood and Bayesian Inference : Applications in Medicine and Biology, 2nd Edition.
+
+-   LeSaffre E & Lawson A (2012) Bayesian Biostatistics, First Edition,
+
+-   Thall P F, Simon R (1994), Practical Guidelines for Phase IIB
+    Clinical Trials, Biometrics, 50, 337-349.
+
+-   Lee J J, Liu D D (2008), A Predictive probability design for phase
+    II cancer clinical trials, 5(2), 93-106, Clinical Trials.
+
+-   Yeo, A T, Sabanés Bové D, Elze M, Pourmohamad T, Zhu J, Lymp J,
+    Teterina A (2024). Phase1b : Calculations for decisions on Phase 1b
+    clinical trials. R package version 1.0.0,
+    <https://genentech.github.io/phase1b>
+
+-   **Inclusive Speaker Orientation [Linux
+    Foundation](https://training.linuxfoundation.org/training/inclusive-speaker-orientation/)**
+
+-   **Zeileis, Fisher, Hornik, Ihaka, McWhite, Murrell, Stauffer,
+    Wilke (2020) colorspace: A Toolbox for Manipulating and Assessing
+    Colors and Palettes. Journal of Statistical Software.**
+
+# Thanks DAGStat 2025 {background-iframe="my_pastel_background/dist/index.html"}
+
+::: columns
+:::  {.column width="50%"}
+**Audrey Yeo**
+\
+[audrey@finc-research.com](email: audrey@finc-research.com)
+\
+M Nursing (Sydney)
+\
+M Sci Biostats (Zürich)
+
+\ \ \ ![](images/QR_Bayes_questionnaire.png){width="30%"}
+
+:::
+::: {.column width="40%"}
+![](images/finc3.png){width="70%"}
+:::
+::: {.column width="0%"}
+:::
+:::
+
+# etc
+
+-   [Code for this
+    talk](https://github.com/audreyyeoCH/presentations2024/tree/main/2024_talks_in_quarto)
+-   [Visit my website](audreyyeoCH.github.io)
+-   [LinkedIn](www.linkedin.com/in/audrey-yeo-8000)
+-   [My GitHub repo](github.com/audreyyeoCH)
+
+:::::: columns
+::: {.column width="30%"}
+:::
+
+::: {.column width="0%"}
+:::
+
+::: {.column width="50%"}
+:::
+
